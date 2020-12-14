@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'queue.dart';
+import 'package:my_project/bar.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,9 +10,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
+        backgroundColor: Colors.greenAccent[50],
       ),
-     
+    home: BarNavy(),
     );
     
   }

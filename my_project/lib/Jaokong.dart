@@ -3,7 +3,6 @@ import 'package:table_calendar/table_calendar.dart';
 import 'bar.dart';
 
 class Queue extends StatefulWidget {
-  String get title => null;
   @override
   _QueueState createState() => _QueueState();
   Widget build(BuildContext context) {
@@ -72,22 +71,22 @@ final _formKey = GlobalKey<FormState>();
   void loadtype() {
     
     typeList = [];
-    new Text('สภาพต้นข้าว');
+    new Text('สถานะของรถ');
     typeList.add(new DropdownMenuItem(
       
-      child: new Text('สภาพต้นข้าว'),
+      child: new Text('สถานะของรถ'),
       value: 0,
     ));
     typeList.add(new DropdownMenuItem(
-      child: new Text('ตั้งตรง'),
+      child: new Text('กำลังทำงาน'),
       value: 1,
     ));
     typeList.add(new DropdownMenuItem(
-      child: new Text('ล้ม'),
+      child: new Text('อยู่ระหว่างการซ่อม'),
       value: 2,
     ));
     typeList.add(new DropdownMenuItem(
-      child: new Text('ราบกับพื้น'),
+      child: new Text('ไม่ทำงาน'),
       value: 3,
     ));
   }
@@ -243,19 +242,6 @@ final _formKey = GlobalKey<FormState>();
       isExpanded: true,
     ));*/
 
-
-  formWidget.add(new TextFormField(
-      decoration: InputDecoration(hintText: 'จำนวนทุ่งนาที่ต้องการเก็บเกี่ยว', labelText: 'จำนวนทุ่งนาที่ต้องการเก็บเกี่ยว'),
-      keyboardType: TextInputType.text,
-      validator: (value) {
-        if (value.isEmpty) return 'จำนวนทุ่งนาที่ต้องการเก็บเกี่ยว';
-      },
-      onSaved: (value) {
-        setState(() {
-          _name1 = value;
-        });
-      },
-    ));
     formWidget.add(new DropdownButton(
       hint: new Text('Select Gender'),
       items: typeList,
@@ -268,10 +254,23 @@ final _formKey = GlobalKey<FormState>();
       isExpanded: true,
     ));
   formWidget.add(new TextFormField(
-      decoration: InputDecoration(hintText: 'พันธุ์ข้าว', labelText: 'พันธุ์ข้าว'),
+      decoration: InputDecoration(hintText: 'เวลาที่ใช้ในการเก็บเกี่ยว', labelText: 'เวลาที่ใช้ในการเก็บเกี่ยว'),
       keyboardType: TextInputType.text,
       validator: (value) {
-        if (value.isEmpty) return 'พันธุ์ข้าว';
+        if (value.isEmpty) return 'เวลาที่ใช้ในการเก็บเกี่ยว';
+      },
+      onSaved: (value) {
+        setState(() {
+          _name1 = value;
+        });
+      },
+    ));
+    
+  formWidget.add(new TextFormField(
+      decoration: InputDecoration(hintText: 'เวลาที่ใช้ในการซ่อมรถ', labelText: 'เวลาที่ใช้ในการซ่อมรถ'),
+      keyboardType: TextInputType.text,
+      validator: (value) {
+        if (value.isEmpty) return 'เวลาที่ใช้ในการซ่อมรถ';
       },
       onSaved: (value) {
         setState(() {
