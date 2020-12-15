@@ -29,6 +29,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   validators: ^2.0.0+1
+  flutter_svg: ^0.19.1
 
 dev_dependencies:
   flutter_test:
@@ -55,6 +56,11 @@ flutter:
     - assets/map.png
     - assets/setting.png
     - assets/todo.png
+    - assets/logos/facebook.jpg
+    - assets/logos/google.jpg
+    - assets/images/
+    - assets/icons/
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_project/bar.dart';
+import 'package:my_project/Screens/Welcome/welcome_screen.dart';
+import 'package:my_project/constants.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
         backgroundColor: Colors.greenAccent[50],
       ),
-    home: BarNavy(),
+     home: WelcomeScreen(),
     );
     
   }
