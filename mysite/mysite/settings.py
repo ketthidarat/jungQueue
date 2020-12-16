@@ -25,7 +25,7 @@ SECRET_KEY = 'i112!1svuhj3kocgjp2pjo75+1-i%8y_35=*asi*!80znu7mev'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['JungQueue.pythonanywhere.com']
+ALLOWED_HOSTS = ['JungQueue.pythonanywhere.com', 'localhost']
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'api',
 ]
 
 MIDDLEWARE = [
