@@ -21,7 +21,12 @@ class owner(models.Model):
     username = models.CharField(max_length=1000)
     password = models.CharField(max_length=1000)
 
+    def __str__(self):
+        return f'{self.owner_name} {self.phone}'
+
 class work(models.Model):
+    #farmer
+    #tractor
     # work_id = models.AutoField(primary_key=True)
     work_status = models.CharField(max_length=1000)
     lat = models.CharField(max_length=1000)
@@ -32,16 +37,22 @@ class work(models.Model):
     Harverstime = models.DateTimeField(auto_now_add=True)
     date = models.DateTimeField(auto_now_add=True)
     money = models.IntegerField()
-    moneyStatus = models.CharField(max_length=1000)
+    moneyStatus = models.CharField(max_length=1000) # ให้นิยามเพิ่มเติม
+    workstatus = models.CharField(max_length=1000) # รับ ไม่รับ จ่าย
 
 class tractor(models.Model):
+    owner = models.ForeignKey(owner, on_delete=models.CASCADE)
     # tractor_id = models.AutoField(primary_key=True)
-    owner_id = models.IntegerField()
     work_id = models.IntegerField()
 
+    def __str__(self):
+        return f'{self.owner}'
+
+"""
 class queue(models.Model):
-    tractor_id = models.IntegerField()
+    tractor = models.ForeignKey(tractor, on_delete=models.CASCADE)
     farmer_id = models.IntegerField()
     work_id = models.IntegerField()
     # queue_id = models.IntegerField()
     statusQueue = models.CharField(max_length=1000)
+"""
