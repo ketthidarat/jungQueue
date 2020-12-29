@@ -37,22 +37,27 @@ class Tractor(models.Model):
     #     return f'{self.owner}'
 
 class Rice_type(models.Model):
+    id = models.AutoField(primary_key=True) 
     rice_type = models.CharField(max_length=100) 
     
     def __str__(self):
          return f'{self.rice_type}'
 
 class Work_status (models.Model):
+    id = models.AutoField(primary_key=True) 
     work_status  = models.CharField(max_length=100) 
     def __str__(self):
          return f'{self.work_status}'
 
 class Money_status(models.Model):
-    moneyStatus = models.CharField(max_length=100) 
+    id = models.AutoField(primary_key=True) 
+    money_status = models.CharField(max_length=100) 
+
     def __str__(self):
-         return f'{self.moneyStatus}'
+         return f'{self.money_status}'
 
 class Work(models.Model):
+    id = models.AutoField(primary_key=True) 
     #farmer
     #tractor
     # work_id = models.AutoField(primary_key=True)
@@ -60,7 +65,6 @@ class Work(models.Model):
     lat = models.CharField(max_length=1000)
     lng = models.CharField(max_length=1000)
     area = models.IntegerField()
-    # rice_type = models.CharField(max_length=100) 
     rice_type = models.ForeignKey(Rice_type, on_delete=models.CASCADE)
     other = models.CharField(max_length=1000) 
     workDetail = models.CharField(max_length=1000)
