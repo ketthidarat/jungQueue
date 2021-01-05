@@ -70,6 +70,16 @@ class Command(BaseCommand):
         # print('กำลัง load ... Work')
         # for d in self.load(wb, 'Work', ['id', 'lat', 'lng', 'date_start', 'date_end', 'area', 'rice_type', 'other', 'RepairTime', 'Harverstime', 'money', 'money_status', 'work_status', 'tractor', 'tractor_status']):
         #     Work(**d).save()
+
+        ''' Bug Fixed
+        rice_type = Rice_type.objects.get(pk=d['rice_type'])
+        d.pop('rice_type')
+        w = Work(**d)
+        w.rice_type = rice_type
+        ....
+        w.save()
+        '''
+
 """
         ws = wb['Work']
         count = int(ws['A2'].value)

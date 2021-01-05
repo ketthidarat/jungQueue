@@ -16,10 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from api import views
+from api.views import router
 from django.urls import include, path
+from django.utils import translation
+
+translation.activate('th')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
-    
+    path('api/', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls'))
 ]

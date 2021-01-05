@@ -7,7 +7,7 @@ class Farmer(models.Model):
     # farmer_id = models.AutoField(primary_key=True)
     farmer_name = models.CharField(max_length=1000)
     # farmer_lastname = models.CharField(max_length=1000)
-    image = models.ImageField()
+    image = models.ImageField(upload_to='media/')
     address = models.CharField(max_length=1000)
     phone = models.CharField(max_length=1000)
     email = models.CharField(max_length=1000)
@@ -21,7 +21,7 @@ class Owner(models.Model):
     # owner_id = models.AutoField(primary_key=True)
     owner_name = models.CharField(max_length=1000)
     # owner_lastname = models.CharField(max_length=1000)
-    image = models.ImageField()
+    image = models.ImageField(upload_to='media/')
     address = models.CharField(max_length=1000)
     phone = models.CharField(max_length=1000)
     email = models.CharField(max_length=1000)
@@ -58,11 +58,17 @@ class Rice_type(models.Model):
     def __str__(self):
          return f'{self.rice_type}'
 
+    class Meta:
+        verbose_name = 'ลักษณะข้าวที่จะให้เกี่ยว'
+
 class Work_status (models.Model):
     id = models.AutoField(primary_key=True) 
-    work_status  = models.CharField(max_length=100) 
+    work_status  = models.CharField(max_length=100, verbose_name="สถานะงาน") 
     def __str__(self):
          return f'{self.work_status}'
+
+    class Meta:
+        verbose_name = 'สถานะงาน'
 
 class Money_status(models.Model):
     id = models.AutoField(primary_key=True) 
@@ -78,10 +84,10 @@ class Work(models.Model):
     tractor = models.ForeignKey(Tractor, on_delete=models.CASCADE)
     # work_id = models.AutoField(primary_key=True)
     # work_status = models.CharField(max_length=1000)
-    lat = models.CharField(max_length=1000)
-    lng = models.CharField(max_length=1000)
-    area = models.IntegerField()
-    rice_type = models.ForeignKey(Rice_type, on_delete=models.CASCADE)
+    lat = models.CharField(max_length=1000, verbose_name='ละติจูด')
+    lng = models.CharField(max_length=1000, verbose_name='ลองติจูด')
+    area = models.IntegerField(verbose_name='พืนที่ (ตรว)')
+    rice_type = models.ForeignKey(Rice_type, on_delete=models.CASCADE, verbose_name='ลักษณะข้าวที่จะให้เกี่ยว')
     other = models.CharField(max_length=1000) 
     workDetail = models.CharField(max_length=1000)
     RepairTime = models.CharField(max_length=1000) 
