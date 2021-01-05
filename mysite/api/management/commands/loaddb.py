@@ -46,11 +46,31 @@ class Command(BaseCommand):
         for d in self.load(wb, 'Money_status', ['id', 'money_status']):
             Money_status(**d).save()
 
-        """
-        print('กำลัง load ... Work')
-        for d in self.load(wb, 'Work', ['id', 'money_status']):
-            Money_status(**d).save()
+        print('กำลัง load ... Farmer')
+        for d in self.load(wb, 'Farmer', ['id', 'farmer_name','phone', 'address', 'email', 'username', 'password', 'image']):
+            print(d)
+            Farmer(**d).save()
 
+        print('กำลัง load ... Owner')
+        for d in self.load(wb, 'Owner', ['id', 'owner_name','phone', 'address', 'email', 'username', 'password', 'image']):
+            print(d)
+            Owner(**d).save()
+
+        print('กำลัง load ... Tractor_status')
+        for d in self.load(wb, 'Tractor_status', ['id', 'tractor_status']):
+            print(d)
+            Tractor_status(**d).save()
+        
+        print('กำลัง load ... Tractor')
+        for d in self.load(wb, 'Tractor', ['id', 'tractor', 'tractor_status']):
+            print(d)
+            Tractor(**d).save()
+
+
+        # print('กำลัง load ... Work')
+        # for d in self.load(wb, 'Work', ['id', 'lat', 'lng', 'date_start', 'date_end', 'area', 'rice_type', 'other', 'RepairTime', 'Harverstime', 'money', 'money_status', 'work_status', 'tractor', 'tractor_status']):
+        #     Work(**d).save()
+"""
         ws = wb['Work']
         count = int(ws['A2'].value)
         print(f'count = {count}')

@@ -3,9 +3,11 @@ from django.db.models.deletion import CASCADE
 
 # Create your models here.
 class Farmer(models.Model):
+    id = models.AutoField(primary_key=True) 
     # farmer_id = models.AutoField(primary_key=True)
     farmer_name = models.CharField(max_length=1000)
     # farmer_lastname = models.CharField(max_length=1000)
+    image = models.ImageField()
     address = models.CharField(max_length=1000)
     phone = models.CharField(max_length=1000)
     email = models.CharField(max_length=1000)
@@ -15,9 +17,11 @@ class Farmer(models.Model):
     def __str__(self):
         return f'{self.farmer_name} {self.address} {self.phone} {self.email} {self.username} {self.password}'
 class Owner(models.Model):
+    id = models.AutoField(primary_key=True) 
     # owner_id = models.AutoField(primary_key=True)
     owner_name = models.CharField(max_length=1000)
     # owner_lastname = models.CharField(max_length=1000)
+    image = models.ImageField()
     address = models.CharField(max_length=1000)
     phone = models.CharField(max_length=1000)
     email = models.CharField(max_length=1000)
@@ -27,14 +31,25 @@ class Owner(models.Model):
     def __str__(self):
         return f'{self.owner_name} {self.phone}'
 
+class Tractor_status(models.Model):
+    id = models.AutoField(primary_key=True) 
+    tractor_status = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return f'{self.tractor_status}'
+
 
 class Tractor(models.Model):
-    owner = models.ForeignKey(Owner, on_delete=models.CASCADE)
-    # tractor_id = models.AutoField(primary_key=True)
-    work_id = models.CharField(max_length=1000)
+    id = models.AutoField(primary_key=True) 
+    # owner_name = models.ForeignKey(Owner, on_delete=models.CASCADE)
+    tractor = models.CharField(max_length=1000)
+    tractor_status = models.ForeignKey(Tractor_status, on_delete=models.CASCADE)
+    # work = models.ForeignKey(Owner, on_delete=models.CASCADE)
 
     # def __str__(self):
     #     return f'{self.owner}'
+
+
 
 class Rice_type(models.Model):
     id = models.AutoField(primary_key=True) 
@@ -58,8 +73,9 @@ class Money_status(models.Model):
 
 class Work(models.Model):
     id = models.AutoField(primary_key=True) 
-    #farmer
-    #tractor
+    farmer_name = models.ForeignKey(Farmer, on_delete=models.CASCADE)
+    # farmer_lastname = models.ForeignKey(Farmer, on_delete=models.CASCADE)
+    tractor = models.ForeignKey(Tractor, on_delete=models.CASCADE)
     # work_id = models.AutoField(primary_key=True)
     # work_status = models.CharField(max_length=1000)
     lat = models.CharField(max_length=1000)
@@ -70,10 +86,13 @@ class Work(models.Model):
     workDetail = models.CharField(max_length=1000)
     RepairTime = models.CharField(max_length=1000) 
     Harverstime = models.CharField(max_length=1000) 
-    date = models.CharField(max_length=1000) 
+    date_start = models.DateTimeField(auto_now=False)
+    date_end = models.DateTimeField(auto_now=False)
     money = models.IntegerField()
-    moneyStatus = models.ForeignKey(Money_status, on_delete=models.CASCADE) # ให้นิยามเพิ่มเติม
-    workstatus = models.ForeignKey(Work_status, on_delete=models.CASCADE) # รับ ไม่รับ จ่าย
+    tractor = models.ForeignKey(Tractor, on_delete=models.CASCADE)
+    tractor_status = models.ForeignKey(Tractor_status, on_delete=models.CASCADE)
+    money_status = models.ForeignKey(Money_status, on_delete=models.CASCADE) # ให้นิยามเพิ่มเติม
+    work_status = models.ForeignKey(Work_status, on_delete=models.CASCADE) # รับ ไม่รับ จ่าย
     # moneyStatus = models.CharField(max_length=100) 
     # work_status = models.CharField(max_length=100) 
    
