@@ -63,8 +63,12 @@ class Command(BaseCommand):
         
         print('กำลัง load ... Tractor')
         for d in self.load(wb, 'Tractor', ['id', 'tractor', 'tractor_status']):
-            print(d)
-            Tractor(**d).save()
+            # print(d)
+            tractor_status = Tractor_status.objects.get(pk=d['tractor_status'])
+            d.pop('tractor_status', None)
+            q = Tractor_status(**d)
+            q = tractor_status.tractor_status
+            q.save()
 
 
         # print('กำลัง load ... Work')
