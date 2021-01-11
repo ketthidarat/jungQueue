@@ -16,30 +16,30 @@ class TractorSerializer(serializers.HyperlinkedModelSerializer):
         model = Tractor
         fields = '__all__'
 
-# class RiceTypeStatusSerializer(serializers.HyperlinkedModelSerializer):
-#     class Meta:
-#         model = Rice_type
-#         fields = '__all__'
+class RiceTypeSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Rice_type
+        fields = '__all__'
 
-# class TractorStatusSerializer(serializers.HyperlinkedModelSerializer):
-#     class Meta:
-#         model = Tractor_status
-#         fields = '__all__'
+class TractorStatusSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Tractor_status
+        fields = '__all__'
 
-# class WorkSerializer(serializers.HyperlinkedModelSerializer):
-#     class Meta:
-#         model = Work
-#         fields = '__all__'
+class WorkSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Work
+        fields = '__all__'
 
-# class MoneyStatusSerializer(serializers.HyperlinkedModelSerializer):
-#     class Meta:
-#         model = Money_status
-#         fields = '__all__'
+class MoneyStatusSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Money_status
+        fields = '__all__'
 
-# class WorkStatusSerializer(serializers.HyperlinkedModelSerializer):
-#     class Meta:
-#         model = Work_status
-#         fields = '__all__'
+class WorkStatusSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Work_status
+        fields = '__all__'
 
 
 
