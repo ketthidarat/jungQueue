@@ -12,6 +12,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:my_project/models.dart';
 
 class Body51 extends StatelessWidget {
+  void fetching() async {
+    // https://pub.dev/packages/http
+
+    //await http.post(url, headers={ 'Content-Type': 'application/json' })
+    //await http.delete(url, headers={ 'Content-Type': 'application/json' })
+    //await http.get(url, headers={ 'Content-Type': 'application/json' })
+    //await http.update(url, headers={ 'Content-Type': 'application/json' })
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -27,6 +35,7 @@ class Body51 extends StatelessWidget {
       List<dynamic> result = json.decode(utf8.decode(response.bodyBytes));
       print('utf8decode: $result');
       print('---convert to list of Farmer---');
+
       List<Farmer> farmers =
           result.map<Farmer>((data) => Farmer.fromMap(data)).toList();
 
