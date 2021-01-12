@@ -1,5 +1,5 @@
-import 'dart:async'; 
-import 'dart:convert'; 
+import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:my_project/Screens/Login/components/background.dart';
 import 'package:my_project/Screens/Signup/signup_screen.dart';
@@ -23,9 +23,10 @@ class _BodyState extends State<Body> {
   String email = '';
   String password = '';
 
-  async void postToServer() {
+  void postToServer() async {
     var url = 'http://jungqueue.pythonanywhere.com/api/farmer/';
-    var response = await http.post(url, body: {'name': 'doodle', 'color': 'blue'});
+    var response =
+        await http.post(url, body: {'name': 'doodle', 'color': 'blue'});
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
   }
@@ -85,5 +86,4 @@ class _BodyState extends State<Body> {
       ),
     );
   }
-
 }
