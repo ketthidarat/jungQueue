@@ -11,6 +11,16 @@ class OwnerSerializer(serializers.HyperlinkedModelSerializer):
         model = Owner
         fields = '__all__'
 
+class TractorSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Tractor
+        fields = '__all__'
+
+class RiceTypeSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Rice_type
+        fields = '__all__'
+
 class TractorStatusSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Tractor_status
@@ -20,6 +30,18 @@ class WorkSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Work
         fields = '__all__'
+
+class MoneyStatusSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Money_status
+        fields = '__all__'
+
+class WorkStatusSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Work_status
+        fields = '__all__'
+
+
 
 ## Serializers define the API representation.
 #class UserSerializer(serializers.HyperlinkedModelSerializer):
