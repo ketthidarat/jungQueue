@@ -2,26 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'bar.dart';
 
-class Queue extends StatefulWidget {
+class Owner extends StatefulWidget {
   @override
-  _QueueState createState() => _QueueState();
+  _OwnerState createState() => _OwnerState();
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor: Colors.greenAccent[50],
+      backgroundColor: Colors.greenAccent[50],
       appBar: AppBar(
         title: Text("Home"),
       ),
-     body: Queue(),
+      body: Owner(),
     );
   }
 }
 
-
-
-class _QueueState extends State<Queue>
-    with SingleTickerProviderStateMixin {
-final _formKey = GlobalKey<FormState>();
- bool _termsChecked1 = true;
+class _OwnerState extends State<Owner> with SingleTickerProviderStateMixin {
+  final _formKey = GlobalKey<FormState>();
+  bool _termsChecked1 = true;
   bool _termsChecked2 = true;
   bool _termsChecked3 = true;
   bool _termsChecked4 = true;
@@ -30,18 +27,15 @@ final _formKey = GlobalKey<FormState>();
   bool _termsChecked7 = true;
   bool _termsChecked8 = true;
   bool _termsChecked9 = true;
-  
-
 
   int _selectedGender = 0;
-  
-  List<DropdownMenuItem<int>> 
-  typeList = [] ,
-  jaList = [],
-  genderList1 = [],
-  genderList2 = [],
-  typecarList = [],
-  priceList = []; 
+
+  List<DropdownMenuItem<int>> typeList = [],
+      jaList = [],
+      genderList1 = [],
+      genderList2 = [],
+      typecarList = [],
+      priceList = [];
   String _name1;
   String _lastname1;
   String _keyja;
@@ -54,26 +48,20 @@ final _formKey = GlobalKey<FormState>();
   String _numbercar;
 
   get body => BarNavy();
-  
-  
-  void onPressedSubmit() {
-      if (_formKey.currentState.validate() ) {
-        _formKey.currentState.save();
 
-       
-      
-      
-        Scaffold.of(context)
-            .showSnackBar(SnackBar(content: Text('Form Submitted')));
-      }
+  void onPressedSubmit() {
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+
+      Scaffold.of(context)
+          .showSnackBar(SnackBar(content: Text('Form Submitted')));
     }
+  }
 
   void loadtype() {
-    
     typeList = [];
     new Text('สถานะของรถ');
     typeList.add(new DropdownMenuItem(
-      
       child: new Text('สถานะของรถ'),
       value: 0,
     ));
@@ -90,7 +78,8 @@ final _formKey = GlobalKey<FormState>();
       value: 3,
     ));
   }
-   void loadja() {
+
+  void loadja() {
     jaList = [];
     jaList.add(new DropdownMenuItem(
       child: new Text('เดือน'),
@@ -104,20 +93,21 @@ final _formKey = GlobalKey<FormState>();
       child: new Text('จ่าสิบตำรวจ'),
       value: 2,
     ));
-      jaList.add(new DropdownMenuItem(
+    jaList.add(new DropdownMenuItem(
       child: new Text('สิบตำรวจตรี'),
       value: 4,
     ));
-      jaList.add(new DropdownMenuItem(
+    jaList.add(new DropdownMenuItem(
       child: new Text('สิบตำรวจเอก'),
       value: 5,
     ));
-      jaList.add(new DropdownMenuItem(
+    jaList.add(new DropdownMenuItem(
       child: new Text('สิบตำรวจโท'),
       value: 6,
     ));
   }
-   void loadgender1() {
+
+  void loadgender1() {
     genderList1 = [];
     genderList1.add(new DropdownMenuItem(
       child: new Text('ปี'),
@@ -136,7 +126,8 @@ final _formKey = GlobalKey<FormState>();
       value: 3,
     ));
   }
-   void loadgender2() {
+
+  void loadgender2() {
     genderList2 = [];
     genderList2.add(new DropdownMenuItem(
       child: new Text('เพศ'),
@@ -155,7 +146,8 @@ final _formKey = GlobalKey<FormState>();
       value: 3,
     ));
   }
-   void loadtypecar() {
+
+  void loadtypecar() {
     typecarList = [];
     typecarList.add(new DropdownMenuItem(
       child: new Text('ประเภทรถ'),
@@ -174,7 +166,8 @@ final _formKey = GlobalKey<FormState>();
       value: 3,
     ));
   }
-    void loadprice() {
+
+  void loadprice() {
     priceList = [];
     priceList.add(new DropdownMenuItem(
       child: new Text('ยังไม่ชำระเงิน'),
@@ -189,11 +182,10 @@ final _formKey = GlobalKey<FormState>();
     //   value: 2,
     // ));
   }
-  
-  
-   @override
+
+  @override
   Widget build(BuildContext context) {
-      // final halfMediaWidth = MediaQuery.of(context).size.width / 2.0;
+    // final halfMediaWidth = MediaQuery.of(context).size.width / 2.0;
     loadtype();
     loadja();
     loadgender1();
@@ -209,15 +201,11 @@ final _formKey = GlobalKey<FormState>();
           )),
     );
   }
-  
-  
+
   List<Widget> getFormWidget() {
     List<Widget> formWidget = new List();
 
-
-
-  
-     /*formWidget.add(new DropdownButton(
+    /*formWidget.add(new DropdownButton(
       hint: new Text('Select Gender'),
       items: jaList,
       value: _selectedGender,
@@ -253,8 +241,10 @@ final _formKey = GlobalKey<FormState>();
       },
       isExpanded: true,
     ));
-  formWidget.add(new TextFormField(
-      decoration: InputDecoration(hintText: 'เวลาที่ใช้ในการเก็บเกี่ยว', labelText: 'เวลาที่ใช้ในการเก็บเกี่ยว'),
+    formWidget.add(new TextFormField(
+      decoration: InputDecoration(
+          hintText: 'เวลาที่ใช้ในการเก็บเกี่ยว',
+          labelText: 'เวลาที่ใช้ในการเก็บเกี่ยว'),
       keyboardType: TextInputType.text,
       validator: (value) {
         if (value.isEmpty) return 'เวลาที่ใช้ในการเก็บเกี่ยว';
@@ -265,9 +255,11 @@ final _formKey = GlobalKey<FormState>();
         });
       },
     ));
-    
-  formWidget.add(new TextFormField(
-      decoration: InputDecoration(hintText: 'เวลาที่ใช้ในการซ่อมรถ', labelText: 'เวลาที่ใช้ในการซ่อมรถ'),
+
+    formWidget.add(new TextFormField(
+      decoration: InputDecoration(
+          hintText: 'เวลาที่ใช้ในการซ่อมรถ',
+          labelText: 'เวลาที่ใช้ในการซ่อมรถ'),
       keyboardType: TextInputType.text,
       validator: (value) {
         if (value.isEmpty) return 'เวลาที่ใช้ในการซ่อมรถ';
@@ -278,7 +270,7 @@ final _formKey = GlobalKey<FormState>();
         });
       },
     ));
-    
+
     /*formWidget.add(new TextFormField(
       decoration: InputDecoration(hintText: 'Email', labelText: 'Email'),
       keyboardType: TextInputType.text,
@@ -291,7 +283,7 @@ final _formKey = GlobalKey<FormState>();
         });
       },
     ));*/
-     /*  formWidget.add(new TextFormField(
+    /*  formWidget.add(new TextFormField(
       decoration: InputDecoration(hintText: 'ที่อยู่', labelText: 'ที่อยู่'),
       keyboardType: TextInputType.text,
       validator: (value) {
@@ -316,7 +308,7 @@ final _formKey = GlobalKey<FormState>();
       },
     ));*/
 
- /* formWidget.add(new DropdownButton(
+    /* formWidget.add(new DropdownButton(
       hint: new Text('Select Gender'),
       items: genderList2,
       value: _selectedGender,
@@ -344,7 +336,7 @@ final _formKey = GlobalKey<FormState>();
       //     : null,
       
     ));*/
-     /*formWidget.add(CheckboxListTile(
+    /*formWidget.add(CheckboxListTile(
       value: _termsChecked2,
       onChanged: (value) {
         setState(() {
@@ -369,7 +361,7 @@ final _formKey = GlobalKey<FormState>();
       ),
       controlAffinity: ListTileControlAffinity.leading,
     ));*/
-   
+
     /*formWidget.add(new TextFormField(
       decoration: InputDecoration(hintText: 'วัน/เดือน/ปีเกิด', labelText: 'วัน/เดือน/ปีเกิด'),
       keyboardType: TextInputType.text,
@@ -394,8 +386,7 @@ final _formKey = GlobalKey<FormState>();
       isExpanded: true,
     ));*/
 
-
-   /* formWidget.add(new DropdownButton(
+    /* formWidget.add(new DropdownButton(
       hint: new Text('Select Gender'),
       items: jaList,
       value: _selectedGender,
@@ -417,7 +408,7 @@ final _formKey = GlobalKey<FormState>();
       },
       isExpanded: true,
     ));*/
-   /* formWidget.add(new TextFormField(
+    /* formWidget.add(new TextFormField(
       decoration: InputDecoration(hintText: 'CVV', labelText: 'CVV'),
       keyboardType: TextInputType.text,
       validator: (value) {
@@ -438,5 +429,4 @@ final _formKey = GlobalKey<FormState>();
         onPressed: onPressedSubmit));
     return formWidget;
   }
-  
 }

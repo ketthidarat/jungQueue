@@ -1,443 +1,174 @@
 import 'package:flutter/material.dart';
-import 'package:table_calendar/table_calendar.dart';
 import 'bar.dart';
+import 'dart:async';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:table_calendar/table_calendar.dart';
+
+import 'calendarcontroller.dart';
 
 class Queue extends StatefulWidget {
-  String get title => null;
   @override
   _QueueState createState() => _QueueState();
+}
+
+class PatientmapPage extends StatefulWidget {
+  String get title => null;
+
+  @override
+  PatientmapPageState createState() {
+    return new PatientmapPageState();
+  }
+}
+
+class PatientmapPageState extends State<PatientmapPage> {
+  // double currentOpacity = 0;
+  // Animation<double> starAnimation;
+  Completer<GoogleMapController> _controller = Completer();
+
+  // @override
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-       backgroundColor: Colors.greenAccent[50],
-      appBar: AppBar(
-        title: Text("Home"),
-      ),
-     body: Queue(),
+    return new MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: new Scaffold(
+          backgroundColor: Color(0xFFB3E5FC),
+          appBar: AppBar(
+            title: Text("Google Map"),
+            actions: [
+              //action button
+              IconButton(
+                icon: Image.asset('assets/icons/heart.png'),
+                onPressed: () {},
+              ),
+            ],
+            backgroundColor: Colors.indigo,
+          ),
+          body: GoogleMap(
+            mapType: MapType.normal,
+            initialCameraPosition: CameraPosition(
+              target:
+                  LatLng(15.1989675, 104.8405362), //ของจังหวัดตัวเอง104.8405362
+              zoom: 16,
+            ),
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
+            },
+          )),
     );
   }
 }
 
-
-
-class _QueueState extends State<Queue>
-    with SingleTickerProviderStateMixin {
-final _formKey = GlobalKey<FormState>();
- bool _termsChecked1 = true;
-  bool _termsChecked2 = true;
-  bool _termsChecked3 = true;
-  bool _termsChecked4 = true;
-  bool _termsChecked5 = true;
-  bool _termsChecked6 = true;
-  bool _termsChecked7 = true;
-  bool _termsChecked8 = true;
-  bool _termsChecked9 = true;
-  
-
-
-  int _selectedGender = 0;
-  
-  List<DropdownMenuItem<int>> 
-  typeList = [] ,
-  jaList = [],
-  genderList1 = [],
-  genderList2 = [],
-  typecarList = [],
-  priceList = []; 
-  String _name1;
-  String _lastname1;
-  String _keyja;
-  String _idme;
-  String _name2;
-  String _lastname2;
-  String _address;
-  String _amphoe;
-  String _province;
-  String _numbercar;
-
-  get body => BarNavy();
-  
-  
-  void onPressedSubmit() {
-      if (_formKey.currentState.validate() ) {
-        _formKey.currentState.save();
-
-       
-      
-      
-        Scaffold.of(context)
-            .showSnackBar(SnackBar(content: Text('Form Submitted')));
-      }
-    }
-
-  void loadtype() {
-    
-    typeList = [];
-    new Text('สภาพต้นข้าว');
-    typeList.add(new DropdownMenuItem(
-      
-      child: new Text('สภาพต้นข้าว'),
-      value: 0,
-    ));
-    typeList.add(new DropdownMenuItem(
-      child: new Text('ตั้งตรง'),
-      value: 1,
-    ));
-    typeList.add(new DropdownMenuItem(
-      child: new Text('ล้ม'),
-      value: 2,
-    ));
-    typeList.add(new DropdownMenuItem(
-      child: new Text('ราบกับพื้น'),
-      value: 3,
-    ));
-  }
-   void loadja() {
-    jaList = [];
-    jaList.add(new DropdownMenuItem(
-      child: new Text('เดือน'),
-      value: 0,
-    ));
-    jaList.add(new DropdownMenuItem(
-      child: new Text('ผิวขาวซีด'),
-      value: 1,
-    ));
-    jaList.add(new DropdownMenuItem(
-      child: new Text('จ่าสิบตำรวจ'),
-      value: 2,
-    ));
-      jaList.add(new DropdownMenuItem(
-      child: new Text('สิบตำรวจตรี'),
-      value: 4,
-    ));
-      jaList.add(new DropdownMenuItem(
-      child: new Text('สิบตำรวจเอก'),
-      value: 5,
-    ));
-      jaList.add(new DropdownMenuItem(
-      child: new Text('สิบตำรวจโท'),
-      value: 6,
-    ));
-  }
-   void loadgender1() {
-    genderList1 = [];
-    genderList1.add(new DropdownMenuItem(
-      child: new Text('ปี'),
-      value: 0,
-    ));
-    genderList1.add(new DropdownMenuItem(
-      child: new Text('ชาย'),
-      value: 1,
-    ));
-    genderList1.add(new DropdownMenuItem(
-      child: new Text('หญิง'),
-      value: 2,
-    ));
-    genderList1.add(new DropdownMenuItem(
-      child: new Text('อิ่นๆ'),
-      value: 3,
-    ));
-  }
-   void loadgender2() {
-    genderList2 = [];
-    genderList2.add(new DropdownMenuItem(
-      child: new Text('เพศ'),
-      value: 0,
-    ));
-    genderList2.add(new DropdownMenuItem(
-      child: new Text('ชาย'),
-      value: 1,
-    ));
-    genderList2.add(new DropdownMenuItem(
-      child: new Text('หญิง'),
-      value: 2,
-    ));
-    genderList2.add(new DropdownMenuItem(
-      child: new Text('อิ่นๆ'),
-      value: 3,
-    ));
-  }
-   void loadtypecar() {
-    typecarList = [];
-    typecarList.add(new DropdownMenuItem(
-      child: new Text('ประเภทรถ'),
-      value: 0,
-    ));
-    typecarList.add(new DropdownMenuItem(
-      child: new Text('รถจักรยานยนต์'),
-      value: 1,
-    ));
-    typecarList.add(new DropdownMenuItem(
-      child: new Text('รถยนต์'),
-      value: 2,
-    ));
-    typecarList.add(new DropdownMenuItem(
-      child: new Text('รถบรรทุก'),
-      value: 3,
-    ));
-  }
-    void loadprice() {
-    priceList = [];
-    priceList.add(new DropdownMenuItem(
-      child: new Text('ยังไม่ชำระเงิน'),
-      value: 0,
-    ));
-    priceList.add(new DropdownMenuItem(
-      child: new Text('ชำระเงินเรียบร้อย'),
-      value: 1,
-    ));
-    // priceList.add(new DropdownMenuItem(
-    //   child: new Text('ชำระค่าปรบเรียบร้อย'),
-    //   value: 2,
-    // ));
-  }
-  
-  
-   @override
+class _QueueState extends State<Queue> {
+  int _value = 1;
+  Completer<GoogleMapController> _controller = Completer();
   Widget build(BuildContext context) {
-      // final halfMediaWidth = MediaQuery.of(context).size.width / 2.0;
-    loadtype();
-    loadja();
-    loadgender1();
-    loadgender2();
-    loadtypecar();
-    loadprice();
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Form(
-          key: _formKey,
-          child: new ListView(
-            children: getFormWidget(),
-          )),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'รายละเอียดการจอง',
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+        backgroundColor: Colors.greenAccent[50],
+      ),
+      home: Scaffold(
+        appBar: new AppBar(
+          title: Text('รายละเอียดการจอง'),
+          // Here we take the value from the MyHomePage object that was created by
+          // the App.build method, and use it to set our appbar title.
+          actions: <Widget>[
+            // new IconButton(icon: const Icon(Icons.save), onPressed: () {})
+          ],
+        ),
+        body: new Column(
+          children: <Widget>[
+            // GoogleMap(
+            //   mapType: MapType.normal,
+            //   initialCameraPosition: CameraPosition(
+            //     target: LatLng(
+            //         15.1989675, 104.8405362), //ของจังหวัดตัวเอง104.8405362
+            //     zoom: 6,
+            //   ),
+            //   onMapCreated: (GoogleMapController controller) {
+            //     _controller.complete(controller);
+            //   },
+            // ),
+
+            new ListTile(
+              // leading: const Icon(Icons.person),
+              title: new TextField(
+                decoration: new InputDecoration(
+                  hintText: "จำนวนไร่ที่ต้องการเก็บเกี่ยว",
+                ),
+              ),
+            ),
+            new ListTile(
+              // leading: const Icon(Icons.phone),
+              title: new TextField(
+                decoration: new InputDecoration(
+                  hintText: "พันธุ์ข้าว",
+                ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(20.0),
+              child: DropdownButton(
+                  value: _value,
+                  items: [
+                    DropdownMenuItem(
+                      child: Text("ตั้งตรง"),
+                      value: 1,
+                    ),
+                    DropdownMenuItem(
+                      child: Text("ราบกับพื้น"),
+                      value: 2,
+                    ),
+                    DropdownMenuItem(child: Text("ล้ม"), value: 3),
+                    // DropdownMenuItem(child: Text("Fourth Item"), value: 4)
+                  ],
+                  onChanged: (value) {
+                    setState(() {
+                      _value = value;
+                    });
+                  }),
+            ),
+            const SizedBox(height: 20),
+            RaisedButton(
+              onPressed: () => {Calendar()},
+              child: const Text('วันที่ต้องการเก็บเกี่ยว',
+                  style: TextStyle(fontSize: 20)),
+            ),
+            new ListTile(
+              // leading: const Icon(Icons.email),
+              title: new TextField(
+                decoration: new InputDecoration(
+                  hintText: "อื่นๆ",
+                ),
+              ),
+            ),
+            // const Divider(
+            //   height: 1.0,
+            // ),
+            // new ListTile(
+            //   leading: const Icon(Icons.label),
+            //   title: const Text('Nick'),
+            //   subtitle: const Text('None'),
+            // ),
+            // new ListTile(
+            //   leading: const Icon(Icons.today),
+            //   title: const Text('Birthday'),
+            //   subtitle: const Text('February 20, 1980'),
+            //   trailing: const Icon(
+            //     Icons.check_circle,
+            //     color: Colors.green,
+            //   ),
+            // ),
+            // new ListTile(
+            //   leading: const Icon(Icons.group),
+            //   title: const Text('Contact group'),
+            //   subtitle: const Text('Not specified'),
+            // )
+          ],
+        ),
+      ),
     );
   }
-  
-  
-  List<Widget> getFormWidget() {
-    List<Widget> formWidget = new List();
-
-
-
-  
-     /*formWidget.add(new DropdownButton(
-      hint: new Text('Select Gender'),
-      items: jaList,
-      value: _selectedGender,
-      onChanged: (value) {
-        setState(() {
-          _selectedGender = value;
-        });
-      },
-      isExpanded: true,
-    ));
-
-
-  formWidget.add(new DropdownButton(
-      hint: new Text('Select Gender'),
-      items: genderList1,
-      value: _selectedGender,
-      onChanged: (value) {
-        setState(() {
-          _selectedGender = value;
-        });
-      },
-      isExpanded: true,
-    ));*/
-
-
-  formWidget.add(new TextFormField(
-      decoration: InputDecoration(hintText: 'จำนวนทุ่งนาที่ต้องการเก็บเกี่ยว', labelText: 'จำนวนทุ่งนาที่ต้องการเก็บเกี่ยว'),
-      keyboardType: TextInputType.text,
-      validator: (value) {
-        if (value.isEmpty) return 'จำนวนทุ่งนาที่ต้องการเก็บเกี่ยว';
-      },
-      onSaved: (value) {
-        setState(() {
-          _name1 = value;
-        });
-      },
-    ));
-    formWidget.add(new DropdownButton(
-      hint: new Text('Select Gender'),
-      items: typeList,
-      value: _selectedGender,
-      onChanged: (value) {
-        setState(() {
-          _selectedGender = value;
-        });
-      },
-      isExpanded: true,
-    ));
-  formWidget.add(new TextFormField(
-      decoration: InputDecoration(hintText: 'พันธุ์ข้าว', labelText: 'พันธุ์ข้าว'),
-      keyboardType: TextInputType.text,
-      validator: (value) {
-        if (value.isEmpty) return 'พันธุ์ข้าว';
-      },
-      onSaved: (value) {
-        setState(() {
-          _lastname1 = value;
-        });
-      },
-    ));
-    
-    /*formWidget.add(new TextFormField(
-      decoration: InputDecoration(hintText: 'Email', labelText: 'Email'),
-      keyboardType: TextInputType.text,
-      validator: (value) {
-        if (value.isEmpty) return 'Email';
-      },
-      onSaved: (value) {
-        setState(() {
-          _keyja = value;
-        });
-      },
-    ));*/
-     /*  formWidget.add(new TextFormField(
-      decoration: InputDecoration(hintText: 'ที่อยู่', labelText: 'ที่อยู่'),
-      keyboardType: TextInputType.text,
-      validator: (value) {
-        if (value.isEmpty) return 'ที่อยู่';
-      },
-      onSaved: (value) {
-        setState(() {
-          _idme = value;
-        });
-      },
-    ));
-    formWidget.add(new TextFormField(
-      decoration: InputDecoration(hintText: 'รหัสไปรษณีย์', labelText: 'รหัสไปรษณีย์'),
-      keyboardType: TextInputType.text,
-      validator: (value) {
-        if (value.isEmpty) return 'รหัสไปรษณีย์';
-      },
-      onSaved: (value) {
-        setState(() {
-          _idme = value;
-        });
-      },
-    ));*/
-
- /* formWidget.add(new DropdownButton(
-      hint: new Text('Select Gender'),
-      items: genderList2,
-      value: _selectedGender,
-      onChanged: (value) {
-        setState(() {
-          _selectedGender = value;
-        });
-      },
-      isExpanded: true,
-    ));
-  
-    
-    formWidget.add(CheckboxListTile(
-      value: _termsChecked1,
-      onChanged: (value) {
-        setState(() {
-          _termsChecked1 = value;
-        });
-      },
-      // subtitle: !_termsChecked
-      //     ? Text(
-      //         'Required',
-      //         style: TextStyle(color: Colors.red, fontSize: 12.0),
-      //       )
-      //     : null,
-      
-    ));*/
-     /*formWidget.add(CheckboxListTile(
-      value: _termsChecked2,
-      onChanged: (value) {
-        setState(() {
-          
-          _termsChecked2 = value;
-        });
-      },
-      title: new Text(
-        'ชาย',
-      ),
-      controlAffinity: ListTileControlAffinity.leading,
-    ));
-     formWidget.add(CheckboxListTile(
-      value: _termsChecked3,
-      onChanged: (value) {
-        setState(() {
-          _termsChecked3 = value;
-        });
-      },
-      title: new Text(
-        'หญิง',
-      ),
-      controlAffinity: ListTileControlAffinity.leading,
-    ));*/
-   
-    /*formWidget.add(new TextFormField(
-      decoration: InputDecoration(hintText: 'วัน/เดือน/ปีเกิด', labelText: 'วัน/เดือน/ปีเกิด'),
-      keyboardType: TextInputType.text,
-      validator: (value) {
-        if (value.isEmpty) return 'วัน/เดือน/ปีเกิด';
-      },
-      onSaved: (value) {
-        setState(() {
-          _name1 = value;
-        });
-      },
-    ));
-    formWidget.add(new DropdownButton(
-      hint: new Text('Select Gender'),
-      items: typeList,
-      value: _selectedGender,
-      onChanged: (value) {
-        setState(() {
-          _selectedGender = value;
-        });
-      },
-      isExpanded: true,
-    ));*/
-
-
-   /* formWidget.add(new DropdownButton(
-      hint: new Text('Select Gender'),
-      items: jaList,
-      value: _selectedGender,
-      onChanged: (value) {
-        setState(() {
-          _selectedGender = value;
-        });
-      },
-      isExpanded: true,
-    ));
-     formWidget.add(new DropdownButton(
-      hint: new Text('Select Gender'),
-      items: genderList1,
-      value: _selectedGender,
-      onChanged: (value) {
-        setState(() {
-          _selectedGender = value;
-        });
-      },
-      isExpanded: true,
-    ));*/
-   /* formWidget.add(new TextFormField(
-      decoration: InputDecoration(hintText: 'CVV', labelText: 'CVV'),
-      keyboardType: TextInputType.text,
-      validator: (value) {
-        if (value.isEmpty) return 'CVV';
-      },
-      onSaved: (value) {
-        setState(() {
-          _name1 = value;
-        });
-      },
-    ));*/
-    //https://lookinggreat.pythonanywhere.com/media/${member.cover.name}
-
-    formWidget.add(new RaisedButton(
-        color: Colors.blue,
-        textColor: Colors.white,
-        child: new Text('Submit'),
-        onPressed: onPressedSubmit));
-    return formWidget;
-  }
-  
 }
