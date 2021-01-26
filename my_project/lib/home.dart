@@ -18,24 +18,28 @@ class HomePage extends StatelessWidget {
                 onPressed: () {},
                 child: Text('ข้อมูลรถเกี่ยวนวดข้าว',
                     style: TextStyle(fontSize: 20)),
+                //child: Text('Tractor Infor', style: TextStyle(fontSize: 20)),
               ),
               const SizedBox(height: 30),
               RaisedButton(
                 onPressed: () {},
-                child: const Text('ตารางงานรถเกี่ยวนวดข้าว',
-                    style: TextStyle(fontSize: 20)),
+                //child: const Text('ตารางงานรถเกี่ยวนวดข้าว',
+                child: const Text('Schedule', style: TextStyle(fontSize: 20)),
               ),
               const SizedBox(height: 30),
               RaisedButton(
                 onPressed: () {},
-                child: const Text('จองคิวรถเกี่ยวนวดข้าว',
-                    style: TextStyle(fontSize: 20)),
+                //child: const Text('จองคิวรถเกี่ยวนวดข้าว',
+                child:
+                    const Text('Reservation', style: TextStyle(fontSize: 20)),
               ),
               const SizedBox(height: 30),
               RaisedButton(
                 onPressed: () {},
                 child:
-                    const Text('ตรวจสอบการจอง', style: TextStyle(fontSize: 20)),
+                    //const Text('ตรวจสอบการจอง', style: TextStyle(fontSize: 20)),
+                    const Text('Check schedule',
+                        style: TextStyle(fontSize: 20)),
               ),
             ],
           ),

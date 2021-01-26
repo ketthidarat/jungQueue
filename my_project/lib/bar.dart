@@ -18,7 +18,7 @@ class _BarNavyState extends State<BarNavy> {
   final List<Widget> _children = [
     HomePage(),
     Queue(),
-    Farmer(),
+    FarmerPage(1),
     Calendar(),
     Tractor()
   ];
@@ -56,19 +56,20 @@ class _BarNavyState extends State<BarNavy> {
           BottomNavigationBarItem(
               // ignore: deprecated_member_use
               title: Text('หน้าหลัก'),
+              //title: Text('home'),
               icon: Icon(Icons.home)),
           BottomNavigationBarItem(
               // ignore: deprecated_member_use
-              title: Text('จองคิว'),
+              title: Text('queue'),
               icon: Icon(Icons.star)),
           BottomNavigationBarItem(
             // ignore: deprecated_member_use
-            title: Text('ฉัน'),
+            title: Text('me1'),
             icon: Icon(Icons.face),
           ),
           BottomNavigationBarItem(
             // ignore: deprecated_member_use
-            title: Text('Me'),
+            title: Text('Me2'),
             icon: Icon(Icons.face),
           ),
           BottomNavigationBarItem(

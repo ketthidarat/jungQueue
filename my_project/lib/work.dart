@@ -12,7 +12,8 @@ class WorkWidget extends StatefulWidget {
     return new _WorkPageState();
   }
 
-  static fromJson(data) {}
+  // ????
+  // static fromJson(data) {}
 }
 
 class _WorkPageState extends State<WorkWidget> {
@@ -44,7 +45,7 @@ class _WorkPageState extends State<WorkWidget> {
         .transform(utf8.decoder)
         .transform(json.decoder)
         .expand((data) => (data as List))
-        .map((data) => Farmer.fromJson(data));
+        .map((data) => Farmer.fromMap(data));
   }
 
   Widget build(BuildContext context) {
