@@ -5,23 +5,8 @@ class DetailPage extends StatefulWidget {
   _DetailPageState createState() => _DetailPageState();
 }
 
-class _DetailPageState extends State<DetailPage>
-    with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-
+class _DetailPageState extends State<DetailPage> {
   @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(vsync: this);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
-  }
-
- @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'First Example',

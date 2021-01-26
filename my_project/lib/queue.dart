@@ -111,6 +111,7 @@ class _QueueState extends State<Queue> {
             Container(
               padding: EdgeInsets.all(20.0),
               child: DropdownButton(
+                  hint: Text("สภาพต้นข้าว"),
                   value: _value,
                   items: [
                     DropdownMenuItem(
@@ -132,9 +133,12 @@ class _QueueState extends State<Queue> {
             ),
             const SizedBox(height: 20),
             RaisedButton(
-              onPressed: () => {Calendar()},
-              child: const Text('วันที่ต้องการเก็บเกี่ยว',
-                  style: TextStyle(fontSize: 20)),
+              onPressed: () => {},
+              color: Colors.blueAccent[100],
+              child: Text(
+                'วันที่ต้องการเก็บเกี่ยว',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
             new ListTile(
               // leading: const Icon(Icons.email),
@@ -144,6 +148,24 @@ class _QueueState extends State<Queue> {
                 ),
               ),
             ),
+            ButtonBar(alignment: MainAxisAlignment.center, children: <Widget>[
+              RaisedButton(
+                onPressed: () => {},
+                color: Colors.green,
+                child: Text(
+                  'ยืนยัน',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              RaisedButton(
+                onPressed: () => {},
+                color: Colors.red,
+                child: Text(
+                  'ยกเลิก',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ])
             // const Divider(
             //   height: 1.0,
             // ),

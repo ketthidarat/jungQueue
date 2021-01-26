@@ -1,12 +1,10 @@
 //import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:my_project/farmer.dart';
-import 'package:my_project/queue.dart';
 import 'home.dart';
 import 'work.dart';
 import 'detail01.dart';
 import 'tractor.dart';
-import 'calendarcontroller.dart';
 
 class BarNavy extends StatefulWidget {
   @override
@@ -15,13 +13,7 @@ class BarNavy extends StatefulWidget {
 
 class _BarNavyState extends State<BarNavy> {
   int _selectedIndex = 0;
-  final List<Widget> _children = [
-    HomePage(),
-    Queue(),
-    Farmer(),
-    Calendar(),
-    Tractor()
-  ];
+  final List<Widget> _children = [HomePage(), WorkWidget(), Farmer()];
   PageController _pageController;
   void onTappedBar(int index) {
     setState(() {
@@ -59,23 +51,18 @@ class _BarNavyState extends State<BarNavy> {
               icon: Icon(Icons.home)),
           BottomNavigationBarItem(
               // ignore: deprecated_member_use
-              title: Text('จองคิว'),
+              title: Text('ตารางงาน'),
               icon: Icon(Icons.star)),
           BottomNavigationBarItem(
             // ignore: deprecated_member_use
             title: Text('ฉัน'),
-            icon: Icon(Icons.face),
+            icon: Icon(Icons.pets),
           ),
-          BottomNavigationBarItem(
-            // ignore: deprecated_member_use
-            title: Text('Me'),
-            icon: Icon(Icons.face),
-          ),
-          BottomNavigationBarItem(
-            // ignore: deprecated_member_use
-            title: Text('Map'),
-            icon: Icon(Icons.face),
-          ),
+          // BottomNavigationBarItem(
+          //   // ignore: deprecated_member_use
+          //   title: Text('Me'),
+          //   icon: Icon(Icons.face),
+          // ),
         ],
       ),
     );
