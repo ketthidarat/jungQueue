@@ -52,6 +52,11 @@ class _WorkPageState extends State<WorkWidget> {
     // var _farmer;
     return MaterialApp(
         title: 'First Example',
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+          fontFamily: 'Sarabun',
+          backgroundColor: Colors.greenAccent[50],
+        ),
         home: Scaffold(
             appBar: AppBar(
               title: Text('เกษตรกร'),

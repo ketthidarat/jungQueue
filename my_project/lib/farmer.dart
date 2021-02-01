@@ -69,6 +69,11 @@ class _FarmerPageState extends State<FarmerPage> {
     //print('${_farmers}');
     return MaterialApp(
       title: 'First Example',
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+        fontFamily: 'Sarabun',
+        backgroundColor: Colors.greenAccent[50],
+      ),
       home: Scaffold(
         appBar: AppBar(
           title: Text('Farmer'),

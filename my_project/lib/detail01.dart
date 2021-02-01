@@ -10,6 +10,11 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'First Example',
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+        fontFamily: 'Sarabun',
+        backgroundColor: Colors.greenAccent[50],
+      ),
       home: Scaffold(
         // appBar: AppBar(
         //   title: Text('Home Page'),

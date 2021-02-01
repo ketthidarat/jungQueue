@@ -13,6 +13,7 @@ class _TractorState extends State<Tractor> {
       title: 'First Example',
       theme: ThemeData(
         primarySwatch: Colors.green,
+        fontFamily: 'Sarabun',
         backgroundColor: Colors.greenAccent[50],
       ),
       home: Scaffold(

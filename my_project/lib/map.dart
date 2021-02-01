@@ -22,6 +22,11 @@ class PatientmapPageState extends State<PatientmapPage> {
   Widget build(BuildContext context) {
     return new MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+        fontFamily: 'Sarabun',
+        backgroundColor: Colors.greenAccent[50],
+      ),
       home: new Scaffold(
           backgroundColor: Color(0xFFB3E5FC),
           appBar: AppBar(
