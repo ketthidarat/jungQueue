@@ -10,7 +10,6 @@ class Farmer {
       this.password);
 
   factory Farmer.fromMap(Map<String, dynamic> json) {
-    print('Farmer.fromJson("${json}")');
     return Farmer(json['farmer_name'], json['address'], json['phone'],
         json['email'], json['username'], json['password']);
   }
@@ -19,8 +18,7 @@ class Farmer {
     return '${this.farmerName} โทรศัพท์: ${this.phone} ที่อยู่ ${this.address}';
   }
 
-  // ฟังก์ชันที่ไม่ทำงานอะไร?
-  //static fromJson(data) {}
+  static fromJson(data) {}
 }
 
 class Owner {

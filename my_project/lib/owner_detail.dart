@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'models.dart';
 
-class FarmerDetail extends StatelessWidget {
-  final Farmer farmer;
+class OwnerDetail extends StatelessWidget {
+  final Owner owner;
 
-  FarmerDetail({this.farmer});
+  OwnerDetail({this.owner});
 
   bodyWidget(BuildContext context) => Stack(
         children: <Widget>[
@@ -29,11 +29,11 @@ class FarmerDetail extends StatelessWidget {
                   // style:
                   //   TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
                   // ),
-                  Text("${farmer.farmerName}"),
+                  Text("${owner.ownerName}"),
                   //Text("${pokemon.weight}"),
-                  Text("${farmer.address}"),
-                  Text("${farmer.phone}"),
-                  Text("${farmer.email}"),
+                  Text("${owner.address}"),
+                  Text("${owner.phone}"),
+                  Text("${owner.email}"),
                   //Text("จำนวนสินค้าที่มี"+ "${pokemon.nextEvolution}"),
                   // Text("${farmer.store}"),
                   // Text("จำนวนสินค้าที่ต้องการซื้อ", style: TextStyle(fontWeight: FontWeight.bold)),
@@ -89,7 +89,7 @@ class FarmerDetail extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.orange,
-        title: Text(farmer.farmerName),
+        title: Text(owner.ownerName),
       ),
       body: bodyWidget(context),
     );

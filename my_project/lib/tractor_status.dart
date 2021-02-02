@@ -4,22 +4,22 @@ import 'package:http/http.dart' as http;
 import 'models.dart';
 import 'farmer_detail.dart';
 
-class FarmerPage extends StatefulWidget {
-  final int farmerId;
+class TractorStatusPage extends StatefulWidget {
+  final int tractorId;
 
-  FarmerPage(this.farmerId);
+  TractorStatusPage(this.tractorId);
 
   @override
-  _FarmerPageState createState() {
+  _TractorStatusPageState createState() {
     print('creating state');
-    return new _FarmerPageState();
+    return new _TractorStatusPageState();
   }
 
   static fromJson(data) {}
 }
 
-class _FarmerPageState extends State<FarmerPage> {
-  var url = "https://jungqueue.pythonanywhere.com/api/farmer/1";
+class _TractorStatusPageState extends State<TractorStatusPage> {
+  var url = "https://jungqueue.pythonanywhere.com/api/tractor_status/1";
 
   // เอารายชื่อของ farmer มาทั้งหมด
   List<Farmer> _farmers = <Farmer>[];
@@ -54,7 +54,7 @@ class _FarmerPageState extends State<FarmerPage> {
 
   void getFarmers() async {
     print('calling getFarmers()');
-    String url = 'https://jungqueue.pythonanywhere.com/api/farmer/';
+    String url = 'https://jungqueue.pythonanywhere.com/api/tractor_status/';
     var response =
         await http.get(url, headers: {'Content-Type': 'application/json'});
     List<dynamic> result = json.decode(utf8.decode(response.bodyBytes));

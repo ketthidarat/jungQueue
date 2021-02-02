@@ -1,28 +1,29 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:my_project/tractor_showDetail.dart';
 import 'models.dart';
-import 'farmer_detail.dart';
+import 'work_detail.dart';
 
-class FarmerPage extends StatefulWidget {
-  final int farmerId;
+class TractorWidget extends StatefulWidget {
+  final int tractorId;
 
-  FarmerPage(this.farmerId);
+  TractorWidget(this.tractorId);
 
   @override
-  _FarmerPageState createState() {
+  _TractorWidgetState createState() {
     print('creating state');
-    return new _FarmerPageState();
+    return new _TractorWidgetState();
   }
 
   static fromJson(data) {}
 }
 
-class _FarmerPageState extends State<FarmerPage> {
-  var url = "https://jungqueue.pythonanywhere.com/api/farmer/1";
+class _TractorWidgetState extends State<TractorWidget> {
+  var url = "https://jungqueue.pythonanywhere.com/api/tractor/1";
 
   // เอารายชื่อของ farmer มาทั้งหมด
-  List<Farmer> _farmers = <Farmer>[];
+  List<Tractor> _tractors = <Tractor>[];
   // เอาข้อมูลชาวนามาคนเยว? one farmer
   // Farmer _farmer;
 
@@ -30,7 +31,7 @@ class _FarmerPageState extends State<FarmerPage> {
   void initState() {
     super.initState();
     print('fetching data');
-    getFarmers();
+    getTractorWidgets();
   }
 
   /*
@@ -52,44 +53,44 @@ class _FarmerPageState extends State<FarmerPage> {
   }
   */
 
-  void getFarmers() async {
-    print('calling getFarmers()');
-    String url = 'https://jungqueue.pythonanywhere.com/api/farmer/';
+  void getTractorWidgets() async {
+    print('calling getOwners()');
+    String url = 'https://jungqueue.pythonanywhere.com/api/tractor/';
     var response =
         await http.get(url, headers: {'Content-Type': 'application/json'});
     List<dynamic> result = json.decode(utf8.decode(response.bodyBytes));
-    _farmers = result.map<Farmer>((data) => Farmer.fromMap(data)).toList();
+    _tractors = result.map<Tractor>((data) => Tractor.fromMap(data)).toList();
     setState(() {});
   }
 
   Widget build(BuildContext context) {
-    print('update FarmerPage');
+    print('update TractorPage');
     //print('${_farmers}');
     return MaterialApp(
       title: 'First Example',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Farmer'),
+          title: Text('Tractor'),
         ),
-        body: _farmers.isEmpty
+        body: _tractors.isEmpty
             ? Center(
                 child: CircularProgressIndicator(),
               )
             : Column(
-                children: _farmers
-                    .map((farmer) => Card(
+                children: _tractors
+                    .map((tractor) => Card(
                         child: ListTile(
                             leading: FlutterLogo(size: 62.0),
-                            title: Text(farmer.username),
-                            subtitle: Text(farmer.address),
+                            title: Text(tractor.tractor),
+                            subtitle: Text(tractor.tractor_status),
                             trailing: Icon(Icons.more_vert),
                             isThreeLine: true,
                             onTap: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => FarmerDetail(
-                                            farmer: farmer,
+                                      builder: (context) => TractorShowDetail(
+                                            tractor: tractor,
                                           )));
                             })))
                     .toList(),

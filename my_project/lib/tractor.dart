@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Tractor extends StatefulWidget {
+class TractorPage extends StatefulWidget {
   @override
-  _TractorState createState() => _TractorState();
+  _TractorPageState createState() => _TractorPageState();
 }
 
-class _TractorState extends State<Tractor> {
+class _TractorPageState extends State<TractorPage> {
   int _value = 1;
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,6 @@ class _TractorState extends State<Tractor> {
       title: 'First Example',
       theme: ThemeData(
         primarySwatch: Colors.green,
-        fontFamily: 'Sarabun',
         backgroundColor: Colors.greenAccent[50],
       ),
       home: Scaffold(

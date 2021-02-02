@@ -1,19 +1,21 @@
 //import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:my_project/farmer.dart';
-import 'home.dart';
+import 'package:my_project/tractor_Detail.dart';
+import 'owner.dart';
+import 'owner_home.dart';
 import 'work.dart';
 import 'detail01.dart';
 import 'tractor.dart';
 
-class BarNavy extends StatefulWidget {
+class OwnerBarNavy extends StatefulWidget {
   @override
-  _BarNavyState createState() => _BarNavyState();
+  _OwnerBarNavyState createState() => _OwnerBarNavyState();
 }
 
-class _BarNavyState extends State<BarNavy> {
+class _OwnerBarNavyState extends State<OwnerBarNavy> {
   int _selectedIndex = 0;
-  final List<Widget> _children = [HomePage(), WorkWidget(), Farmer()];
+  final List<Widget> _children = [OwnerHome(), TractorWidget(1), OwnerPage(1)];
   PageController _pageController;
   void onTappedBar(int index) {
     setState(() {

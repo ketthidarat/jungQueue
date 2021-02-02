@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-
+import 'queue.dart';
 import 'models.dart';
 
-class FarmerDetail extends StatelessWidget {
-  final Farmer farmer;
+class TractorShowDetail extends StatelessWidget {
+  final Tractor tractor;
 
-  FarmerDetail({this.farmer});
+  TractorShowDetail({this.tractor});
 
   bodyWidget(BuildContext context) => Stack(
         children: <Widget>[
@@ -29,11 +29,21 @@ class FarmerDetail extends StatelessWidget {
                   // style:
                   //   TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
                   // ),
-                  Text("${farmer.farmerName}"),
-                  //Text("${pokemon.weight}"),
-                  Text("${farmer.address}"),
-                  Text("${farmer.phone}"),
-                  Text("${farmer.email}"),
+                  Text("${tractor.tractor}"),
+                  Text("${tractor.workId}"),
+                  Text("${tractor.tractor_status}"),
+                  // Text("${tractor.dateStart}"),
+                  // Text("${tractor.dateEnd}"),
+                  // Text("${tractor.area}"),
+                  // Text("${tractor.riceType}"),
+                  // Text("${tractor.repairTime}"),
+                  // Text("${tractor.harverstime}"),
+                  // Text("${tractor.money}"),
+                  // Text("${tractor.moneyStatus}"),
+                  // Text("${tractor.tractorStatus}"),
+                  // Text("${tractor.tractor}"),
+                  // Text("${tractor.tractorStatus}"),
+                  // Text("${tractor.money}"),
                   //Text("จำนวนสินค้าที่มี"+ "${pokemon.nextEvolution}"),
                   // Text("${farmer.store}"),
                   // Text("จำนวนสินค้าที่ต้องการซื้อ", style: TextStyle(fontWeight: FontWeight.bold)),
@@ -75,8 +85,8 @@ class FarmerDetail extends StatelessWidget {
           //             image: DecorationImage(
           //                 fit: BoxFit.cover,
           //                 image: FARMER_IMAGES.containsKey(farmer.cid) ?
-          //                   NetworkImage(farmer_IMAGES[farmer.cid]):
-          //                   NetworkImage('http://picsum.photos/200'))),
+          //                   NettractorImage(farmer_IMAGES[farmer.cid]):
+          //                   NettractorImage('http://picsum.photos/200'))),
           //       )),
           // )
         ],
@@ -89,7 +99,7 @@ class FarmerDetail extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.orange,
-        title: Text(farmer.farmerName),
+        title: Text(tractor.tractor),
       ),
       body: bodyWidget(context),
     );

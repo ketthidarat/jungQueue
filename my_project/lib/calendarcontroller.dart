@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_project/add_event.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class Calendar extends StatefulWidget {
@@ -14,6 +15,19 @@ class _CalendarState extends State<Calendar> {
     // TODO: implement initState
     super.initState();
     _controller = CalendarController();
+
+    @override
+    void dispose() {
+      _controller.dispose();
+      super.dispose();
+    }
+
+    @override
+    Widget build(BuildContext context) {
+      return TableCalendar(
+        calendarController: _controller,
+      );
+    }
   }
 
   @override
@@ -27,7 +41,7 @@ class _CalendarState extends State<Calendar> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             TableCalendar(
-              initialCalendarFormat: CalendarFormat.week,
+              initialCalendarFormat: CalendarFormat.month,
               calendarStyle: CalendarStyle(
                   todayColor: Colors.orange,
                   selectedColor: Theme.of(context).primaryColor,
@@ -77,7 +91,10 @@ class _CalendarState extends State<Calendar> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => AddEvent()));
+        },
       ),
     );
   }

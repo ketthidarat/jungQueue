@@ -1,4 +1,3 @@
-//import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:my_project/farmer.dart';
 import 'package:my_project/queue.dart';
@@ -20,7 +19,7 @@ class _BarNavyState extends State<BarNavy> {
     Queue(),
     FarmerPage(1),
     Calendar(),
-    Tractor()
+    WorkWidget(1)
   ];
   PageController _pageController;
   void onTappedBar(int index) {
@@ -64,17 +63,17 @@ class _BarNavyState extends State<BarNavy> {
               icon: Icon(Icons.star)),
           BottomNavigationBarItem(
             // ignore: deprecated_member_use
-            title: Text('me1'),
+            title: Text('Farmer'),
             icon: Icon(Icons.face),
           ),
           BottomNavigationBarItem(
             // ignore: deprecated_member_use
-            title: Text('Me2'),
+            title: Text('Calendar'),
             icon: Icon(Icons.face),
           ),
           BottomNavigationBarItem(
             // ignore: deprecated_member_use
-            title: Text('Map'),
+            title: Text('Work'),
             icon: Icon(Icons.face),
           ),
         ],

@@ -10,19 +10,20 @@ import 'work.dart';
 import 'bar.dart';
 import 'owner.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
+class AddEvent extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-        backgroundColor: Colors.greenAccent[50],
+      title: 'First Example',
+      home: Scaffold(
+        // appBar: AppBar(
+        //   title: Text('Home Page'),
+        // ),
+        body: Center(
+          child: Text('Hello World'),
+        ),
       ),
-      home: BarNavy(),
     );
   }
 }

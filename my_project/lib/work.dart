@@ -5,84 +5,96 @@ import 'models.dart';
 import 'work_detail.dart';
 
 class WorkWidget extends StatefulWidget {
-  static final route = 'Work';
+  final int workId;
+
+  WorkWidget(this.workId);
 
   @override
-  _WorkPageState createState() {
-    return new _WorkPageState();
+  _WorkWidgetState createState() {
+    print('creating state');
+    return new _WorkWidgetState();
   }
 
-  // ????
-  // static fromJson(data) {}
+  static fromJson(data) {}
 }
 
-class _WorkPageState extends State<WorkWidget> {
-  var url = "https://jungqueue.pythonanywhere.com/api/work/";
+class _WorkWidgetState extends State<WorkWidget> {
+  var url = "https://jungqueue.pythonanywhere.com/api/work/1";
 
-  List<Work> _work = <Work>[];
-
-  get work => null;
+  // เอารายชื่อของ farmer มาทั้งหมด
+  List<Work> _works = <Work>[];
+  // เอาข้อมูลชาวนามาคนเยว? one farmer
+  // Farmer _farmer;
 
   @override
   void initState() {
     super.initState();
-    print('what the');
-    print(_work);
-    fetchData();
+    print('fetching data');
+    getWorkWidgets();
   }
 
+  /*
+  void getFarmerInfo() async {
+    print('calling getFarmerInfo(${widget.farmerId})');
+    var response =
+        await http.get(url, headers: {'Content-Type': 'application/json'});
+    dynamic result = json.decode(utf8.decode(response.bodyBytes));
+    print('stream is done.');
+    print('${result}');
+    Farmer farmer1 = Farmer.fromMap(result);
+    print('${farmer1}');
+    _farmer = farmer1;
+    setState(() {});
+  }
   fetchData() async {
-    final Stream<Work> stream = (await getWorks()) as Stream<Work>;
-    stream.listen((Work work) => setState(() => _work.add(work)));
+    final Stream<Farmer> stream = await getFarmers();
+    stream.listen((Farmer farmer) => setState(() => _farmer.add(farmer)));
   }
+  */
 
-  Future<Stream<Farmer>> getWorks() async {
-    print('calling getFarmers()');
-    final client = new http.Client();
-    final streamedRest = await client.send(http.Request('get', Uri.parse(url)));
-
-    return streamedRest.stream
-        .transform(utf8.decoder)
-        .transform(json.decoder)
-        .expand((data) => (data as List))
-        .map((data) => Farmer.fromMap(data));
+  void getWorkWidgets() async {
+    print('calling getWorkWidget()');
+    String url = 'https://jungqueue.pythonanywhere.com/api/work/';
+    var response =
+        await http.get(url, headers: {'Content-Type': 'application/json'});
+    List<dynamic> result = json.decode(utf8.decode(response.bodyBytes));
+    _works = result.map<Work>((data) => Work.fromMap(data)).toList();
+    setState(() {});
   }
 
   Widget build(BuildContext context) {
-    // var _farmer;
+    print('update WorkWidget');
+    //print('${_farmers}');
     return MaterialApp(
-        title: 'First Example',
-        theme: ThemeData(
-          primarySwatch: Colors.green,
-          fontFamily: 'Sarabun',
-          backgroundColor: Colors.greenAccent[50],
+      title: 'First Example',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Owner'),
         ),
-        home: Scaffold(
-            appBar: AppBar(
-              title: Text('เกษตรกร'),
-            ),
-            body: _work.isEmpty
-                ? Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : ListView(
-                    children: _work
-                        .map(
-                          (work) => Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => WorkDetail(
-                                              work: work,
-                                            )));
-                              },
-                            ),
-                          ),
-                        )
-                        .toList(),
-                  )));
+        body: _works.isEmpty
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : Column(
+                children: _works
+                    .map((work) => Card(
+                        child: ListTile(
+                            leading: FlutterLogo(size: 62.0),
+                            title: Text(work.farmerId),
+                            subtitle: Text(work.area),
+                            trailing: Icon(Icons.more_vert),
+                            isThreeLine: true,
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => WorkDetail(
+                                            work: work,
+                                          )));
+                            })))
+                    .toList(),
+              ),
+      ),
+    );
   }
 }

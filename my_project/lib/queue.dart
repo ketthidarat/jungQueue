@@ -3,7 +3,6 @@ import 'bar.dart';
 import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:table_calendar/table_calendar.dart';
-
 import 'calendarcontroller.dart';
 
 class Queue extends StatefulWidget {
@@ -30,11 +29,6 @@ class PatientmapPageState extends State<PatientmapPage> {
   Widget build(BuildContext context) {
     return new MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-        fontFamily: 'Sarabun',
-        backgroundColor: Colors.greenAccent[50],
-      ),
       home: new Scaffold(
           backgroundColor: Color(0xFFB3E5FC),
           appBar: AppBar(
@@ -72,7 +66,6 @@ class _QueueState extends State<Queue> {
       title: 'รายละเอียดการจอง',
       theme: ThemeData(
         primarySwatch: Colors.green,
-        fontFamily: 'Sarabun',
         backgroundColor: Colors.greenAccent[50],
       ),
       home: Scaffold(
@@ -86,17 +79,14 @@ class _QueueState extends State<Queue> {
         ),
         body: new Column(
           children: <Widget>[
-            // GoogleMap(
-            //   mapType: MapType.normal,
-            //   initialCameraPosition: CameraPosition(
-            //     target: LatLng(
-            //         15.1989675, 104.8405362), //ของจังหวัดตัวเอง104.8405362
-            //     zoom: 6,
-            //   ),
-            //   onMapCreated: (GoogleMapController controller) {
-            //     _controller.complete(controller);
-            //   },
-            // ),
+            const SizedBox(height: 30),
+            RaisedButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => PatientmapPage()));
+              },
+              child: Text('แผนที่', style: TextStyle(fontSize: 20)),
+            ),
 
             new ListTile(
               // leading: const Icon(Icons.person),
@@ -139,7 +129,10 @@ class _QueueState extends State<Queue> {
             ),
             const SizedBox(height: 20),
             RaisedButton(
-              onPressed: () => {},
+              onPressed: () => {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Calendar()))
+              },
               color: Colors.blueAccent[100],
               child: Text(
                 'วันที่ต้องการเก็บเกี่ยว',
@@ -164,7 +157,10 @@ class _QueueState extends State<Queue> {
                 ),
               ),
               RaisedButton(
-                onPressed: () => {},
+                onPressed: () => {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Calendar()))
+                },
                 color: Colors.red,
                 child: Text(
                   'ยกเลิก',

@@ -77,7 +77,7 @@ flutter:
   fonts:
     - family: Sarabun
       fonts:
-        - asset: assets/fonts/Sarabun-Light.ttf
+        - asset: assets/fonts/Sarabun-Regular.ttf
 
   # fonts:
   #   - family: Schyler
