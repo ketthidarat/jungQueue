@@ -1,7 +1,7 @@
 //import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:my_project/farmer.dart';
-import 'package:my_project/tractor_Detail.dart';
+import 'package:my_project/tractor_detail.dart';
 import 'owner.dart';
 import 'owner_home.dart';
 import 'work.dart';
@@ -15,7 +15,7 @@ class OwnerBarNavy extends StatefulWidget {
 
 class _OwnerBarNavyState extends State<OwnerBarNavy> {
   int _selectedIndex = 0;
-  final List<Widget> _children = [OwnerHome(), TractorWidget(1), OwnerPage(1)];
+  final List<Widget> _children = [OwnerHome(), TractorPage(), OwnerPage(1)];
   PageController _pageController;
   void onTappedBar(int index) {
     setState(() {

@@ -69,6 +69,7 @@ class _FarmerPageState extends State<FarmerPage> {
       title: 'First Example',
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.green,
           title: Text('Farmer'),
         ),
         body: _farmers.isEmpty
@@ -80,7 +81,7 @@ class _FarmerPageState extends State<FarmerPage> {
                     .map((farmer) => Card(
                         child: ListTile(
                             leading: FlutterLogo(size: 62.0),
-                            title: Text(farmer.username),
+                            title: Text(farmer.farmerName),
                             subtitle: Text(farmer.address),
                             trailing: Icon(Icons.more_vert),
                             isThreeLine: true,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'add_tractor.dart';
 import 'queue.dart';
 import 'models.dart';
 
@@ -29,7 +30,7 @@ class TractorShowDetail extends StatelessWidget {
                   // style:
                   //   TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
                   // ),
-                  Text("${tractor.tractor}"),
+                  Text("${tractor.tractorName}"),
                   Text("${tractor.workId}"),
                   Text("${tractor.tractor_status}"),
                   // Text("${tractor.dateStart}"),
@@ -98,10 +99,9 @@ class TractorShowDetail extends StatelessWidget {
       backgroundColor: Colors.purple[50],
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: Colors.orange,
-        title: Text(tractor.tractor),
+        backgroundColor: Colors.green,
+        title: Text(tractor.tractorName),
       ),
-      body: bodyWidget(context),
     );
   }
 }

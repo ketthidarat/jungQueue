@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_project/tractor_detail.dart';
+import 'package:my_project/work.dart';
+import 'calendarcontroller.dart';
 import 'main.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -13,27 +16,53 @@ class OwnerHome extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              const SizedBox(height: 30),
+              const SizedBox(height: 2),
+              Image.asset(
+                'assets/images/queue.png',
+                width: 200,
+                height: 100,
+              ),
               RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => WorkWidget(1)));
+                },
                 child: Text('จองคิวเก็บเกี่ยวข้าว',
                     style: TextStyle(fontSize: 20)),
               ),
-              const SizedBox(height: 30),
-              RaisedButton(
-                onPressed: () {},
-                child: const Text('จองคิวรถเกี่ยวนวดข้าว',
-                    style: TextStyle(fontSize: 20)),
+              const SizedBox(height: 20),
+              Image.asset(
+                'assets/images/schedule.png',
+                width: 200,
+                height: 100,
               ),
-              const SizedBox(height: 30),
               RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Calendar()));
+                },
                 child: const Text('ตารางงานรถเกี่ยวนวดข้าว',
                     style: TextStyle(fontSize: 20)),
               ),
-              const SizedBox(height: 30),
+              // const SizedBox(height: 20),
+              // RaisedButton(
+              //   onPressed: () {},
+              //   child: const Text('ตารางงานรถเกี่ยวนวดข้าว',
+              //       style: TextStyle(fontSize: 20)),
+              // ),
+              const SizedBox(height: 2),
+              Image.asset(
+                'assets/images/schedule.png',
+                width: 200,
+                height: 100,
+              ),
               RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TractorDetail(1)));
+                },
                 child: const Text('ข้อมูลรถเกี่ยวนวดข้าว',
                     style: TextStyle(fontSize: 20)),
               ),

@@ -23,6 +23,7 @@ class _WorkWidgetState extends State<WorkWidget> {
 
   // เอารายชื่อของ farmer มาทั้งหมด
   List<Work> _works = <Work>[];
+
   // เอาข้อมูลชาวนามาคนเยว? one farmer
   // Farmer _farmer;
 
@@ -62,6 +63,16 @@ class _WorkWidgetState extends State<WorkWidget> {
     setState(() {});
   }
 
+  // void getFamers() async {
+  //   print('calling getWorkWidget()');
+  //   String url1 = 'https://jungqueue.pythonanywhere.com/api/farmer/';
+  //   var response =
+  //       await http.get(url1, headers: {'Content-Type': 'application/json'});
+  //   List<dynamic> result = json.decode(utf8.decode(response.bodyBytes));
+  //   _farmers = result.map<Farmer>((data) => Farmer.fromMap(data)).toList();
+  //   setState(() {});
+  // }
+
   Widget build(BuildContext context) {
     print('update WorkWidget');
     //print('${_farmers}');
@@ -69,7 +80,8 @@ class _WorkWidgetState extends State<WorkWidget> {
       title: 'First Example',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Owner'),
+          backgroundColor: Colors.green,
+          title: Text('รายละเอียดการของเกษตรกร'),
         ),
         body: _works.isEmpty
             ? Center(
@@ -81,7 +93,7 @@ class _WorkWidgetState extends State<WorkWidget> {
                         child: ListTile(
                             leading: FlutterLogo(size: 62.0),
                             title: Text(work.farmerId),
-                            subtitle: Text(work.area),
+                            subtitle: Text("l;ylfu"),
                             trailing: Icon(Icons.more_vert),
                             isThreeLine: true,
                             onTap: () {
@@ -90,6 +102,7 @@ class _WorkWidgetState extends State<WorkWidget> {
                                   MaterialPageRoute(
                                       builder: (context) => WorkDetail(
                                             work: work,
+                                            // farmer: farmer,
                                           )));
                             })))
                     .toList(),

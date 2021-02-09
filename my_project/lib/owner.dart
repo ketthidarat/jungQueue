@@ -69,6 +69,7 @@ class _OwnerPageState extends State<OwnerPage> {
       title: 'First Example',
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.green,
           title: Text('Owner'),
         ),
         body: _owners.isEmpty

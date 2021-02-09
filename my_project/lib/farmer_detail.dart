@@ -88,7 +88,7 @@ class FarmerDetail extends StatelessWidget {
       backgroundColor: Colors.purple[50],
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.green,
         title: Text(farmer.farmerName),
       ),
       body: bodyWidget(context),

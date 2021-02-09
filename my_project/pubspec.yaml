@@ -20,10 +20,15 @@ dependencies:
   flutter_rounded_date_picker: 1.0.0
   flutter_clean_calendar: ^1.0.2+1
   google_fonts: ^0.2.0
+  
   table_calendar: ^2.3.3
   flutter:
     sdk: flutter
+    
   google_maps_flutter: ^0.5.28+1
+  location: 2.3.5
+  url_launcher: 5.0.2
+  intl: ^0.16.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -35,6 +40,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
   
 
 # For information on the generic Dart part of this file, see the
@@ -61,6 +67,7 @@ flutter:
     - assets/logos/google.jpg
     - assets/images/
     - assets/icons/
+    - assets/schedule.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

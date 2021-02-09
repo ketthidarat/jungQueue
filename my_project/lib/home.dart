@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_project/queue.dart';
 import 'package:my_project/tractor.dart';
-import 'package:my_project/tractor_Detail.dart';
+import 'package:my_project/tractor_detail.dart';
 import 'package:my_project/tractor_status.dart';
 import 'calendarcontroller.dart';
 import 'check_schedule.dart';
@@ -22,28 +22,45 @@ class HomePage extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              const SizedBox(height: 30),
-              RaisedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => TractorWidget(1)));
-                },
-                child: Text('ข้อมูลรถเกี่ยวนวดข้าว',
-                    style: TextStyle(fontSize: 20)),
-                //child: Text('Tractor Infor', style: TextStyle(fontSize: 20)),
+              // const SizedBox(height: 2),
+              // Image.asset(
+              //   'assets/images/tractor.png',
+              //   width: 200,
+              //   height: 100,
+              // ),
+              // RaisedButton(
+              //   onPressed: () {
+              //     Navigator.push(
+              //         context,
+              //         MaterialPageRoute(
+              //             builder: (context) => TractorWidget(1)));
+              //   },
+
+              //   child: Text('ข้อมูลรถเกี่ยวนวดข้าว',
+              //       style: TextStyle(fontSize: 20)),
+              //   //child: Text('Tractor Infor', style: TextStyle(fontSize: 20)),
+              // ),
+              const SizedBox(height: 2),
+              Image.asset(
+                'assets/images/tractor.png',
+                width: 200,
+                height: 100,
               ),
-              const SizedBox(height: 30),
               RaisedButton(
                 onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => Calendar()));
                 },
                 //child: const Text('ตารางงานรถเกี่ยวนวดข้าว',
-                child: const Text('Schedule', style: TextStyle(fontSize: 20)),
+                child: const Text('Tractor Schedule',
+                    style: TextStyle(fontSize: 20)),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 2),
+              Image.asset(
+                'assets/images/queue.png',
+                width: 200,
+                height: 100,
+              ),
               RaisedButton(
                 onPressed: () {
                   Navigator.push(context,
@@ -53,7 +70,12 @@ class HomePage extends StatelessWidget {
                 child:
                     const Text('Reservation', style: TextStyle(fontSize: 20)),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
+              Image.asset(
+                'assets/images/schedule.png',
+                width: 200,
+                height: 100,
+              ),
               RaisedButton(
                 onPressed: () {
                   Navigator.push(context,

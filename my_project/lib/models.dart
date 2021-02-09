@@ -43,18 +43,18 @@ class Owner {
 }
 
 class Tractor {
-  String tractor;
-  String workId;
+  String tractorName;
+  int workId;
   String tractor_status;
 
-  Tractor(this.tractor, this.workId, this.tractor_status);
+  Tractor(this.tractorName, this.workId, this.tractor_status);
 
   factory Tractor.fromMap(Map<String, dynamic> json) {
-    return Tractor(json['owner_name'], json['address'], json['tractor_status']);
+    return Tractor(json['tractor'], json['workId'], json['tractor_status']);
   }
 
   String toString() {
-    return '${this.tractor} โทรศัพท์: ${this.workId} ที่อยู่ ${this.tractor_status}';
+    return '${this.tractorName} ${this.workId} ${this.tractor_status}';
   }
 }
 
@@ -120,16 +120,16 @@ class Work {
   String lng;
   String dateStart;
   String dateEnd;
-  String area;
-  String riceType;
+  int area;
+  RiceType riceType;
   String repairTime;
   String harverstime;
-  String money;
-  String moneyStatus;
-  String workStatus;
-  String tractor;
-  String tractorStatus;
-
+  int money;
+  MoneyStatus moneyStatus;
+  WorkStatus workStatus;
+  Tractor tractor;
+  TractorStatus tractorStatus;
+  Farmer farmerName;
   Work(
       this.farmerId,
       this.lat,
@@ -148,23 +148,30 @@ class Work {
 
   factory Work.fromMap(Map<String, dynamic> json) {
     return Work(
-        json['farmer_id'],
-        json['lat'],
-        json['lng'],
-        json['date_start'],
-        json['date_end'],
-        json['area'],
-        json['rice_type'],
-        json['RepairTime'],
-        json['Harverstime'],
-        json['money'],
-        json['money_status'],
-        json['work_status'],
-        json['tractor'],
-        json['tractor_status']);
+      json['farmer_name'],
+      json['lat'],
+      json['lng'],
+      json['date_start'],
+      json['date_end'],
+      json['area'],
+      json['rice_type'],
+      json['RepairTime'],
+      json['Harverstime'],
+      json['money'],
+      json['money_status'],
+      json['work_status'],
+      json['tractor'],
+      json['tractor_status'],
+      Farmer.fromMap(json['farmer_name']),
+      RiceType.fromMap(json['rice_type']),
+      Tractor.fromMap(json['tractor']),
+      TractorStatus.fromMap(json['tractor_status']),
+      MoneyStatus.fromMap(json['money_status']),
+      WorkStatus.fromMap(json['work_status']),
+    );
   }
 
   String toString() {
-    return '${this.farmerId} ตำแหน่ง: ${this.lat}  ${this.lat}';
+    return '${this.farmerName} ตำแหน่ง: ${this.lat}  ${this.lat}';
   }
 }

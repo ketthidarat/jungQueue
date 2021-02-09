@@ -2,24 +2,25 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_project/tractor_showDetail.dart';
+import 'add_tractor.dart';
 import 'models.dart';
-import 'work_detail.dart';
+import 'tractor_detail.dart';
 
-class TractorWidget extends StatefulWidget {
+class TractorDetail extends StatefulWidget {
   final int tractorId;
 
-  TractorWidget(this.tractorId);
+  TractorDetail(this.tractorId);
 
   @override
-  _TractorWidgetState createState() {
+  _TractorDetail createState() {
     print('creating state');
-    return new _TractorWidgetState();
+    return new _TractorDetail();
   }
 
   static fromJson(data) {}
 }
 
-class _TractorWidgetState extends State<TractorWidget> {
+class _TractorDetail extends State<TractorDetail> {
   var url = "https://jungqueue.pythonanywhere.com/api/tractor/1";
 
   // เอารายชื่อของ farmer มาทั้งหมด
@@ -31,7 +32,7 @@ class _TractorWidgetState extends State<TractorWidget> {
   void initState() {
     super.initState();
     print('fetching data');
-    getTractorWidgets();
+    getTractorDetails();
   }
 
   /*
@@ -53,8 +54,8 @@ class _TractorWidgetState extends State<TractorWidget> {
   }
   */
 
-  void getTractorWidgets() async {
-    print('calling getOwners()');
+  void getTractorDetails() async {
+    print('calling getWorkWidget()');
     String url = 'https://jungqueue.pythonanywhere.com/api/tractor/';
     var response =
         await http.get(url, headers: {'Content-Type': 'application/json'});
@@ -64,13 +65,17 @@ class _TractorWidgetState extends State<TractorWidget> {
   }
 
   Widget build(BuildContext context) {
-    print('update TractorPage');
+    print('update WorkWidget');
     //print('${_farmers}');
     return MaterialApp(
       title: 'First Example',
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+        backgroundColor: Colors.greenAccent[50],
+      ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Tractor'),
+          title: Text('ข้อมูลรถเกี่ยวนวดข้าว'),
         ),
         body: _tractors.isEmpty
             ? Center(
@@ -81,8 +86,8 @@ class _TractorWidgetState extends State<TractorWidget> {
                     .map((tractor) => Card(
                         child: ListTile(
                             leading: FlutterLogo(size: 62.0),
-                            title: Text(tractor.tractor),
-                            subtitle: Text(tractor.tractor_status),
+                            title: Text(tractor.tractorName),
+                            subtitle: Text("Tractor"),
                             trailing: Icon(Icons.more_vert),
                             isThreeLine: true,
                             onTap: () {
@@ -95,6 +100,13 @@ class _TractorWidgetState extends State<TractorWidget> {
                             })))
                     .toList(),
               ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => AddTractor()));
+          },
+        ),
       ),
     );
   }
