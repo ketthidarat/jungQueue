@@ -64,7 +64,6 @@ class Tractor(models.Model):
         verbose_name = 'รถเกี่ยวนวดข้าว'
 
 
-
 class Rice_type(models.Model):
     id = models.AutoField(primary_key=True) 
     rice_type = models.CharField(max_length=100) 
