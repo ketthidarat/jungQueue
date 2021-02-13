@@ -81,7 +81,7 @@ class _FarmerPageState extends State<FarmerPage> {
                     .map((farmer) => Card(
                         child: ListTile(
                             leading: FlutterLogo(size: 62.0),
-                            title: Text(farmer.farmerName),
+                            title: Text(farmer.farmer_name),
                             subtitle: Text(farmer.address),
                             trailing: Icon(Icons.more_vert),
                             isThreeLine: true,

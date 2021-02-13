@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'bar.dart';
 import 'dart:async';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:table_calendar/table_calendar.dart';
-import 'calendarcontroller.dart';
 import 'package:location/location.dart';
 import 'package:intl/intl.dart';
 

@@ -29,7 +29,7 @@ class OwnerDetail extends StatelessWidget {
                   // style:
                   //   TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
                   // ),
-                  Text("${owner.ownerName}"),
+                  Text("${owner.owner_name}"),
                   //Text("${pokemon.weight}"),
                   Text("${owner.address}"),
                   Text("${owner.phone}"),
@@ -89,7 +89,7 @@ class OwnerDetail extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.green,
-        title: Text(owner.ownerName),
+        title: Text(owner.owner_name),
       ),
       body: bodyWidget(context),
     );

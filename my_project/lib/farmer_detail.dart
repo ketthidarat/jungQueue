@@ -29,7 +29,7 @@ class FarmerDetail extends StatelessWidget {
                   // style:
                   //   TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
                   // ),
-                  Text("${farmer.farmerName}"),
+                  Text("${farmer.farmer_name}"),
                   //Text("${pokemon.weight}"),
                   Text("${farmer.address}"),
                   Text("${farmer.phone}"),
@@ -89,7 +89,7 @@ class FarmerDetail extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.green,
-        title: Text(farmer.farmerName),
+        title: Text(farmer.farmer_name),
       ),
       body: bodyWidget(context),
     );

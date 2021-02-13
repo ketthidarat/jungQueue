@@ -1,9 +1,6 @@
-import 'dart:async';
-import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
-import 'package:my_project/Screens/Login/login_screen.dart';
 import 'package:my_project/Screens/Signup/signup_screen.dart';
 import 'package:my_project/Screens/Welcome/components/background.dart';
 import 'package:my_project/components/rounded_button.dart';

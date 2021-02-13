@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'main.dart';
+// import 'package:google_fonts/google_fonts.dart';
 
 class CheckScedule extends StatelessWidget {
   Widget build(BuildContext context) {

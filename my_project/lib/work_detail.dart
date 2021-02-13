@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'queue.dart';
 import 'models.dart';
 
 class WorkDetail extends StatelessWidget {
@@ -29,13 +28,13 @@ class WorkDetail extends StatelessWidget {
                     // style:
                     //   TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
                     // ),
-                    Text("${work.farmerId}"),
+                    Text("${work.farmer_name}"),
                     Text("${work.lat}"),
                     Text("${work.lng}"),
                     Text("${work.dateStart}"),
                     Text("${work.dateEnd}"),
                     Text("${work.area}"),
-                    Text("${work.riceType}"),
+                    Text("${work.rice_type}"),
                     Text("${work.repairTime}"),
                     Text("${work.harverstime}"),
                     Text("${work.money}"),

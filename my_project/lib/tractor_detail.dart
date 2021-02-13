@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:my_project/tractor_showDetail.dart';
 import 'add_tractor.dart';
 import 'models.dart';
-import 'tractor_detail.dart';
 
 class TractorDetail extends StatefulWidget {
   final int tractorId;

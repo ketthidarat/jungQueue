@@ -3,8 +3,8 @@ import 'package:my_project/farmer.dart';
 import 'package:my_project/queue.dart';
 import 'home.dart';
 import 'work.dart';
-import 'detail01.dart';
-import 'tractor.dart';
+// import 'detail01.dart';
+// import 'tractor.dart';
 import 'calendarcontroller.dart';
 
 class BarNavy extends StatefulWidget {

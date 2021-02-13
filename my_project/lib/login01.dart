@@ -1,14 +1,13 @@
-import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
 import 'package:my_project/Screens/Login/login_screen.dart';
-import 'package:my_project/Screens/Signup/signup_screen.dart';
+// import 'package:my_project/Screens/Signup/signup_screen.dart';
 import 'package:my_project/Screens/Welcome/components/background.dart';
 import 'package:my_project/components/rounded_button.dart';
 import 'package:my_project/constants.dart';
-import 'package:flutter_svg/svg.dart';
+// import 'package:flutter_svg/svg.dart';
 import 'package:my_project/models.dart';
 
 class Body51 extends StatelessWidget {

@@ -1,14 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_project/bar.dart';
-import 'package:my_project/Screens/Welcome/welcome_screen.dart';
-import 'package:my_project/constants.dart';
-import 'Screens/Login/login_screen.dart';
 import 'bar.dart';
-import 'login01.dart';
-import 'owner_bar.dart';
-import 'work.dart';
-import 'bar.dart';
-import 'owner.dart';
 
 void main() => runApp(MyApp());
 

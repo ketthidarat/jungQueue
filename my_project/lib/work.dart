@@ -92,8 +92,9 @@ class _WorkWidgetState extends State<WorkWidget> {
                     .map((work) => Card(
                         child: ListTile(
                             leading: FlutterLogo(size: 62.0),
-                            title: Text(work.farmerId),
-                            subtitle: Text("l;ylfu"),
+                            title: Text("ชื่อ ${work.farmer_name} "),
+                            subtitle: Text(
+                                "จำนวนไร่ที่ต้องการเก็บเกี่ยว ${work.area} "),
                             trailing: Icon(Icons.more_vert),
                             isThreeLine: true,
                             onTap: () {

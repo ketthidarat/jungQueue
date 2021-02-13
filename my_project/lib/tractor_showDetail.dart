@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'add_tractor.dart';
-import 'queue.dart';
 import 'models.dart';
 
 class TractorShowDetail extends StatelessWidget {
@@ -31,7 +29,7 @@ class TractorShowDetail extends StatelessWidget {
                   //   TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
                   // ),
                   Text("${tractor.tractorName}"),
-                  Text("${tractor.workId}"),
+                  // Text("${tractor.workId}"),
                   Text("${tractor.tractor_status}"),
                   // Text("${tractor.dateStart}"),
                   // Text("${tractor.dateEnd}"),

@@ -1,11 +1,7 @@
 //import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:my_project/farmer.dart';
-import 'package:my_project/tractor_detail.dart';
 import 'owner.dart';
 import 'owner_home.dart';
-import 'work.dart';
-import 'detail01.dart';
 import 'tractor.dart';
 
 class OwnerBarNavy extends StatefulWidget {
