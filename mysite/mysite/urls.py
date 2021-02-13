@@ -24,6 +24,7 @@ translation.activate('th')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    #  path('index',views.index),
     path('', views.index, name='index'),
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls'))

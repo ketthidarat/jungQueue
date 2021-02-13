@@ -5,6 +5,12 @@ from rest_framework import routers, serializers, viewsets
 from .models import *
 from .serializers import *
 
+
+
+
+def index(req):
+    return render(req, 'api/index.html')
+
 class FarmerViewSet(viewsets.ModelViewSet):
     queryset = Farmer.objects.all()
     serializer_class = FarmerSerializer
@@ -48,7 +54,7 @@ router.register(r'moneystatus', MoneyStatusViewSet)
 router.register(r'workstatus', WorkStatusViewSet)
 router.register(r'work', WorkViewSet)
 
-def index(request):
-      translation.activate('th')
-      return HttpResponse("<h1>JungQueue</h1>")
+# def index(request):
+#       translation.activate('th')
+#       return HttpResponse("<h1>JungQueue</h1>")
 # Create your views here.
