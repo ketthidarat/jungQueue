@@ -113,7 +113,7 @@ class Work(models.Model):
     # money = models.IntegerField(  verbose_name='จำนวนเงิน (บาท)')
     # tractor = models.ForeignKey(Tractor, on_delete=models.CASCADE, null=True,  verbose_name='รถเกี่ยวนวดข้าว')
     # tractor_status = models.ForeignKey(Tractor_status, on_delete=models.CASCADE, null=True, default=1,  verbose_name='สถานะรถเกี่ยวนวดข้าว')
-    # money_status = models.ForeignKey(Money_status, on_delete=models.CASCADE, null=True, default=1,  verbose_name='สถานะการชำระเงิน') # ให้นิยามเพิ่มเติม
+    money_status = models.ForeignKey(Money_status, on_delete=models.CASCADE, null=True, default=1,  verbose_name='สถานะการชำระเงิน') # ให้นิยามเพิ่มเติม
     # work_status = models.ForeignKey(Work_status, on_delete=models.CASCADE, null=True, default=1, verbose_name='สถานะงาน') # รับ ไม่รับ จ่าย
     # moneyStatus = models.CharField(max_length=100) 
     # work_status = models.CharField(max_length=100) 

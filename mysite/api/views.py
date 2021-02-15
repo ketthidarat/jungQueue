@@ -57,11 +57,11 @@ def addTractor(request):
                     
 
                   }) 
-# def tractor_status(req):
-#     tractor_status = Tractor_status.objects.all() 
-#     return render(req, 'api/tractor.html', {
-#         'tractor_status': tractor_status,
-#     })
+def showaddTractor(req):
+    showaddTractor = addTractor.objects.all() 
+    return render(req, 'api/showaddTractor.html', {
+        'showaddTractor': showaddTractor,
+    })
 
 class FarmerViewSet(viewsets.ModelViewSet):
     queryset = Farmer.objects.all()

@@ -30,6 +30,7 @@ urlpatterns = [
     path('showWork',views.showWork),
     path('tractor',views.tractor),
     path('addTractor',views.addTractor),
+    path('showaddTractor',views.showaddTractor),
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls'))
 ]

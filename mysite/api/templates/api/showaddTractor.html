@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 {% extends 'api/base.html' %}
 
 {% block content %}
@@ -17,6 +18,8 @@
           <div class="card-header">
               <i class="fas fa-table"></i>
               รายการ
+
+              <a  class="btn btn-sm btn-success" href="/showaddTractor" style="padding: 8px; float: right; background-color: green; color: white;">ADD</a>
           </div>
 
           {% comment %} <nav class="navbar navbar-light bg-light justify-content-between">
@@ -40,38 +43,38 @@
                       <thead>
                       <tr>
                         <th>id</th>
-                          <th>จำนวนไร่ที่ต้องการเก็บเกี่ยว</th>
-                          <th>ลักษณะต้นข้าว</th>
-                          <th>รายละเอียด</th>
-                          <th>พันธุ์ข้าว</th>
+                          <th>ยี่ห้อ</th>
+                          <th>ขนาดของรถ</th>
+                          <th>สถานะรถเกี่ยวนวดข้าว</th>
+                          <th>เวลาที่ใช้ในการเก็บเกี่ยว</th>
+                          <th>เวลาที่ใช้ในการซ่อม</th>
                           {% comment %} <th>รูป</th>
                           <th>จำนวน</th>
                           <!-- <th>Created At</th> -->{% endcomment %}
-                          <th>การชำระเงิน</th> 
-                         {% comment %}  <th>ลบ</th>  {% endcomment %}
+                          {% comment %} <th>แก้ไข</th> 
+                          <th>ลบ</th>  {% endcomment %}
                       </tr>
                       </thead>
                       <tbody>
                         {% csrf_token %} 
-                      {% for showWork in showWork %}
+                      {% for showaddTractor in showaddTractor %}
                     
                           <tr>
-                            <td>{{ showWork.id }}</td>
-                              <td>{{ showWork.area }}</td>
-                              <td>{{ showWork.rice_type }}</td>
-                              <td>{{ showWork.rice }}</td>
-                              <td>{{ showWork.workDetail }}</td>
-                              <td>{{ showWork.money_status }}</td>
+                            <td>{{ showaddTractor.tractor_name }}</td>
+                              <td>{{ showaddTractor.tractor_detail }}</td>
+                              <td>{{ showaddTractor.tractor_timeHarvers }}</td>
+                              <td>{{ showaddTractor.tractor_timeRepair }}</td>
+                              <td>{{ showaddTractor.tractor_status }}</td>
                               {% comment %} <td><img src="/media/{{showWork.showWork_img}}" style="height: 75px;"></td>
                               <td>{{ showWork.showWork_amount }}</td> {% endcomment %}
                               <!-- <td>{{ i.created_at  |date:"d-m-Y H:i:s" }}</td> -->
-                              {% comment %} <td>                                   
+                              <td>                                   
                                   <a class="btn btn-sm btn-warning" href="/editshowWork/{{showWork.id}}"> <span class="fa fa-edit"></span> Edit</a>
                                   
                               </td>
                               <td><a class="btn btn-sm btn-danger" href="/deleteshowWork/{{showWork.id}}"><span class="fa fa-trash"></span> Delete</a></td>
                           </tr>
-                           {% endcomment %}
+                          
                       {% endfor %}
                       </tbody>
                   

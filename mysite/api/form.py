@@ -11,7 +11,7 @@ class WorkForm(forms.ModelForm):
 
 class TractorForm(forms.ModelForm):
     class Meta:
-        model = Tractor
+        model = addTractor
         fields = '__all__'
         # fields = [  'product_name','product_price', 'product_detail', 'product_img','product_type','product_status','product_amount' ]
 
