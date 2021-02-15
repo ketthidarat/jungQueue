@@ -1,15 +1,67 @@
-from django.shortcuts import render
+from api.form import *
 from django.http import HttpResponse
-from django.utils import translation
-from rest_framework import routers, serializers, viewsets
+# from django.utils import translation
 from .models import *
 from .serializers import *
-
-
-
+from django.core.checks import messages
+from django.http import request
+from django.http.response import HttpResponseRedirect
+from django.shortcuts import redirect, render
+from django.core.exceptions import ValidationError
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic import ListView
 
 def index(req):
     return render(req, 'api/index.html')
+
+def work(request):
+    if request.method == 'POST':
+        form = WorkForm(request.POST ,request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('/work')
+    else:
+        form = WorkForm()
+    return render(request, 'api/work.html',
+                  {
+                      'form': form,
+                      'rice_type': Rice_type.objects.all(),
+                    #   'workt_statuss': workt_Status.objects.all(),
+
+                  }) 
+
+def showWork(req):
+    showWork = Work.objects.all() 
+    return render(req, 'api/showWork.html', {
+        'showWork': showWork,
+    })
+
+def tractor(req):
+    tractor = Tractor.objects.all() 
+    return render(req, 'api/tractor.html', {
+        'tractor': tractor,
+    })
+
+def addTractor(request):
+    if request.method == 'POST':
+        form = TractorForm(request.POST ,request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('/addTractor')
+    else:
+        form = TractorForm()
+    return render(request, 'api/addTractor.html',
+                  {
+                      'form': form,
+                      'tractor_status': Tractor_status.objects.all(),
+                    
+
+                  }) 
+# def tractor_status(req):
+#     tractor_status = Tractor_status.objects.all() 
+#     return render(req, 'api/tractor.html', {
+#         'tractor_status': tractor_status,
+#     })
 
 class FarmerViewSet(viewsets.ModelViewSet):
     queryset = Farmer.objects.all()

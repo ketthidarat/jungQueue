@@ -1,0 +1,115 @@
+{% extends 'api/base.html' %}
+
+{% block content %}
+
+<div id="content-wrapper">
+
+  <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <!-- <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+              <a href="#">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active">CRUD</li>
+      </ol> -->
+      
+      <div class="card mb-3">
+          <div class="card-header">
+              <i class="fas fa-table"></i>
+              รายการ
+
+              <a  class="btn btn-sm btn-success" href="/addshowWork" style="padding: 8px; float: right; background-color: green; color: white;">ADD</a>
+          </div>
+
+          {% comment %} <nav class="navbar navbar-light bg-light justify-content-between">
+            <a class="navbar-brand"></a>
+  
+              <form class="form-inline" action="/showshowWork/" style="font:right;" method="POST">
+              {% csrf_token %}
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="showWork_name" value="{{ search_showWork_name }}">
+              <button class="btn btn-outline-success my-2 my-sm-0"name="search" type="submit">Search</button>
+            </form> 
+          </nav> {% endcomment %}
+        
+          <div class="card-body">
+              <!-- {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                      {{ message }}
+                  </div> 
+              {% endfor %} -->
+               <div class="table-responsive">
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" align="center">
+                      <thead>
+                      <tr>
+                        <th>id</th>
+                          <th>จำนวนไร่ที่ต้องการเก็บเกี่ยว</th>
+                          <th>ลักษณะต้นข้าว</th>
+                          <th>รายละเอียด</th>
+                          <th>พันธุ์ข้าว</th>
+                          {% comment %} <th>รูป</th>
+                          <th>จำนวน</th>
+                          <!-- <th>Created At</th> -->{% endcomment %}
+                          <th>แก้ไข</th> 
+                          <th>ลบ</th> 
+                      </tr>
+                      </thead>
+                      <tbody>
+                        {% csrf_token %} 
+                      {% for showWork in showWork %}
+                    
+                          <tr>
+                            <td>{{ showWork.id }}</td>
+                              <td>{{ showWork.area }}</td>
+                              <td>{{ showWork.rice_type }}</td>
+                              <td>{{ showWork.rice }}</td>
+                              <td>{{ showWork.workDetail }}</td>
+                              {% comment %} <td><img src="/media/{{showWork.showWork_img}}" style="height: 75px;"></td>
+                              <td>{{ showWork.showWork_amount }}</td> {% endcomment %}
+                              <!-- <td>{{ i.created_at  |date:"d-m-Y H:i:s" }}</td> -->
+                              <td>                                   
+                                  <a class="btn btn-sm btn-warning" href="/editshowWork/{{showWork.id}}"> <span class="fa fa-edit"></span> Edit</a>
+                                  
+                              </td>
+                              <td><a class="btn btn-sm btn-danger" href="/deleteshowWork/{{showWork.id}}"><span class="fa fa-trash"></span> Delete</a></td>
+                          </tr>
+                          
+                      {% endfor %}
+                      </tbody>
+                  
+                    </table>
+                    {% comment %} {% if showWork.has_other_pages %}
+                    <ul class="pagination">
+                      {% if showWork.has_previous %}
+                        <li><a class="page-link" href="?page={{ showWork.previous_page_number }}">&laquo;  Previous</a></li>
+                        <li><a class="page-link" href="?page={{ showWork.previous_page_number }}">{{ showWork.previous_page_number }} </a></li>
+                      {% else %}
+                        <li class="disabled page-link"><span>&laquo;Previous</span></li>
+                      {% endif %}
+                        <!--   หน้าปัจจุบัน -->
+                      <li class="page-item active">
+                        <span class="page-link">
+                            <span class="current" >
+                                {{ showWork.number }} 
+                              </span>
+                         
+                        </span>
+                      </li>
+                          <!-- หน้าถัดไป -->
+                      {% if showWork.has_next %}
+                        
+                        <li><a class="page-link"  href="?page={{ showWork.next_page_number }}">Next &raquo; </a></li>
+                      {% else %}
+                        <li class="disabled page-link"><span>Next &raquo;</span></li>
+                      {% endif %}
+                    </ul>
+                  {% endif %}
+                    </div>
+                    
+                    </div> {% endcomment %}
+
+                </div>
+                </div>
+                </div>
+                </div>
+             
+                {% endblock %}

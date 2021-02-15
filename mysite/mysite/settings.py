@@ -28,6 +28,7 @@ DEBUG = True
 # ALLOWED_HOSTS = ['JungQueue.pythonanywhere.com', 'localhost']
 ALLOWED_HOSTS = ['*']
 
+GOOGLE_MAPS_API_KEY = 'AIzaSyBhaFLM4M_bLyWG9HcQHKk60NV9wmfiu_0',
 
 # Application definition
 
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'api',
     'rest_framework',
+    
     
 ]
 

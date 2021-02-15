@@ -1,0 +1,51 @@
+{% extends 'api/base.html' %}
+
+{% block content %}
+
+
+<div id="content-wrapper">
+
+  <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <!-- <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+              <a href="#">CRUD</a>
+          </li>
+          <li class="breadcrumb-item active">Add</li> -->
+      </ol>
+      <div class="card mb-3">
+          <div class="card-header">
+              <i class="fas fa-table"></i>
+              ข้อมูลรถเกี่ยวนวดข้าว
+              {% comment %} <a  class="btn btn-sm btn-warning" href="/editstore/{{store.id}}" style="padding: 8px; float: right;  color: white;" > <span class="fa fa-edit"></span> Edit</a> {% endcomment %}
+          </div>
+          <div class="card-body">
+            <form class="form-horizontal" action="/tractor" method="POST"  enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="form-group">
+                  <div class="form-row">
+                      <div class="col-md-12">
+                          <div class="form-label-group">
+                           <br>
+                           {% comment %} <center> <img src="media/{{store.store_img}}" width="500" height="360"> </center> <br> {% endcomment %}
+                           <center><label for="tractor"><b>ยี่ห้อ : </b>{{tractor.tractor}}</label> </center> 
+                           <center><label for="tractor"><b>สถานะ : </b>{{tractor.tractor_status}}</label> </center> 
+                           {% comment %} <center><label for="stores"><b>ที่อยู่ร้าน : </b>{{store.store_address}}</label> </center>
+                         
+                          <center><label for="lat"><b>ที่อยู่ร้าน : </b>{{store.lat}}</label> </center>
+                          <center><label for="stores"><b>ที่อยู่ร้าน : </b>{{store.lng}}</label> </center> {% endcomment %}
+                            <!-- <input type="text" class="form-control" placeholder="กรุณากรอกชื่อสินค้า" name="product_name" required> -->
+                           
+                              <!-- <input type="text" class="form-control" name="product_name" placeholder="กรุณากรอกชื่อสินค้า" id="inputFirst" required>  -->
+                          </div>
+                      </div>
+                   
+                  </div>
+              </div>
+              
+          </form>
+          </div>
+      </div>
+  </div>
+</div>
+{% endblock %}

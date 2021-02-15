@@ -9,6 +9,9 @@ verify_ssl = true
 django = "==2.2.7"
 openpyxl = "*"
 pillow = "*"
+djangorestframework = "*"
+markdown = "*"
+django-filter = "*"
 
 [scripts]
 rmdb = "rm -rf db.sqlite3 api/migrations"

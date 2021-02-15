@@ -1,0 +1,91 @@
+{% extends 'api/base.html' %}
+
+{% block content %}
+
+<div id="content-wrapper">
+
+  <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <!-- <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+              <a href="#">CRUD</a>
+          </li>
+          <li class="breadcrumb-item active">Add</li> -->
+      </ol>
+      <div class="card mb-3">
+          <div class="card-header">
+              <i class="fas fa-table"></i>
+              จองคิวรถเกี่ยวนวดข้าว
+          </div>
+          <div class="card-body">
+            <form class="form-horizontal" action="/work" method="POST"  enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="form-group">
+                  <div class="form-row">
+                      <div class="col-md-9">
+                          <div class="form-label-group">
+                            <label for="area"><b>จำนวนทุ่งนาที่ต้องการเก็บเกี่ยว (ไร่)</b></label>
+                            <input type="text" class="form-control"  name="area" required>
+                           
+                              <!-- <input type="text" class="form-control" name="product_name" placeholder="กรุณากรอกชื่อสินค้า" id="inputFirst" required>  -->
+                          </div>
+                      </div>
+                   
+                  </div>
+              </div>
+              
+        <div class="form-group">
+          <div class="form-row">
+              <div class="col-md-9">
+                  <div class="form-label-group">
+                    <label for="exampleSelect1"><b> ลักษณะต้นข้าว</b></label>
+                    <select class="form-control" id="Select" name="rice_type" required>
+                    
+                      {% for c in rice_type %}
+                      <option value="{{c.id}}">{{ c.rice_type }}</option>  
+                      {% endfor %}
+                    </select>
+                
+                  </div>
+              </div>
+           
+          </div>
+      </div>
+      <div class="form-group">
+                  <div class="form-row">
+                      <div class="col-md-9">
+                          <div class="form-label-group">
+                            <label for="work_detail"><b>พันธุ์ข้าว</b></label>
+                            <input type="text" class="form-control"  name="rice" required>
+                           
+                              <!-- <input type="text" class="form-control" name="product_name" placeholder="กรุณากรอกชื่อสินค้า" id="inputFirst" required>  -->
+                          </div>
+                      </div>
+                   
+                  </div>
+              </div>
+  
+            <div class="form-group">
+              <div class="form-row">
+                  <div class="col-md-9">
+                      <div class="form-label-group">
+                        <label for="workDetail"><b>รายละเอียดอื่นๆ</b></label>
+                            <div class="form-group">
+                            
+                              <textarea class="form-control" rows="4" name="workDetail" required></textarea >
+                            </div>
+                      </div>
+                  </div>
+               
+              </div>
+          </div>
+              
+  
+              <button class="btn btn-primary btn-block" type="submit">ยืนยัน &nbsp;&nbsp;&nbsp;<span></span></button>
+              <button class="btn btn-danger btn-block" type="cancel">ยกเลิก &nbsp;&nbsp;&nbsp;<span></span></button>
+          </form>
+          </div>
+      </div>
+  </div>
+</div>
+{% endblock %}
