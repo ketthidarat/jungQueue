@@ -1,0 +1,154 @@
+{% extends 'api/ownerBase.html' %}
+{% block content %}
+
+
+<div id="content-wrapper">
+
+  <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <!-- <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+              <a href="#">CRUD</a>
+          </li>
+          <li class="breadcrumb-item active">Add</li>
+      </ol> -->
+      <div class="card mb-3">
+          <div class="card-header">
+              <i class="fas fa-table"></i>
+              Crud Add
+              <a  class="btn btn-sm btn-success" href="/ownerShowaddWork" style="padding: 8px; float: right; background-color: rgb(53, 122, 155); color: white;">Back</a>
+          </div>
+          <div class="card-body">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                {{ message }}
+            </div> 
+        {% endfor %}
+            <form class="form-horizontal" action="/editShowaddWork/{{ work.id }}/" method="POST"  enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="form-group">
+                  <div class="form-row">
+                      <div class="col-md-9">
+                          <div class="form-label-group">
+                            <label for="area"><b>จำนวนทุ่งนาที่ต้องการเก็บเกี่ยว (ไร่)</b></label>
+                            <input type="text" class="form-control" name="area" value="{{ work.area }}"  required>
+                          </div>
+                      </div>
+                   
+                  </div>
+              </div>
+               <div class="form-group">
+          <div class="form-row">
+              <div class="col-md-9">
+                  <div class="form-label-group">
+                    <label for="exampleSelect1"><b>ลักษณะต้นข้าว</b></label>
+                    <select class="form-control" id="Select" name="rice_type" required>
+        
+                      {% for c in rice_type %}
+                      {% if c == rice_type.rice_type %}
+                      <option value="{{c.id}}" selected>{{ c.rice_type }}</option>  
+                      {% else %}
+                      <option value="{{c.id}}">{{ c.rice_type }}</option> 
+                      {% endif %} 
+                      {% endfor %}
+                    </select>
+                
+                  </div>
+              </div>
+           
+          </div>
+      </div>
+              <div class="form-group">
+                  <div class="form-row">
+                      <div class="col-md-9">
+                          <div class="form-label-group">
+                            <label for="rice"><b>พันธุ์ข้าว</b></label>
+                            <input type="text" class="form-control"  name="rice" value="{{ work.rice }}" required>
+                           
+                              <!-- <input type="text" class="form-control" name="product_name" placeholder="กรุณากรอกชื่อสินค้า" id="inputFirst" required>  -->
+                          </div>
+                      </div>
+                   
+                  </div>
+              </div>
+  
+            <div class="form-group">
+              <div class="form-row">
+                  <div class="col-md-9">
+                      <div class="form-label-group">
+                        <label for="workDetail"><b>รายละเอียดอื่นๆ</b></label>
+                            <div class="form-group">
+                            
+                              <textarea class="form-control" rows="4" name="workDetail" value="{{ work.workDetail }}" required>{{ work.workDetail}}</textarea >
+                            </div>
+                      </div>
+                  </div>
+               
+              </div>
+          </div>
+
+           <div class="form-group">
+                  <div class="form-row">
+                      <div class="col-md-9">
+                          <div class="form-label-group">
+                            <label for="price"><b>จำนวนเงิน (บาท)</b></label>
+                            <input type="text" class="form-control"  name="price" value="{{ work.price }}" required>
+                           
+                          </div>
+                      </div>
+                   
+                  </div>
+              </div>
+            <div class="form-group" >
+          <div class="form-row">
+              <div class="col-md-9">
+                  <div class="form-label-group">
+                    <label for="exampleSelect1"><b>สถานะการชำระเงิน</b></label>
+                    <select class="form-control" id="Select" name="money_status" required>
+        
+                      {% for c in money_status %}
+                      {% if c == money_status.money_status %}
+                      <option value="{{c.id}}" selected>{{ c.money_status }}</option>  
+                      {% else %}
+                      <option value="{{c.id}}">{{ c.money_status }}</option> 
+                      {% endif %} 
+                      {% endfor %}
+                    </select>
+                
+                  </div>
+              </div>
+           
+          </div>
+      </div>
+
+      <div class="form-row">
+              <div class="col-md-9">
+                  <div class="form-label-group">
+                    <label for="exampleSelect1"><b>สถานะงาน</b></label>
+                    <select class="form-control" id="Select" name="work_status" required>
+        
+                      {% for c in work_status %}
+                      {% if c == work_status.work_status %}
+                      <option value="{{c.id}}" selected>{{ c.work_status }}</option>  
+                      {% else %}
+                      <option value="{{c.id}}">{{ c.work_status }}</option> 
+                      {% endif %} 
+                      {% endfor %}
+                    </select>
+                
+                  </div>
+              </div>
+           
+          </div>
+      </div>
+
+
+
+
+            <button class="btn btn-primary btn-block" type="submit">Submit &nbsp;&nbsp;&nbsp;<span></span></button>
+          </form>
+          </div>
+      </div>
+  </div>
+</div>
+{% endblock %}

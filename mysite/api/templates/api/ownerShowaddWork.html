@@ -1,4 +1,4 @@
-{% extends 'api/base.html' %}
+{% extends 'api/ownerBase.html' %}
 
 {% block content %}
 
@@ -51,33 +51,33 @@
                           <th>จำนวน</th>
                           <!-- <th>Created At</th> -->{% endcomment %}
                           {% comment %} <th>การชำระเงิน</th>  {% endcomment %}
-                         {% comment %}  <th>ลบ</th>  {% endcomment %}
+                          <th>แก้ไข</th> 
+                          <th>ลบ</th> 
                       </tr>
                       </thead>
                       <tbody>
                         {% csrf_token %} 
-                      {% for showWork in showWork %}
-                    
+                      {% for ownerShowaddWork in ownerShowaddWork %}
                           <tr>
-                            <td>{{ showWork.id }}</td>
-                              <td>{{ showWork.area }}</td>
-                              <td>{{ showWork.rice_type }}</td>
-                              <td>{{ showWork.rice }}</td>
-                              <td>{{ showWork.workDetail }}</td>
-                              <td>{{ showWork.price }}</td>
-                              <td>{{ showWork.money_status }}</td>
-                              <td>{{ showWork.work_status }}</td>
+                            <td>{{ ownerShowaddWork.id }}</td>
+                              <td>{{ ownerShowaddWork.area }}</td>
+                              <td>{{ ownerShowaddWork.rice_type }}</td>
+                              <td>{{ ownerShowaddWork.rice }}</td>
+                              <td>{{ ownerShowaddWork.workDetail }}</td>
+                              <td>{{ ownerShowaddWork.price }}</td>
+                              <td>{{ ownerShowaddWork.money_status }}</td>
+                              <td>{{ ownerShowaddWork.work_status }}</td>
                               {% comment %} <td>{{ showWork.money_status }}</td> {% endcomment %}
                               {% comment %} <td><img src="/media/{{showWork.showWork_img}}" style="height: 75px;"></td>
                               <td>{{ showWork.showWork_amount }}</td> {% endcomment %}
                               <!-- <td>{{ i.created_at  |date:"d-m-Y H:i:s" }}</td> -->
-                              {% comment %} <td>                                   
-                                  <a class="btn btn-sm btn-warning" href="/editshowWork/{{showWork.id}}"> <span class="fa fa-edit"></span> Edit</a>
+                              <td>                                   
+                                  <a class="btn btn-sm btn-warning" href="/editShowaddWork/{{ownerShowaddWork.id}}"> <span class="fa fa-edit"></span> Edit</a>
                                   
                               </td>
-                              <td><a class="btn btn-sm btn-danger" href="/deleteshowWork/{{showWork.id}}"><span class="fa fa-trash"></span> Delete</a></td>
+                              <td><a class="btn btn-sm btn-danger" href="/deleteshowWork/{{ownerShowaddWork.id}}"><span class="fa fa-trash"></span> Delete</a></td>
                           </tr>
-                           {% endcomment %}
+                           
                       {% endfor %}
                       </tbody>
                   

@@ -102,37 +102,20 @@ class Work(models.Model):
     # work_status = models.CharField(max_length=1000)
     # lat = models.CharField(max_length=1000, verbose_name='ละติจูด')
     # lng = models.CharField(max_length=1000, verbose_name='ลองติจูด')
-    area = models.IntegerField(verbose_name='พื้นที่ (ไร่)')
+    area = models.CharField(max_length=1000, null=True, verbose_name='พื้นที่ (ไร่)')
     rice_type = models.ForeignKey(Rice_type, on_delete=models.CASCADE, null=True, default=1, verbose_name='ลักษณะข้าวที่จะให้เกี่ยว')
-    rice = models.CharField(max_length=1000,  verbose_name='พันธุ์ข้าว') 
-    workDetail = models.CharField(max_length=1000,  verbose_name='รายละเอียด')
-    # RepairTime = models.CharField(max_length=1000,  verbose_name='เวลาที่ใช้ซ่อมรถ (ชม.)') 
-    # Harverstime = models.CharField(max_length=1000,  verbose_name='เวลาที่ใช้เก็บเกี่ยว (ชม.)') 
-    # date_start = models.DateTimeField(auto_now=False,  verbose_name='วันที่เริ่มเก็บเกี่ยว')
-    # date_end = models.DateTimeField(auto_now=False,  verbose_name='วันสิ้นสุดการเก็บเกี่ยว')
-    # money = models.IntegerField(  verbose_name='จำนวนเงิน (บาท)')
-    # tractor = models.ForeignKey(Tractor, on_delete=models.CASCADE, null=True,  verbose_name='รถเกี่ยวนวดข้าว')
-    # tractor_status = models.ForeignKey(Tractor_status, on_delete=models.CASCADE, null=True, default=1,  verbose_name='สถานะรถเกี่ยวนวดข้าว')
-    money_status = models.ForeignKey(Money_status, on_delete=models.CASCADE, null=True, default=1,  verbose_name='สถานะการชำระเงิน') # ให้นิยามเพิ่มเติม
-    # work_status = models.ForeignKey(Work_status, on_delete=models.CASCADE, null=True, default=1, verbose_name='สถานะงาน') # รับ ไม่รับ จ่าย
-    # moneyStatus = models.CharField(max_length=100) 
-    # work_status = models.CharField(max_length=100) 
-   
+    rice = models.CharField(max_length=1000, null=True, verbose_name='พันธุ์ข้าว') 
+    workDetail = models.TextField(max_length=1000, null=True,  verbose_name='รายละเอียด')
+    price = models.CharField(max_length=1000, null=True, verbose_name='จำนวนเงิน (บาท)')
+    money_status = models.ForeignKey(Money_status, on_delete=models.CASCADE, null=True, default=" ", verbose_name='สถานะการชำระเงิน') # ให้นิยามเพิ่มเติม
+    work_status = models.ForeignKey(Work_status, on_delete=models.CASCADE, null=True, default=" ", verbose_name='สถานะงาน') # รับ ไม่รับ จ่าย
     def __str__(self):
          return f'{self.area}'
 
     class Meta:
         verbose_name = 'งานที่ต้องเก็บเกี่ยว'
 
-# class Venue(models.Model):
-
-#     name = models.CharField(max_length=255)
-#     latitude = models.DecimalField(
-#                 max_digits=9, decimal_places=6, null=True, blank=True)
-#     longitude = models.DecimalField(
-#                 max_digits=9, decimal_places=6, null=True, blank=True)
-    
-class addTractor(models.Model):
+class AddTractor(models.Model):
     # tractor_owner = models.CharField(max_length=1000)
     tractor_name = models.CharField(max_length=1000)
     tractor_detail = models.CharField(max_length=1000)
@@ -146,10 +129,19 @@ class addTractor(models.Model):
     class Meta:
         verbose_name = 'เพิ่มข้อมูลรถเกี่ยวนวดข้าว'
 
-   
 
-    # def get_absolute_url(self):
-    #     return reverse("addTractor_detail", kwargs={"pk": self.pk})
+
+
+
+
+
+
+
+
+
+
+
+
 
 """
 class queue(models.Model):

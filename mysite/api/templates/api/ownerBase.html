@@ -33,7 +33,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/addTractor">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                     <!-- <img src="/media/{{store.store_img}}" class="img-rounded" alt="img" width="30" height="20"> -->
@@ -46,27 +46,27 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="/work">
+                <a class="nav-link" href="/ownerShowaddWork">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>จองคิวรถเกี่ยวนวดข้าว</span></a>
+                    <span>รายละเอียดจองคิวรถเกี่ยวนวดข้าว</span></a>
             </li>
 
              <hr class="sidebar-divider">
              <li class="nav-item active">
-                <a class="nav-link" href="/showWork">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>รายละเอียดจองคิวรถเกี่ยวนวดข้าว</span></a>
-            </li>
-            <hr class="sidebar-divider">
-             <li class="nav-item active">
-                <a class="nav-link" href="/showaddTractor">
+                <a class="nav-link" href="/ownerShowaddTractor">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>ข้อมูลรถเกี่ยวนวดข้าว</span></a>
             </li>
+            {% comment %} <hr class="sidebar-divider"> {% endcomment %}
+             {% comment %} <li class="nav-item active">
+                <a class="nav-link" href="/showaddTractor">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>ข้อมูลรถเกี่ยวนวดข้าว</span></a>
+            </li> {% endcomment %}
 
             <!-- Divider -->
             <hr class="sidebar-divider">
-        </ul>
+        </ul> 
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->

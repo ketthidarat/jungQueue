@@ -26,11 +26,18 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #  path('index',views.index),
     path('', views.work, name='work'),
+    # path('login/',views.login),
+    # path('register/',views.register), 
+    # path('logout/',views.logout),
     path('work',views.work),
     path('showWork',views.showWork),
     path('tractor',views.tractor),
     path('addTractor',views.addTractor),
     path('showaddTractor',views.showaddTractor),
+    path('ownerBase',views.ownerBase),
+    path('ownerShowaddWork',views.ownerShowaddWork),
+    path('editShowaddWork/<int:id>/',views.editShowaddWork),
+    path('ownerShowaddTractor',views.ownerShowaddTractor),
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls'))
 ]

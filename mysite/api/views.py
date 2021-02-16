@@ -14,6 +14,13 @@ from django.views.generic import ListView
 def index(req):
     return render(req, 'api/index.html')
 
+def ownerBase(req):
+    return render(req, 'api/ownerBase.html')
+
+def ownerShowaddTractor(req):
+    return render(req, 'api/ownerShowaddTractor.html')
+
+
 def work(request):
     if request.method == 'POST':
         form = WorkForm(request.POST ,request.FILES)
@@ -26,10 +33,45 @@ def work(request):
                   {
                       'form': form,
                       'rice_type': Rice_type.objects.all(),
+                    #   'money_status': Money_status.objects.all(),
                     #   'workt_statuss': workt_Status.objects.all(),
 
-                  }) 
+                  })
 
+def editShowaddWork(request, id=0):
+    work = Work.objects.get(pk=id)
+    rice_type = Rice_type.objects.all()
+    money_status = Money_status.objects.all()
+    work_status = Work_status.objects.all()
+    if request.method == 'POST':
+        form = WorkForm(request.POST, request.FILES, instance=work)
+        if form.is_valid():
+            
+            form.save()
+            # messages.success(request, 'Member was created successfully!')
+            # return redirect('/editproduct/{<int:id>/')
+        else:
+            print("==== form.errors ====")
+            print(form.errors)
+    else:
+        form = WorkForm(work)
+       
+    return render(request, 'api/editShowaddWork.html' ,{ 
+        'form': form,
+        'work': work,
+        'rice_type': rice_type,
+        'money_status': money_status,
+        'work_status': work_status,
+        # 'product_statuss': product_statuss,
+    })
+
+def ownerShowaddWork(req):
+    ownerShowaddWork = Work.objects.all() 
+    return render(req, 'api/ownerShowaddWork.html', {
+        'ownerShowaddWork': ownerShowaddWork,
+    })
+
+ 
 def showWork(req):
     showWork = Work.objects.all() 
     return render(req, 'api/showWork.html', {
@@ -58,10 +100,69 @@ def addTractor(request):
 
                   }) 
 def showaddTractor(req):
-    showaddTractor = addTractor.objects.all() 
+    showaddTractor = AddTractor.objects.all() 
     return render(req, 'api/showaddTractor.html', {
         'showaddTractor': showaddTractor,
     })
+
+def ownerShowaddTractor(req):
+    ownerShowaddTractor = AddTractor.objects.all() 
+    return render(req, 'api/ownerShowaddTractor.html', {
+        'ownerShowaddTractor': ownerShowaddTractor,
+    })
+# def editShowaddTractor(req):
+#     def editShowaddTractor(request, id=0):
+#     product = Product.objects.get(pk=id)
+#     product_types = Product_Type.objects.all()
+#     product_statuss = Product_Status.objects.all()
+#     if request.method == 'POST':
+#         form = ProductForm(request.POST, request.FILES, instance=product)
+#         if form.is_valid():
+            
+#             form.save()
+#             # messages.success(request, 'Member was created successfully!')
+#             # return redirect('/editproduct/{<int:id>/')
+#         else:
+#             print("==== form.errors ====")
+#             print(form.errors)
+#     else:
+#         form = ProductForm(product)
+       
+#     return render(request, 'api/editproduct.html' ,{ 
+#         'form': form,
+#         'product': product,
+#         'product_types': product_types,
+#         'product_statuss': product_statuss,
+#     })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class FarmerViewSet(viewsets.ModelViewSet):
     queryset = Farmer.objects.all()
