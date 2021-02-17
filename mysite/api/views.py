@@ -123,7 +123,7 @@ def editShowaddTractor(request, id=0):
     tractor_status = Tractor_status.objects.all()
     # product_statuss = Product_Status.objects.all()
     if request.method == 'POST':
-        form = TractorForm(request.POST, request.FILES, instance=Tractor)
+        form = TractorForm(request.POST, request.FILES, instance=addTractor)
         if form.is_valid():
             
             form.save()

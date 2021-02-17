@@ -24,7 +24,7 @@
                 {{ message }}
             </div> 
         {% endfor %}
-            <form class="form-horizontal" action="/showaddTractor/{{ addTractor.id }}/" method="POST"  enctype="multipart/form-data">
+            <form class="form-horizontal" action="/editShowaddTractor/{{ addTractor.id }}/" method="POST"  enctype="multipart/form-data">
               {% csrf_token %}
               <div class="form-group">
                   <div class="form-row">
