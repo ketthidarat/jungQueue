@@ -1,1 +1,106 @@
 {% extends 'api/ownerBase.html' %}
+{% block content %}
+
+
+<div id="content-wrapper">
+
+  <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <!-- <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+              <a href="#">CRUD</a>
+          </li>
+          <li class="breadcrumb-item active">Add</li>
+      </ol> -->
+      <div class="card mb-3">
+          <div class="card-header">
+              <i class="fas fa-table"></i>
+              Crud Add
+              <a  class="btn btn-sm btn-success" href="/showaddTractor" style="padding: 8px; float: right; background-color: rgb(53, 122, 155); color: white;">Back</a>
+          </div>
+          <div class="card-body">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                {{ message }}
+            </div> 
+        {% endfor %}
+            <form class="form-horizontal" action="/showaddTractor/{{ addTractor.id }}/" method="POST"  enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="form-group">
+                  <div class="form-row">
+                      <div class="col-md-9">
+                          <div class="form-label-group">
+                            <label for="tractor_name"><b>ยี่ห้อ</b></label>
+                            <input type="text" class="form-control" name="tractor_name" value="{{ addTractor.tractor_name }}"  required>
+                          </div>
+                      </div>
+                   
+                  </div>
+              </div>
+              <div class="form-group">
+                  <div class="form-row">
+                      <div class="col-md-9">
+                          <div class="form-label-group">
+                            <label for="tractor_detail"><b>ขนาดรถ</b></label>
+                            <input type="text" class="form-control" name="tractor_detail" value="{{ addTractor.tractor_detail }}"  required>
+                          </div>
+                      </div>
+                   
+                  </div>
+              </div>
+              
+               <div class="form-group">
+          <div class="form-row">
+              <div class="col-md-9">
+                  <div class="form-label-group">
+                    <label for="exampleSelect1"><b>สถานะรถเกี่ยวนวดข้าว</b></label>
+                    <select class="form-control" id="Select" name="tractor_status" required>
+        
+                      {% for c in tractor_status %}
+                      {% if c == addTractor.tractor_status %}
+                      <option value="{{c.id}}" selected>{{ c.tractor_status }}</option>  
+                      {% else %}
+                      <option value="{{c.id}}">{{ c.tractor_status }}</option> 
+                      {% endif %} 
+                      {% endfor %}
+                    </select>
+                
+                  </div>
+              </div>
+           
+          </div>
+      </div>
+              <div class="form-group">
+                  <div class="form-row">
+                      <div class="col-md-9">
+                          <div class="form-label-group">
+                            <label for="tractor_timeHarvers"><b>เวลาที่ใช้ในการเก็บเกี่ยว</b></label>
+                            <input type="text" class="form-control"  name="tractor_timeHarvers" value="{{ addTractor.tractor_timeHarvers }}" required>
+                           
+                              <!-- <input type="text" class="form-control" name="product_name" placeholder="กรุณากรอกชื่อสินค้า" id="inputFirst" required>  -->
+                          </div>
+                      </div>
+                   
+                  </div>
+              </div>
+  
+           <div class="form-group">
+                  <div class="form-row">
+                      <div class="col-md-9">
+                          <div class="form-label-group">
+                            <label for="tractor_timeRepair"><b>เวลาที่ใช้ในการซ่อม</b></label>
+                            <input type="text" class="form-control"  name="tractor_timeRepair" value="{{ addTractor.tractor_timeRepair }}" required>
+                           
+                          </div>
+                      </div>
+                   
+                  </div>
+              </div>
+
+            <button class="btn btn-primary btn-block" type="submit">Submit &nbsp;&nbsp;&nbsp;<span></span></button>
+          </form>
+          </div>
+      </div>
+  </div>
+</div>
+{% endblock %}

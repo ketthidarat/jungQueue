@@ -107,7 +107,7 @@
 
                 </div>
           <div class="card-body">
-            <form class="form-horizontal" action="/work" method="POST"  enctype="multipart/form-data">
+            <form class="form-horizontal" action="/addWork" method="POST"  enctype="multipart/form-data">
               {% csrf_token %}
               <div class="form-group">
                   <div class="form-row">
@@ -144,7 +144,7 @@
                   <div class="form-row">
                       <div class="col-md-9">
                           <div class="form-label-group">
-                            <label for="work_detail"><b>พันธุ์ข้าว</b></label>
+                            <label for="rice"><b>พันธุ์ข้าว</b></label>
                             <input type="text" class="form-control"  name="rice" required>
                            
                               <!-- <input type="text" class="form-control" name="product_name" placeholder="กรุณากรอกชื่อสินค้า" id="inputFirst" required>  -->

@@ -57,7 +57,7 @@
                       </thead>
                       <tbody>
                         {% csrf_token %} 
-                      {% for ownerShowaddTractor in showaddTractor %}
+                      {% for ownerShowaddTractor in ownerShowaddTractor %}
                     
                           <tr>
                             <td>{{ ownerShowaddTractor.tractor_name }}</td>
@@ -69,10 +69,10 @@
                               <td>{{ showWork.showWork_amount }}</td> {% endcomment %}
                               <!-- <td>{{ i.created_at  |date:"d-m-Y H:i:s" }}</td> -->
                               <td>                                   
-                                  <a class="btn btn-sm btn-warning" href="/editshowWork/{{ownerShowaddTractor.id}}"> <span class="fa fa-edit"></span> Edit</a>
+                                  <a class="btn btn-sm btn-warning" href="/editShowaddTractor/{{ownerShowaddTractor.id}}"> <span class="fa fa-edit"></span> Edit</a>
                                   
                               </td>
-                              <td><a class="btn btn-sm btn-danger" href="/deleteshowWork/{{ownerShowaddTractor.id}}"><span class="fa fa-trash"></span> Delete</a></td>
+                              <td><a class="btn btn-sm btn-danger" href="/deleteShowaddTractor/{{ownerShowaddTractor.id}}"><span class="fa fa-trash"></span> Delete</a></td>
                           </tr>
                           
                       {% endfor %}

@@ -14,22 +14,21 @@ from django.views.generic import ListView
 def index(req):
     return render(req, 'api/index.html')
 
+def schedule(req):
+    return render(req, 'api/schedule.html')
+
 def ownerBase(req):
     return render(req, 'api/ownerBase.html')
 
-def ownerShowaddTractor(req):
-    return render(req, 'api/ownerShowaddTractor.html')
-
-
-def work(request):
-    if request.method == 'POST':
-        form = WorkForm(request.POST ,request.FILES)
+def addWork(req):
+    if req.method == 'POST':
+        form = WorkForm(req.POST ,req.FILES)
         if form.is_valid():
             form.save()
-            return redirect('/work')
+            return redirect('/addWork')
     else:
         form = WorkForm()
-    return render(request, 'api/work.html',
+    return render(req, 'api/addWork.html',
                   {
                       'form': form,
                       'rice_type': Rice_type.objects.all(),
@@ -64,6 +63,13 @@ def editShowaddWork(request, id=0):
         'work_status': work_status,
         # 'product_statuss': product_statuss,
     })
+
+def deleteShowaddWork(req, id=0):
+    work = Work.objects.get(pk=id)
+    # product_types = Product_Type.objects.all()
+    # product_statuss = Product_Status.objects.all()
+    work.delete()
+    return HttpResponseRedirect(req.META.get('HTTP_REFERER'))
 
 def ownerShowaddWork(req):
     ownerShowaddWork = Work.objects.all() 
@@ -110,30 +116,37 @@ def ownerShowaddTractor(req):
     return render(req, 'api/ownerShowaddTractor.html', {
         'ownerShowaddTractor': ownerShowaddTractor,
     })
-# def editShowaddTractor(req):
-#     def editShowaddTractor(request, id=0):
-#     product = Product.objects.get(pk=id)
-#     product_types = Product_Type.objects.all()
-#     product_statuss = Product_Status.objects.all()
-#     if request.method == 'POST':
-#         form = ProductForm(request.POST, request.FILES, instance=product)
-#         if form.is_valid():
+
+
+def editShowaddTractor(request, id=0):
+    addTractor = AddTractor.objects.get(pk=id)
+    tractor_status = Tractor_status.objects.all()
+    # product_statuss = Product_Status.objects.all()
+    if request.method == 'POST':
+        form = TractorForm(request.POST, request.FILES, instance=Tractor)
+        if form.is_valid():
             
-#             form.save()
-#             # messages.success(request, 'Member was created successfully!')
-#             # return redirect('/editproduct/{<int:id>/')
-#         else:
-#             print("==== form.errors ====")
-#             print(form.errors)
-#     else:
-#         form = ProductForm(product)
+            form.save()
+            # messages.success(request, 'Member was created successfully!')
+            # return redirect('/editproduct/{<int:id>/')
+        else:
+            print("==== form.errors ====")
+            print(form.errors)
+    else:
+        form = TractorForm(addTractor)
        
-#     return render(request, 'api/editproduct.html' ,{ 
-#         'form': form,
-#         'product': product,
-#         'product_types': product_types,
-#         'product_statuss': product_statuss,
-#     })
+    return render(request, 'api/editShowaddTractor.html' ,{ 
+        'form': form,
+        'addTractor': addTractor,
+        'tractor_status': tractor_status,
+        # 'product_types': product_types,
+        # 'product_statuss': product_statuss,
+    })
+
+def deleteShowaddTractor(req, id=0):
+    addTractor = AddTractor.objects.get(pk=id)
+    addTractor.delete()
+    return HttpResponseRedirect(req.META.get('HTTP_REFERER'))
 
 
 

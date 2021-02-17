@@ -47,6 +47,7 @@
                           <th>ราคา</th>
                           <th>สถานะการชำระเงิน</th>
                           <th>สถานะงาน</th>
+                          <th>ยกเลิก</th>
                           {% comment %} <th>รูป</th>
                           <th>จำนวน</th>
                           <!-- <th>Created At</th> -->{% endcomment %}
@@ -67,6 +68,7 @@
                               <td>{{ showWork.price }}</td>
                               <td>{{ showWork.money_status }}</td>
                               <td>{{ showWork.work_status }}</td>
+                              <td><a class="btn btn-sm btn-danger" href="/deleteshowWork/{{showWork.id}}"><span class="fa fa-trash"></span> ยกเลิก</a></td>
                               {% comment %} <td>{{ showWork.money_status }}</td> {% endcomment %}
                               {% comment %} <td><img src="/media/{{showWork.showWork_img}}" style="height: 75px;"></td>
                               <td>{{ showWork.showWork_amount }}</td> {% endcomment %}
