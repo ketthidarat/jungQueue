@@ -38,22 +38,26 @@ def addWork(req):
                   })
 
 def editShowaddWork(request, id=0):
+    print(f'/editShowAddWork id={id}')
     work = Work.objects.get(pk=id)
     rice_type = Rice_type.objects.all()
     money_status = Money_status.objects.all()
     work_status = Work_status.objects.all()
     if request.method == 'POST':
-        form = WorkForm(request.POST, request.FILES, instance=work)
+        print(request.POST)
+        form = FarmerWorkForm(request.POST, request.FILES, instance=work)
+        print(form.is_valid())
         if form.is_valid():
-            
             form.save()
+            work = form.instance
+            print(work)
             # messages.success(request, 'Member was created successfully!')
             # return redirect('/editproduct/{<int:id>/')
         else:
             print("==== form.errors ====")
             print(form.errors)
     else:
-        form = WorkForm(work)
+        form = FarmerWorkForm(work)
        
     return render(request, 'api/editShowaddWork.html' ,{ 
         'form': form,

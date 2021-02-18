@@ -45,11 +45,11 @@
                     <select class="form-control" id="Select" name="rice_type" required>
         
                       {% for c in rice_type %}
-                      {% if c == rice_type.rice_type %}
-                      <option value="{{c.id}}" selected>{{ c.rice_type }}</option>  
-                      {% else %}
-                      <option value="{{c.id}}">{{ c.rice_type }}</option> 
-                      {% endif %} 
+                        {% if c == work.rice_type %}
+                        <option value="{{c.id}}" selected>{{ c.rice_type }}</option>  
+                        {% else %}
+                        <option value="{{c.id}}">{{ c.rice_type }}</option> 
+                        {% endif %} 
                       {% endfor %}
                     </select>
                 
@@ -107,7 +107,7 @@
                     <select class="form-control" id="Select" name="money_status" required>
         
                       {% for c in money_status %}
-                      {% if c == money_status.money_status %}
+                      {% if c == work.money_status %}
                       <option value="{{c.id}}" selected>{{ c.money_status }}</option>  
                       {% else %}
                       <option value="{{c.id}}">{{ c.money_status }}</option> 
@@ -128,7 +128,7 @@
                     <select class="form-control" id="Select" name="work_status" required>
         
                       {% for c in work_status %}
-                      {% if c == work_status.work_status %}
+                      {% if c == work.work_status %}
                       <option value="{{c.id}}" selected>{{ c.work_status }}</option>  
                       {% else %}
                       <option value="{{c.id}}">{{ c.work_status }}</option> 

@@ -100,8 +100,8 @@ class Work(models.Model):
     # tractor = models.ForeignKey(Tractor, on_delete=models.CASCADE, null=True,  verbose_name='รถเกี่ยวนวดข้าว')
     # work_id = models.AutoField(primary_key=True)
     # work_status = models.CharField(max_length=1000)
-    # lat = models.CharField(max_length=1000, verbose_name='ละติจูด')
-    # lng = models.CharField(max_length=1000, verbose_name='ลองติจูด')
+    lat = models.CharField(max_length=1000, verbose_name='ละติจูด')
+    lng = models.CharField(max_length=1000, verbose_name='ลองติจูด')
     area = models.CharField(max_length=1000, verbose_name='พื้นที่ (ไร่)')
     rice_type = models.ForeignKey(Rice_type, on_delete=models.CASCADE, null=True, default=1, verbose_name='ลักษณะข้าวที่จะให้เกี่ยว')
     rice = models.CharField(max_length=1000, null=True, verbose_name='พันธุ์ข้าว') 
@@ -109,8 +109,9 @@ class Work(models.Model):
     price = models.CharField(max_length=1000, verbose_name='จำนวนเงิน (บาท)')
     money_status = models.ForeignKey(Money_status, on_delete=models.CASCADE, default=" ", verbose_name='สถานะการชำระเงิน') # ให้นิยามเพิ่มเติม
     work_status = models.ForeignKey(Work_status, on_delete=models.CASCADE, default=" ", verbose_name='สถานะงาน') # รับ ไม่รับ จ่าย
+
     def __str__(self):
-         return f'{self.area}'
+         return f'{self.area} {self.rice_type} {self.rice} {self.money_status}'
 
     class Meta:
         verbose_name = 'งานที่ต้องเก็บเกี่ยว'

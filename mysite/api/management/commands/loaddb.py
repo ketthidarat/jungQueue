@@ -29,7 +29,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # pass
         from openpyxl import load_workbook
-        filename = "xlsx/แผนการดำเนินโครงงานที่ปรึกษา senior project 62 - เกษ.xlsx"
+        #filename = "xlsx/แผนการดำเนินโครงงานที่ปรึกษา senior project 62 - เกษ.xlsx"
+        filename = "xlsx/data.xlsx"
         wb = load_workbook(filename, data_only=True)
         #sheets = [ 'Rice_type', 'Work_status', 'Money_status', 'Work' ]
 
@@ -40,11 +41,13 @@ class Command(BaseCommand):
 
         print('กำลัง load ... Work_status')
         for d in self.load(wb, 'Work_status', ['id', 'work_status']):
-            Work_status(**d).save()
+            w = Work_status(**d).save()
+            print(w)
 
         print('กำลัง load ... Money_status')
         for d in self.load(wb, 'Money_status', ['id', 'money_status']):
-            Money_status(**d).save()
+            m = Money_status(**d).save()
+            print(m)
 
         print('กำลัง load ... Farmer')
         for d in self.load(wb, 'Farmer', ['id', 'farmer_name','phone', 'address', 'email', 'username', 'password', 'image']):
@@ -72,8 +75,9 @@ class Command(BaseCommand):
 
 
         print('กำลัง load ... Work')
-        for d in self.load(wb, 'Work', ['id', 'farmer_name', 'lat', 'lng', 'date_start', 'date_end', 'area', 'rice_type', 'other', 'RepairTime', 'Harverstime', 'money', 'money_status', 'work_status', 'tractor', 'tractor_status']):
+        for d in self.load(wb, 'Work', ['id', 'farmer_name', 'lat', 'lng', 'area', 'rice', 'rice_type', 'RepairTime', 'Harverstime', 'price', 'money_status', 'work_status', 'tractor', 'tractor_status']):
            
+            print(d)
             farmer_name = Farmer.objects.get(pk=d['farmer_name'])
             d.pop('farmer_name', None)
         

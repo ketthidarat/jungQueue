@@ -2,17 +2,24 @@ from django import forms
 from .models import *
 
  
-class WorkForm(forms.ModelForm):
+class TractorWorkForm(forms.ModelForm):
+
+    class Meta:
+        model = Work
+        fields = '__all__'
+
+class FarmerWorkForm(forms.ModelForm):
 
     class Meta:
         model = Work
         fields = [ 'area', 'rice_type', 'rice', 'workDetail' ]
-        # fields = '__all__'
 
 class TractorForm(forms.ModelForm):
+
     class Meta:
         model = AddTractor
         fields = '__all__'
+
         # fields = [  'product_name','product_price', 'product_detail', 'product_img','product_type','product_status','product_amount' ]
 
 
