@@ -45,5 +45,5 @@ urlpatterns = [
     path('ownerShowaddTractor',views.ownerShowaddTractor),
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
-    path('calendar', include('api.urls')),
+    path('cal/', include('api.urls')),
 ]

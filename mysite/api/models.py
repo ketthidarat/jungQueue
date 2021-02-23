@@ -106,12 +106,12 @@ class Work(models.Model):
     area = models.CharField(max_length=1000, verbose_name='พื้นที่ (ไร่)')
     rice_type = models.ForeignKey(Rice_type, on_delete=models.CASCADE, null=True, default=1, verbose_name='ลักษณะข้าวที่จะให้เกี่ยว')
     rice = models.CharField(max_length=1000, null=True, verbose_name='พันธุ์ข้าว') 
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+    start_time = models.DateTimeField(blank=True, null=True)
+    end_time = models.DateTimeField(blank=True, null=True)
     workDetail = models.TextField(max_length=1000, null=True,  verbose_name='รายละเอียด')
     price = models.CharField(max_length=1000, null=True, verbose_name='จำนวนเงิน (บาท)')
-    money_status = models.ForeignKey(Money_status, on_delete=models.CASCADE, default=" ",null=True, verbose_name='สถานะการชำระเงิน') # ให้นิยามเพิ่มเติม
-    work_status = models.ForeignKey(Work_status, on_delete=models.CASCADE, default=" ",null=True, verbose_name='สถานะงาน') # รับ ไม่รับ จ่าย
+    money_status = models.ForeignKey(Money_status, on_delete=models.CASCADE, default=1,null=True, verbose_name='สถานะการชำระเงิน') # ให้นิยามเพิ่มเติม
+    work_status = models.ForeignKey(Work_status, on_delete=models.CASCADE, default=1,null=True, verbose_name='สถานะงาน') # รับ ไม่รับ จ่าย
 
     def __str__(self):
          return f'{self.area} {self.rice_type} {self.rice}'
