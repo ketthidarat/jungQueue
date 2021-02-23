@@ -51,6 +51,7 @@
                           <th>จำนวน</th>
                           <!-- <th>Created At</th> -->
                           {% endcomment %}
+                          {% comment %} <th>เพิ่ม</th>  {% endcomment %}
                           <th>แก้ไข</th> 
                           <th>ลบ</th> 
                       </tr>
@@ -68,6 +69,10 @@
                               {% comment %} <td><img src="/media/{{showWork.showWork_img}}" style="height: 75px;"></td>
                               <td>{{ showWork.showWork_amount }}</td> {% endcomment %}
                               <!-- <td>{{ i.created_at  |date:"d-m-Y H:i:s" }}</td> -->
+                               {% comment %} <td>                                   
+                                  <a class="btn btn-sm btn-warning" href="/addShowTractor/{{addTractor.id}}"> <span class="fa fa-edit"></span> Add</a>
+                                  
+                              </td> {% endcomment %}
                               <td>                                   
                                   <a class="btn btn-sm btn-warning" href="/editShowaddTractor/{{ownerShowaddTractor.id}}"> <span class="fa fa-edit"></span> Edit</a>
                                   

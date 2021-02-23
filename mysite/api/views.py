@@ -11,6 +11,15 @@ from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView
 
+from datetime import datetime, timedelta, date
+from django.views import generic
+from django.urls import reverse
+from django.utils.safestring import mark_safe
+import calendar
+
+from .models import *
+from .utils import Calendar
+
 def index(req):
     return render(req, 'api/index.html')
 
@@ -22,42 +31,40 @@ def ownerBase(req):
 
 def addWork(req):
     if req.method == 'POST':
-        form = WorkForm(req.POST ,req.FILES)
+        print(req.POST)
+        form = FarmerWorkForm(req.POST ,req.FILES)
         if form.is_valid():
             form.save()
+            # print(form)
+
             return redirect('/addWork')
     else:
-        form = WorkForm()
+        form = FarmerWorkForm()
     return render(req, 'api/addWork.html',
                   {
                       'form': form,
                       'rice_type': Rice_type.objects.all(),
                     #   'money_status': Money_status.objects.all(),
                     #   'workt_statuss': workt_Status.objects.all(),
-
                   })
 
 def editShowaddWork(request, id=0):
-    print(f'/editShowAddWork id={id}')
     work = Work.objects.get(pk=id)
     rice_type = Rice_type.objects.all()
     money_status = Money_status.objects.all()
     work_status = Work_status.objects.all()
     if request.method == 'POST':
-        print(request.POST)
-        form = FarmerWorkForm(request.POST, request.FILES, instance=work)
-        print(form.is_valid())
+        form = TractorWorkForm(request.POST, request.FILES, instance=work)
         if form.is_valid():
             form.save()
-            work = form.instance
-            print(work)
+            # print(form)
             # messages.success(request, 'Member was created successfully!')
             # return redirect('/editproduct/{<int:id>/')
         else:
             print("==== form.errors ====")
             print(form.errors)
     else:
-        form = FarmerWorkForm(work)
+        form = TractorWorkForm(work)
        
     return render(request, 'api/editShowaddWork.html' ,{ 
         'form': form,
@@ -154,7 +161,94 @@ def deleteShowaddTractor(req, id=0):
 
 
 
+# def productpage(request):
+#     # list all users.
+#     products = Product.objects.all()
+#     page_number = request.GET.get('page', 1)
+#     paginate_result = do_paginate(products, page_number)
+#     product = paginate_result[0]
+#     paginator = paginate_result[1]
+#     base_url = '/api/product/?'
+#     users = Users.objects.get(username=request.user.username)
+#     return render(request, 'api/product.html',
+#                       {'products': products, 'paginator' : paginator, 'base_url': base_url ,'users':users})
+# #ค้นหาสินค้า
+# def product(request):
+#     product_name = request.POST.get('product_name', '').strip()
+#     if len(product_name) == 0:
+#         product_name = request.GET.get('product_name', '').strip()
+#     product = Product.objects.filter(product_name__contains=product_name)
+#     page_number = request.GET.get('page', 1)
+#     paginate_result = do_paginate(product, page_number)
+#     product = paginate_result[0]
+#     paginator = paginate_result[1]
+#     base_url = '/api/user_search/?product_name=' + product_name + "&"
+#     users = Users.objects.get(username=request.user.username)
+#     return render(request, 'api/product.html',
+#                       {'product': product, 'paginator' : paginator, 'base_url': base_url, 'search_product_name': product_name,'users':users})
 
+# def do_paginate(data_list, page_number):
+#     ret_data_list = data_list
+#     #  หน้า มี 5รายการ
+#     result_per_page = 5
+#     # build the paginator object.
+#     paginator = Paginator(data_list, result_per_page)
+#     try:
+#         # get data list for the specified page_number.
+#         ret_data_list = paginator.page(page_number)
+#     except EmptyPage:
+#         # get the lat page data if the page_number is bigger than last page number.
+#         ret_data_list = paginator.page(paginator.num_pages)
+#     except PageNotAnInteger:
+#         # if the page_number is not an integer then return the first page data.
+#         ret_data_list = paginator.page(1)
+#     return [ret_data_list, paginator]
+
+class CalendarView(generic.ListView):
+    model = Event
+    template_name = 'api/calendar.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        d = get_date(self.request.GET.get('month', None))
+        cal = Calendar(d.year, d.month)
+        html_cal = cal.formatmonth(withyear=True)
+        context['calendar'] = mark_safe(html_cal)
+        context['prev_month'] = prev_month(d)
+        context['next_month'] = next_month(d)
+        return context
+
+def get_date(req_month):
+    if req_month:
+        year, month = (int(x) for x in req_month.split('-'))
+        return date(year, month, day=1)
+    return datetime.today()
+
+def prev_month(d):
+    first = d.replace(day=1)
+    prev_month = first - timedelta(days=1)
+    month = 'month=' + str(prev_month.year) + '-' + str(prev_month.month)
+    return month
+
+def next_month(d):
+    days_in_month = calendar.monthrange(d.year, d.month)[1]
+    last = d.replace(day=days_in_month)
+    next_month = last + timedelta(days=1)
+    month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
+    return month
+
+def event(request, event_id=None):
+    instance = Event()
+    if event_id:
+        instance = get_object_or_404(Event, pk=event_id)
+    else:
+        instance = Event()
+
+    form = EventForm(request.POST or None, instance=instance)
+    if request.POST and form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('api:calendar'))
+    return render(request, 'api/event.html', {'form': form})
 
 
 

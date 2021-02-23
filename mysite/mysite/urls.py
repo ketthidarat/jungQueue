@@ -39,9 +39,11 @@ urlpatterns = [
     path('ownerShowaddWork',views.ownerShowaddWork),
     path('editShowaddWork/<int:id>/',views.editShowaddWork),
     path('deleteShowaddWork/<int:id>', views.deleteShowaddWork),
+    path('addShowaddTractor/<int:id>/',views.addTractor),
     path('editShowaddTractor/<int:id>/',views.editShowaddTractor),
     path('deleteShowaddTractor/<int:id>', views.deleteShowaddTractor),
     path('ownerShowaddTractor',views.ownerShowaddTractor),
     path('api/', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls'))
+    path('api-auth/', include('rest_framework.urls')),
+    path('calendar', include('api.urls')),
 ]

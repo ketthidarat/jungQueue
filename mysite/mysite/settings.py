@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'api',
     'rest_framework',
+    # 'api.apps.CalConfig',
+    # 'schedule',
+    # 'djangobower',
+    # 'django_bootstrap_calendar',
     
     
 ]

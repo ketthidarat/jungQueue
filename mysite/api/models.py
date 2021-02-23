@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
+from django.urls import reverse
 
 # Create your models here.
 class Farmer(models.Model):
@@ -105,13 +106,15 @@ class Work(models.Model):
     area = models.CharField(max_length=1000, verbose_name='พื้นที่ (ไร่)')
     rice_type = models.ForeignKey(Rice_type, on_delete=models.CASCADE, null=True, default=1, verbose_name='ลักษณะข้าวที่จะให้เกี่ยว')
     rice = models.CharField(max_length=1000, null=True, verbose_name='พันธุ์ข้าว') 
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
     workDetail = models.TextField(max_length=1000, null=True,  verbose_name='รายละเอียด')
-    price = models.CharField(max_length=1000, verbose_name='จำนวนเงิน (บาท)')
-    money_status = models.ForeignKey(Money_status, on_delete=models.CASCADE, default=" ", verbose_name='สถานะการชำระเงิน') # ให้นิยามเพิ่มเติม
-    work_status = models.ForeignKey(Work_status, on_delete=models.CASCADE, default=" ", verbose_name='สถานะงาน') # รับ ไม่รับ จ่าย
+    price = models.CharField(max_length=1000, null=True, verbose_name='จำนวนเงิน (บาท)')
+    money_status = models.ForeignKey(Money_status, on_delete=models.CASCADE, default=" ",null=True, verbose_name='สถานะการชำระเงิน') # ให้นิยามเพิ่มเติม
+    work_status = models.ForeignKey(Work_status, on_delete=models.CASCADE, default=" ",null=True, verbose_name='สถานะงาน') # รับ ไม่รับ จ่าย
 
     def __str__(self):
-         return f'{self.area} {self.rice_type} {self.rice} {self.money_status}'
+         return f'{self.area} {self.rice_type} {self.rice}'
 
     class Meta:
         verbose_name = 'งานที่ต้องเก็บเกี่ยว'
@@ -130,25 +133,13 @@ class AddTractor(models.Model):
     class Meta:
         verbose_name = 'เพิ่มข้อมูลรถเกี่ยวนวดข้าว'
 
+class Event(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-"""
-class queue(models.Model):
-    tractor = models.ForeignKey(tractor, on_delete=models.CASCADE)
-    farmer_id = models.IntegerField()
-    work_id = models.IntegerField()
-    # queue_id = models.IntegerField()
-    statusQueue = models.CharField(max_length=1000)
-"""
+    @property
+    def get_html_url(self):
+        url = reverse('cal:event_edit', args=(self.id,))
+        return f'<a href="{url}"> {self.title} </a>'
