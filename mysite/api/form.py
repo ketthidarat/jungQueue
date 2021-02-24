@@ -2,7 +2,18 @@ from django import forms
 from django.forms import DateInput
 from .models import *
 
- 
+class FarmerForm(forms.ModelForm):
+
+    class Meta:
+        model = Farmer 
+        fields = [ 'farmer_name' ,'image', 'address', 'phone','email', 'username','password' ]
+
+class OwnerForm(forms.ModelForm):
+
+    class Meta:
+        model = Owner 
+        fields = [ 'owner_name' ,'image', 'address', 'phone','email', 'username','password', ]
+
 class TractorWorkForm(forms.ModelForm):
 
     class Meta:
@@ -38,8 +49,7 @@ class EventForm(forms.ModelForm):
     # input_formats parses HTML5 datetime-local input to datetime field
     self.fields['start_time'].input_formats = ('%Y-%m-%dT%H:%M',)
     self.fields['end_time'].input_formats = ('%Y-%m-%dT%H:%M',)
-
-
+    
 # class MechanicForm(forms.ModelForm):
 #     class Meta:
 #         model = Mechanic

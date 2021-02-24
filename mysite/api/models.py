@@ -1,9 +1,10 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
 from django.urls import reverse
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
-class Farmer(models.Model):
+class Farmer(AbstractUser):
     id = models.AutoField(primary_key=True) 
     # farmer_id = models.AutoField(primary_key=True)
     farmer_name = models.CharField(max_length=1000, verbose_name = 'ชื่อ-สกุล')
@@ -12,7 +13,7 @@ class Farmer(models.Model):
     address = models.CharField(max_length=1000, verbose_name = 'ที่อยู่')
     phone = models.CharField(max_length=1000, verbose_name = 'เบอร์โทรศัพท์')
     email = models.CharField(max_length=1000)
-    username = models.CharField(max_length=1000)
+    # username = models.CharField(max_length=1000)
     password = models.CharField(max_length=1000)
     
     def __str__(self):
@@ -96,7 +97,7 @@ class Money_status(models.Model):
 
 class Work(models.Model):
     # id = models.AutoField(primary_key=True) 
-    # farmer_name = models.ForeignKey(Farmer, on_delete=models.CASCADE, null=True,  verbose_name='เกษตรกร')
+    farmer_name = models.ForeignKey(Farmer, on_delete=models.CASCADE, null=True,  verbose_name='เกษตรกร')
     # farmer_lastname = models.ForeignKey(Farmer, on_delete=models.CASCADE)
     # tractor = models.ForeignKey(Tractor, on_delete=models.CASCADE, null=True,  verbose_name='รถเกี่ยวนวดข้าว')
     # work_id = models.AutoField(primary_key=True)
@@ -141,5 +142,10 @@ class Event(models.Model):
 
     @property
     def get_html_url(self):
-        url = reverse('cal:event_edit', args=(self.id,))
+        url = reverse('api:event_edit', args=(self.id,))
         return f'<a href="{url}"> {self.title} </a>'
+    
+    def __str__(self):
+        return f'{self.title}'
+    class Meta:
+        verbose_name = 'ตารางงานรถเกี่ยวนวดข้าว'

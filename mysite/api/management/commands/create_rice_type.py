@@ -12,13 +12,13 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         t1 = Rice_type()
+        t1.rice_type = 'ตั้งตรง'
+        t1.save()
+
+        t1 = Rice_type()
+        t1.rice_type = 'ราบกับพื้น'
+        t1.save()
+
+        t1 = Rice_type()
         t1.rice_type = 'ล้ม'
-        t1.save()
-
-        t1 = Rice_type()
-        t1.rice_type = 'ยีน'
-        t1.save()
-
-        t1 = Rice_type()
-        t1.rice_type = 'ราบ'
         t1.save()

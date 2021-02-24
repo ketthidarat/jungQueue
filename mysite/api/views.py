@@ -10,24 +10,61 @@ from django.shortcuts import redirect, render
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView
-
+from django.shortcuts import render, get_object_or_404
 from datetime import datetime, timedelta, date
 from django.views import generic
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 import calendar
-
 from .models import *
 from .utils import Calendar
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
+from django.contrib.auth.hashers import make_password
 
 def index(req):
     return render(req, 'api/index.html')
 
-def schedule(req):
-    return render(req, 'api/schedule.html')
-
 def ownerBase(req):
     return render(req, 'api/ownerBase.html')
+
+# def farmerCalendar(req):
+#     return render(req, 'api/farmerCalendar.html')
+
+def register(req):
+    print('register()')
+    form = FarmerForm()
+    print(req)
+    if req.method == 'POST':
+        form = FarmerForm(req.POST, req.FILES)
+        print("req.POST")
+        print(req.POST)
+        if form.is_valid():
+            print('form valid')
+            form.instance.password = make_password(req.POST['password'])
+            form.save()
+        else:
+            print("==== form.errors ====")
+            print(form.errors)
+    return render(req, 'api/register.html', { 
+        'form': form,
+       
+        })
+
+def login(req):
+    if req.method == 'POST':
+        print(req.POST)
+        users = authenticate(username=req.POST['username'], password=req.POST['password'])
+        print(users)
+        if users is not None:
+            print(users)
+            auth_login(req, users)
+            return redirect('/index')
+    else:
+        print('ยังไม่ได้กรอก login/password')
+    return render(req, 'api/login.html')
 
 def addWork(req):
     if req.method == 'POST':
@@ -47,6 +84,11 @@ def addWork(req):
                     #   'money_status': Money_status.objects.all(),
                     #   'workt_statuss': workt_Status.objects.all(),
                   })
+
+def logout(req):
+    # if req.adminn.is_/authenticated:
+    auth_logout(req)
+    return redirect('/')
 
 def editShowaddWork(request, id=0):
     work = Work.objects.get(pk=id)
@@ -94,6 +136,13 @@ def showWork(req):
     return render(req, 'api/showWork.html', {
         'showWork': showWork,
     })
+
+def deleteShowWork(req, id=0):
+    work = Work.objects.get(pk=id)
+    # product_types = Product_Type.objects.all()
+    # product_statuss = Product_Status.objects.all()
+    work.delete()
+    return HttpResponseRedirect(req.META.get('HTTP_REFERER'))
 
 def tractor(req):
     tractor = Tractor.objects.all() 
@@ -249,20 +298,6 @@ def event(request, event_id=None):
         form.save()
         return HttpResponseRedirect(reverse('api:calendar'))
     return render(request, 'api/event.html', {'form': form})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
