@@ -25,13 +25,22 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.hashers import make_password
 
 def index(req):
-    return render(req, 'api/index.html')
+    # farmer = Farmer.objects.get(username=req.user.username)
+    return render(req, 'api/index.html', {
+    # 'farmer': farmer,
+    })
 
 def ownerBase(req):
     return render(req, 'api/ownerBase.html')
 
-# def farmerCalendar(req):
-#     return render(req, 'api/farmerCalendar.html')
+def profile(req):
+    farmer = Farmer.objects.get(username=req.user.username)
+    return render(req, 'api/profile.html', {
+        'farmer': farmer,
+        })
+
+def schedule(req):
+    return render(req, 'api/schedule.html')
 
 def register(req):
     print('register()')

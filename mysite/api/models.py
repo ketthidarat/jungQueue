@@ -9,7 +9,7 @@ class Farmer(AbstractUser):
     # farmer_id = models.AutoField(primary_key=True)
     farmer_name = models.CharField(max_length=1000, verbose_name = 'ชื่อ-สกุล')
     # farmer_lastname = models.CharField(max_length=1000)
-    image = models.ImageField(upload_to='media/', verbose_name = 'รูปโปรไฟล์')
+    image = models.ImageField(upload_to='images/farmer',verbose_name = 'รูปโปรไฟล์')
     address = models.CharField(max_length=1000, verbose_name = 'ที่อยู่')
     phone = models.CharField(max_length=1000, verbose_name = 'เบอร์โทรศัพท์')
     email = models.CharField(max_length=1000)
