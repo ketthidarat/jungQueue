@@ -1,15 +1,17 @@
-{% extends 'api/ownerBase.html' %}
+{% extends 'api/base.html' %}
 
 {% block title %}
 Calendar
 {% endblock %}
-{% comment %} 
+
 {% block content %}
 <div class="clearfix">
 	<a class="btn btn-info left" href="/cal/calendar?{{ prev_month }}"> Previous Month </a>
 	<a class="btn btn-info right" href="/cal/calendar?{{ next_month }}"> Next Month </a>
+		{% if request.user.is_superuser %}
 	<a class="btn btn-info right" href="/cal/event/new"> New Event </a>
+	{% endif %}
 </div>
 
-{{ calendar }} {% endcomment %}
-{% comment %} {% endblock %} {% endcomment %}
+{{ calendar }}
+{% endblock %}

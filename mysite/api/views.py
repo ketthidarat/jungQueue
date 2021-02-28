@@ -81,8 +81,7 @@ def login(req):
     return render(req, 'api/login.html')
 
 def addWork(req):
-    # users = Farmer.objects.get(username=req.user.username) 
-    # print(user)
+    # user = Farmer.objects.get(username=request.user.username) 
     if req.method == 'POST':
         
         print(req.POST)
@@ -90,6 +89,7 @@ def addWork(req):
         if form.is_valid():
             form.save()
             # print(form)
+
             return redirect('/addWork')
     else:
         form = FarmerWorkForm()
@@ -97,7 +97,7 @@ def addWork(req):
                   {
                       'form': form,
                       'rice_type': Rice_type.objects.all(),
-                    #   'users': users,
+                    #   'user': Farmer.objects.all(),
                     #   'workt_statuss': workt_Status.objects.all(),
                   })
 
@@ -306,6 +306,7 @@ def editProfile(request, id=0):
 #         ret_data_list = paginator.page(1)
 #     return [ret_data_list, paginator]
 
+
 class CalendarView(generic.ListView):
     model = Event
     template_name = 'api/calendar.html'
@@ -351,6 +352,9 @@ def event(request, event_id=None):
         form.save()
         return HttpResponseRedirect(reverse('api:calendar'))
     return render(request, 'api/event.html', {'form': form})
+
+
+
 
 
 
