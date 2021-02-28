@@ -17,11 +17,7 @@
 
         
           <div class="card-body">
-              <!-- {% for message in messages %}
-                  <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
-                      {{ message }}
-                  </div> 
-              {% endfor %} -->
+           
                <div class="table-responsive">
                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" align="center">
                       <thead>
@@ -32,11 +28,7 @@
                           <th>เวลาที่ใช้ในการเก็บเกี่ยว</th>
                           <th>เวลาที่ใช้ในการซ่อม</th>
                           <th>สถานะรถเกี่ยวนวดข้าว</th>
-                          {% comment %} <th>รูป</th>
-                          <th>จำนวน</th>
-                          <!-- <th>Created At</th> -->{% endcomment %}
-                           {% comment %} <th>แก้ไข</th> 
-                          <th>ลบ</th>  {% endcomment %}
+                       
                       </tr>
                       </thead>
                       <tbody>
@@ -48,49 +40,14 @@
                               <td>{{ showaddTractor.tractor_timeHarvers }}</td>
                               <td>{{ showaddTractor.tractor_timeRepair }}</td>
                               <td>{{ showaddTractor.tractor_status }}</td>
-                              {% comment %} <td><img src="/media/{{showWork.showWork_img}}" style="height: 75px;"></td>
-                              <td>{{ showWork.showWork_amount }}</td> {% endcomment %}
-                              <!-- <td>{{ i.created_at  |date:"d-m-Y H:i:s" }}</td> -->
-                              {% comment %} <td>                                   
-                                  <a class="btn btn-sm btn-warning" href="/editshowWork/{{showWork.id}}"> <span class="fa fa-edit"></span> Edit</a>
-                                  
-                              </td>
-                              <td><a class="btn btn-sm btn-danger" href="/deleteshowWork/{{showWork.id}}"><span class="fa fa-trash"></span> Delete</a></td> {% endcomment %}
+                            
                           </tr>
                           
                       {% endfor %}
                       </tbody>
                   
                     </table>
-                    {% comment %} {% if showWork.has_other_pages %}
-                    <ul class="pagination">
-                      {% if showWork.has_previous %}
-                        <li><a class="page-link" href="?page={{ showWork.previous_page_number }}">&laquo;  Previous</a></li>
-                        <li><a class="page-link" href="?page={{ showWork.previous_page_number }}">{{ showWork.previous_page_number }} </a></li>
-                      {% else %}
-                        <li class="disabled page-link"><span>&laquo;Previous</span></li>
-                      {% endif %}
-                        <!--   หน้าปัจจุบัน -->
-                      <li class="page-item active">
-                        <span class="page-link">
-                            <span class="current" >
-                                {{ showWork.number }} 
-                              </span>
-                         
-                        </span>
-                      </li>
-                          <!-- หน้าถัดไป -->
-                      {% if showWork.has_next %}
-                        
-                        <li><a class="page-link"  href="?page={{ showWork.next_page_number }}">Next &raquo; </a></li>
-                      {% else %}
-                        <li class="disabled page-link"><span>Next &raquo;</span></li>
-                      {% endif %}
-                    </ul>
-                  {% endif %}
-                    </div>
-                    
-                    </div> {% endcomment %}
+         
 
                 </div>
                 </div>

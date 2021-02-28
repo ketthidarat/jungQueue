@@ -14,11 +14,17 @@ class OwnerForm(forms.ModelForm):
         model = Owner 
         fields = [ 'owner_name' ,'image', 'address', 'phone','email', 'username','password', ]
 
+class EditFarmerForm(forms.ModelForm):
+
+    class Meta:
+        model = Farmer 
+        fields = [ 'farmer_name' , 'address', 'phone','email' ]
+
 class TractorWorkForm(forms.ModelForm):
 
     class Meta:
         model = Work
-        fields = '__all__'
+        fields = [ 'price', 'money_status', 'work_status' ]
 
 class FarmerWorkForm(forms.ModelForm):
     class Meta:

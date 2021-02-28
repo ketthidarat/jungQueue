@@ -1,6 +1,5 @@
 from api.form import *
 from django.http import HttpResponse
-# from django.utils import translation
 from .models import *
 from .serializers import *
 from django.core.checks import messages
@@ -39,6 +38,12 @@ def profile(req):
         'farmer': farmer,
         })
 
+# def farmerWork(req):
+#     farmerWork =  Work.objects.all() 
+#     return render(req, 'api/farmerWork.html', {
+#         'farmerWork': farmerWork,
+#         })
+
 def schedule(req):
     return render(req, 'api/schedule.html')
 
@@ -76,13 +81,15 @@ def login(req):
     return render(req, 'api/login.html')
 
 def addWork(req):
+    # users = Farmer.objects.get(username=req.user.username) 
+    # print(user)
     if req.method == 'POST':
+        
         print(req.POST)
         form = FarmerWorkForm(req.POST ,req.FILES)
         if form.is_valid():
             form.save()
             # print(form)
-
             return redirect('/addWork')
     else:
         form = FarmerWorkForm()
@@ -90,7 +97,7 @@ def addWork(req):
                   {
                       'form': form,
                       'rice_type': Rice_type.objects.all(),
-                    #   'money_status': Money_status.objects.all(),
+                    #   'users': users,
                     #   'workt_statuss': workt_Status.objects.all(),
                   })
 
@@ -98,17 +105,21 @@ def logout(req):
     # if req.adminn.is_/authenticated:
     auth_logout(req)
     return redirect('/')
-
+    
 def editShowaddWork(request, id=0):
+    print(f'/editShowAddWork id={id}')
     work = Work.objects.get(pk=id)
     rice_type = Rice_type.objects.all()
     money_status = Money_status.objects.all()
     work_status = Work_status.objects.all()
     if request.method == 'POST':
+        print(request.POST)
         form = TractorWorkForm(request.POST, request.FILES, instance=work)
+        print(form.is_valid())
         if form.is_valid():
             form.save()
-            # print(form)
+            work = form.instance
+            print(work)
             # messages.success(request, 'Member was created successfully!')
             # return redirect('/editproduct/{<int:id>/')
         else:
@@ -126,6 +137,7 @@ def editShowaddWork(request, id=0):
         # 'product_statuss': product_statuss,
     })
 
+
 def deleteShowaddWork(req, id=0):
     work = Work.objects.get(pk=id)
     # product_types = Product_Type.objects.all()
@@ -139,17 +151,32 @@ def ownerShowaddWork(req):
         'ownerShowaddWork': ownerShowaddWork,
     })
 
- 
-def showWork(req):
+def showWork(request):
     showWork = Work.objects.all() 
-    return render(req, 'api/showWork.html', {
+    user = Farmer.objects.get(username=request.user.username) 
+    # farmer = Farmer.objects.get(username=req.user.username)
+    # user = request.user
+    # user = request.user
+    
+    return render(request, 'api/showWork.html', {
         'showWork': showWork,
+        'user': user,
+    })
+
+def farmerWork(request):
+    farmerWork = Work.objects.all() 
+    user = Farmer.objects.get(username=request.user.username) 
+    # farmer = Farmer.objects.get(username=req.user.username)
+    # user = request.user
+    # user = request.user
+    
+    return render(request, 'api/farmerWork.html', {
+        'farmerWork': farmerWork,
+        'user': user,
     })
 
 def deleteShowWork(req, id=0):
     work = Work.objects.get(pk=id)
-    # product_types = Product_Type.objects.all()
-    # product_statuss = Product_Status.objects.all()
     work.delete()
     return HttpResponseRedirect(req.META.get('HTTP_REFERER'))
 
@@ -171,8 +198,6 @@ def addTractor(request):
                   {
                       'form': form,
                       'tractor_status': Tractor_status.objects.all(),
-                    
-
                   }) 
 def showaddTractor(req):
     showaddTractor = AddTractor.objects.all() 
@@ -217,6 +242,25 @@ def deleteShowaddTractor(req, id=0):
     addTractor.delete()
     return HttpResponseRedirect(req.META.get('HTTP_REFERER'))
 
+
+def editProfile(request, id=0):
+    profile = Farmer.objects.get(pk=id)
+    if request.method == 'POST':
+        form = EditFarmerForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            
+            form.save()
+           
+        else:
+            print("==== form.errors ====")
+            print(form.errors)
+    else:
+        form = EditFarmerForm(profile)
+       
+    return render(request, 'api/editProfile.html' ,{ 
+        'form': form,
+        'profile': profile,
+    })
 
 
 # def productpage(request):
@@ -307,15 +351,6 @@ def event(request, event_id=None):
         form.save()
         return HttpResponseRedirect(reverse('api:calendar'))
     return render(request, 'api/event.html', {'form': form})
-
-
-
-
-
-
-
-
-
 
 
 

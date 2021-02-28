@@ -3,7 +3,7 @@
 {% block title %}
 Calendar
 {% endblock %}
-
+{% comment %} 
 {% block content %}
 <div class="clearfix">
 	<a class="btn btn-info left" href="/cal/calendar?{{ prev_month }}"> Previous Month </a>
@@ -11,5 +11,5 @@ Calendar
 	<a class="btn btn-info right" href="/cal/event/new"> New Event </a>
 </div>
 
-{{ calendar }}
-{% endblock %}
+{{ calendar }} {% endcomment %}
+{% comment %} {% endblock %} {% endcomment %}

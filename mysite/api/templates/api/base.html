@@ -95,7 +95,7 @@
                     </button>
 
                     <ul class="navbar-nav ml-auto">
-
+  <div class="topbar-divider d-none d-sm-block"></div>
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
@@ -126,13 +126,37 @@
                          {% csrf_token %}
                      {% if user.is_authenticated %}
              
-              {% comment %} {% if request.user.is_superuser %} {% endcomment %}
+              {% if request.user.is_superuser %}
+                
+                  <!-- แอดมิน -->
+              {% comment %} <li class="nav-item submenu dropdown"> {% endcomment %}
+              
+             {% comment %} <div class="topbar-divider d-none d-sm-block"></div> {% endcomment %}
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{user.farmer_name}}  </span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{user.username}}  </span>
                                 <img class="img-profile rounded-circle"
-                                    src="{{user.image.url}}">
+                                    src="{% static 'api/img/undraw_profile.svg'%}">
                             </a>
+             {% else %}
+
+              {% comment %} <li class="nav-item submenu dropdown"> {% endcomment %}
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                aria-expanded="false">
+               <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{user.username}}  </span>
+                <!-- user.avatar.url -->
+               
+                <!-- <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{adminn.username}}  </span> -->
+                <img class="img-profile rounded-circle"
+                src="{{user.image.url}} " >
+            </a>    
+
+            {% endif %}
+            
+           
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
@@ -140,10 +164,12 @@
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                {% if request.user.is_superuser %}
+                                <a class="dropdown-item" href="/ownerShowaddWork">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
                                 </a>
+                                {% endif %}
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Activity Log
@@ -159,8 +185,8 @@
 
                         {% comment %} {% endif %} {% endcomment %}
                     </ul>
-
-                    {% else %}
+ {% comment %} {% endif %} {% endcomment %}
+                     {% else %}
              
                   <li class="nav-item"><a class="nav-link" href="/login">เข้าสู่ระบบ</a></li>
                   <li class="nav-item"><a class="nav-link" href="/register">สมัครสมาชิก</a></li>

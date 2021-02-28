@@ -1,0 +1,51 @@
+{% extends 'api/base.html' %}
+
+{% block content %}
+
+<div id="content-wrapper">
+
+  <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <!-- <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+              <a href="#">CRUD</a>
+          </li>
+          <li class="breadcrumb-item active">Add</li> -->
+      </ol>
+      <div class="card mb-3">
+          <div class="card-header">
+              <i class="fas fa-table"></i>
+              โปรไฟล์
+              <a  class="btn btn-sm btn-warning" href="/editProfile/{{farmerWork.id}}"" style="padding: 8px; float: right;  color: white;" > <span class="fa fa-edit"></span> Edit</a>
+          </div>
+          <div class="card-body">
+            <form class="form-horizontal" action="/profile" method="POST"  enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="form-group">
+                  <div class="form-row">
+                      <div class="col-md-12">
+                          <div class="form-label-group">
+                           <br>
+                           {% comment %} <center> <img src="/media/{{farmer.image}}" width="200" height="200"> </center> <br> {% endcomment %}
+                           <center><label for="profile"><b>พันธุ์ข้าว : </b>{{farmerWork.rice}}</label> </center> 
+                           <center><label for="profile"><b>ลักษณะต้นข้าว : </b>{{ farmerWork.rice_type }}</label> </center>
+                           <center><label for="profile"><b>จำนวนไร่ที่ต้องการเก็บเกี่ยว : </b>{{ farmerWork.area }}</label> </center>   
+                           <center><label for="profile"><b>รายละเอียด : </b>{{farmerWork.workDetail}}</label> </center>
+                           <center><label for="profile"><b>สถานะงาน : </b>{{farmerWork.price}}</label> </center> 
+                           <center><label for="profile"><b>ราคา : </b>{{farmerWork.price}}</label> </center>
+                           <center><label for="profile"><b>สถานะการชำระเงิน : </b>{{farmerWork.price}}</label> </center>  
+
+                           
+                                               
+                          </div>
+                      </div>
+                   
+                  </div>
+              </div>
+              
+          </form>
+          </div>
+      </div>
+  </div>
+</div>
+{% endblock %}

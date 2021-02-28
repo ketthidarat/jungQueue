@@ -9,7 +9,7 @@ class Farmer(AbstractUser):
     # farmer_id = models.AutoField(primary_key=True)
     farmer_name = models.CharField(max_length=1000, verbose_name = 'ชื่อ-สกุล')
     # farmer_lastname = models.CharField(max_length=1000)
-    image = models.ImageField(upload_to='images/farmer',verbose_name = 'รูปโปรไฟล์')
+    image = models.ImageField(upload_to='images/farmer', default='images/farmer/admin.png',verbose_name = 'รูปโปรไฟล์')
     address = models.CharField(max_length=1000, verbose_name = 'ที่อยู่')
     phone = models.CharField(max_length=1000, verbose_name = 'เบอร์โทรศัพท์')
     email = models.CharField(max_length=1000)
@@ -17,7 +17,7 @@ class Farmer(AbstractUser):
     password = models.CharField(max_length=1000)
     
     def __str__(self):
-        return f'{self.farmer_name} '
+        return f'{self.username} '
 
     class Meta:
         verbose_name = 'เกษตรกร'
@@ -98,10 +98,6 @@ class Money_status(models.Model):
 class Work(models.Model):
     # id = models.AutoField(primary_key=True) 
     farmer_name = models.ForeignKey(Farmer, on_delete=models.CASCADE, null=True,  verbose_name='เกษตรกร')
-    # farmer_lastname = models.ForeignKey(Farmer, on_delete=models.CASCADE)
-    # tractor = models.ForeignKey(Tractor, on_delete=models.CASCADE, null=True,  verbose_name='รถเกี่ยวนวดข้าว')
-    # work_id = models.AutoField(primary_key=True)
-    # work_status = models.CharField(max_length=1000)
     lat = models.CharField(max_length=1000, verbose_name='ละติจูด')
     lng = models.CharField(max_length=1000, verbose_name='ลองติจูด')
     area = models.CharField(max_length=1000, verbose_name='พื้นที่ (ไร่)')
