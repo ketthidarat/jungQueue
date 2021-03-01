@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% extends 'api/ownerBase.html' %}
+{% extends 'api/base.html' %}
 {% block content %}
 
 <div id="content-wrapper">
@@ -52,8 +52,10 @@
                           <!-- <th>Created At</th> -->
                           {% endcomment %}
                           {% comment %} <th>เพิ่ม</th>  {% endcomment %}
+                          {% if request.user.is_superuser %}
                           <th>แก้ไข</th> 
                           <th>ลบ</th> 
+                          {% endif %}
                       </tr>
                       </thead>
                       <tbody>
@@ -73,11 +75,13 @@
                                   <a class="btn btn-sm btn-warning" href="/addShowTractor/{{addTractor.id}}"> <span class="fa fa-edit"></span> Add</a>
                                   
                               </td> {% endcomment %}
+                              {% if request.user.is_superuser %}
                               <td>                                   
                                   <a class="btn btn-sm btn-warning" href="/editShowaddTractor/{{ownerShowaddTractor.id}}"> <span class="fa fa-edit"></span> Edit</a>
                                   
                               </td>
                               <td><a class="btn btn-sm btn-danger" href="/deleteShowaddTractor/{{ownerShowaddTractor.id}}"><span class="fa fa-trash"></span> Delete</a></td>
+                          {% endif %}
                           </tr>
                           
                       {% endfor %}

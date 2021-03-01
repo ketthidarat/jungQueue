@@ -41,7 +41,9 @@
                 </div>
                 <div class="sidebar-brand-text mx-3">Ket Tractor</div>
             </a>
-
+{% comment %}{% if request.user.is_superuser %}
+        <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
+{% endif %} {% endcomment %} 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
@@ -70,8 +72,16 @@
              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Components:</h6> -->
-                        <a class="collapse-item" href="/showaddTractor">ข้อมูลรถเกี่ยวนวดข้าว</a>
+                        <a class="collapse-item" href="/ownerShowaddTractor">ข้อมูลรถเกี่ยวนวดข้าว</a>
                         <a class="collapse-item" href="/cal/calendar">ตารางงานรถเกี่ยวนวดข้าว</a>
+                       
+                        <!-- <h6 class="collapse-header">Custom Components:</h6> -->
+                        {% if request.user.is_superuser %}
+                        {% comment %} <a class="collapse-item" href="/ownerShowaddTractor">แก้ไขข้อมูลรถเกี่ยวนวดข้าว</a> {% endcomment %}
+                        <a class="collapse-item" href="/addTractor">เพิ่มข้อมูลรถเกี่ยวนวดข้าว</a>
+                         {% endif %}
+                        
+                 
                         
                     </div>
                 </div>
@@ -146,7 +156,7 @@
               {% comment %} <li class="nav-item submenu dropdown"> {% endcomment %}
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                 aria-expanded="false">
-               <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{user.username}}  </span>
+               <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{user.farmer_name}}  </span>
                 <!-- user.avatar.url -->
                
                 <!-- <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{adminn.username}}  </span> -->

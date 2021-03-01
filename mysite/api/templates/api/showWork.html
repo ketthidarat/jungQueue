@@ -12,7 +12,7 @@
               รายการ
           </div>
 
-       
+       {% if request.user.is_superuser %}
           <div class="card-body">
             
                <div class="table-responsive">
@@ -28,12 +28,10 @@
                           <th>ราคา</th>
                           <th>สถานะการชำระเงิน</th>
                           <th>สถานะงาน</th>
-                          {% comment %} <th>ยกเลิก</th> {% endcomment %}
-                          {% comment %} <th>รูป</th>
-                          <th>จำนวน</th>
-                          <!-- <th>Created At</th> -->{% endcomment %}
-                          {% comment %} <th>การชำระเงิน</th>  {% endcomment %}
-                         {% comment %}  <th>ลบ</th>  {% endcomment %}
+                          
+                          <th>แก้ไข</th> 
+                          <th>ลบ</th>
+                         {% comment %} {% endif %} {% endcomment %}
                       </tr>
                       </thead>
                       <tbody>
@@ -44,21 +42,25 @@
                             <td>{{ showWork.id }}</td>
                             <td>{{ showWork.farmer_name }}</td>
                               <td>{{ showWork.area }}</td>
-                              {% comment %} <td>{{ showWork.rice_type }}</td> {% endcomment %}
                               <td>{{ showWork.rice_type }}</td>
                               <td>{{ showWork.rice }}</td>
                               <td>{{ showWork.workDetail }}</td>
                               <td>{{ showWork.price }}</td>
                               <td>{{ showWork.money_status }}</td>
                               <td>{{ showWork.work_status }}</td>
-                              {% comment %} <td><a class="btn btn-sm btn-danger" href="/deleteShowWork/{{showWork.id}}"><span class="fa fa-trash"></span> ยกเลิก</a></td> {% endcomment %}
-                            
+                             {% comment %} {% if request.user.is_superuser %} {% endcomment %}
+                            <td>                                   
+                                  <a class="btn btn-sm btn-warning" href="/editShowaddWork/{{showWork.id}}"> <span class="fa fa-edit"></span> Edit</a>
+                                  
+                              </td>
+                              <td><a class="btn btn-sm btn-danger" href="/deleteShowaddWork/{{showWork.id}}"><span class="fa fa-trash"></span> Delete</a></td>
+                         
+                          </tr>
                       {% endfor %}
-                      {% comment %} <td>{{ showWork.rice_type }}</td> {% endcomment %}
                       </tbody>
-                  
+                  {% endif %}
                     </table>
-                   
+                    
                 </div>
                 </div>
                 </div>

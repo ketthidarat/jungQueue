@@ -1,4 +1,4 @@
-{% extends 'api/ownerBase.html' %}
+{% extends 'api/base.html' %}
 
 {% block title %}
 Event
@@ -9,7 +9,6 @@ Event
 <div class="clearfix">
   <a class="btn btn-info left" href="/cal/calendar"> Calendar </a>
 </div>
-<center><h1> เฉพาะ Admin เท่านั้น </h1>
 
  {% if request.user.is_superuser %}
 {% if form.errors %}
