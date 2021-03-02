@@ -79,12 +79,16 @@
                         {% if request.user.is_superuser %}
                         {% comment %} <a class="collapse-item" href="/ownerShowaddTractor">แก้ไขข้อมูลรถเกี่ยวนวดข้าว</a> {% endcomment %}
                         <a class="collapse-item" href="/addTractor">เพิ่มข้อมูลรถเกี่ยวนวดข้าว</a>
-                         {% endif %}
                         
-                 
-                        
-                    </div>
+                   </div>
                 </div>
+                <hr class="sidebar-divider">
+             <li class="nav-item active">
+                <a class="nav-link" href="/farmerWork">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>รายละเอียดจองของเกษตรกร</span></a>
+            </li>
+             {% endif %}
             <!-- Divider -->
             <hr class="sidebar-divider">
         </ul>

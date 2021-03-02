@@ -141,14 +141,11 @@ def editShowaddWork(request, id=0):
         'rice_type': rice_type,
         'money_status': money_status,
         'work_status': work_status,
-        # 'product_statuss': product_statuss,
     })
 
 
 def deleteShowaddWork(req, id=0):
     work = Work.objects.get(pk=id)
-    # product_types = Product_Type.objects.all()
-    # product_statuss = Product_Status.objects.all()
     work.delete()
     return HttpResponseRedirect(req.META.get('HTTP_REFERER'))
 
@@ -158,23 +155,41 @@ def ownerShowaddWork(req):
         'ownerShowaddWork': ownerShowaddWork,
     })
 
-def showWork(request):
-    works = Work.objects.filter(farmer_name = request.user) 
-    
-    return render(request, 'api/showWork.html', {
-        'works': works
-    })
-
 def farmerWork(request):
     farmerWork = Work.objects.all() 
-    user = Farmer.objects.get(username=request.user.username) 
+    # user = Farmer.objects.get(username=request.user.username) 
     # farmer = Farmer.objects.get(username=req.user.username)
     # user = request.user
     # user = request.user
     
     return render(request, 'api/farmerWork.html', {
         'farmerWork': farmerWork,
-        'user': user,
+        # 'user': user,
+    })
+    
+def showWork(request):
+    works = Work.objects.filter(farmer_name = request.user) 
+    return render(request, 'api/showWork.html', {
+        'works': works
+    })
+
+# def showFarmerWork(request):
+#     works = Work.objects.filterWork.objects.all()  
+    
+#     return render(request, 'api/showWork.html', {
+#         'works': works
+#     })
+
+def farmerWork(request):
+    farmerWork = Work.objects.all() 
+    # user = Farmer.objects.get(username=request.user.username) 
+    # farmer = Farmer.objects.get(username=req.user.username)
+    # user = request.user
+    # user = request.user
+    
+    return render(request, 'api/farmerWork.html', {
+        'farmerWork': farmerWork,
+        # 'user': user,
     })
 
 def deleteShowWork(req, id=0):
