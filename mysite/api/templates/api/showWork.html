@@ -12,7 +12,6 @@
               รายการ
           </div>
 
-       {% if request.user.is_superuser %}
           <div class="card-body">
             
                <div class="table-responsive">
@@ -35,30 +34,31 @@
                       </tr>
                       </thead>
                       <tbody>
-                        {% csrf_token %} 
-                      {% for showWork in showWork %}
+                      {% for work in works %}
                     
                           <tr>
-                            <td>{{ showWork.id }}</td>
-                            <td>{{ showWork.farmer_name }}</td>
-                              <td>{{ showWork.area }}</td>
-                              <td>{{ showWork.rice_type }}</td>
-                              <td>{{ showWork.rice }}</td>
-                              <td>{{ showWork.workDetail }}</td>
-                              <td>{{ showWork.price }}</td>
-                              <td>{{ showWork.money_status }}</td>
-                              <td>{{ showWork.work_status }}</td>
+                            <td>{{ work.id }}</td>
+                            <td>{{ work.farmer_name }}</td>
+                              <td>{{ work.area }}</td>
+                              <td>{{ work.rice_type }}</td>
+                              <td>{{ work.rice }}</td>
+                              <td>{{ work.workDetail }}</td>
+                              <td>{{ work.price }}</td>
+                              <td>{{ work.money_status }}</td>
+                              <td>{{ work.work_status }}</td>
                              {% comment %} {% if request.user.is_superuser %} {% endcomment %}
                             <td>                                   
-                                  <a class="btn btn-sm btn-warning" href="/editShowaddWork/{{showWork.id}}"> <span class="fa fa-edit"></span> Edit</a>
+                                  <a class="btn btn-sm btn-warning" href="/editShowaddWork/{{work.id}}"> <span class="fa fa-edit"></span> Edit</a>
                                   
                               </td>
-                              <td><a class="btn btn-sm btn-danger" href="/deleteShowaddWork/{{showWork.id}}"><span class="fa fa-trash"></span> Delete</a></td>
+                              <td><a class="btn btn-sm btn-danger" href="/deleteShowaddWork/{{work.id}}"><span class="fa fa-trash"></span> Delete</a></td>
                          
                           </tr>
+
                       {% endfor %}
+
                       </tbody>
-                  {% endif %}
+
                     </table>
                     
                 </div>

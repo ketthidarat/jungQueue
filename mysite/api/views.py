@@ -82,14 +82,21 @@ def login(req):
 
 def addWork(req):
     # user = Farmer.objects.get(username=request.user.username) 
+    print(req.user)
     if req.method == 'POST':
         
         print(req.POST)
-        form = FarmerWorkForm(req.POST ,req.FILES)
+        form = FarmerWorkForm(req.POST)# ,req.FILES)
         if form.is_valid():
-            form.save()
-            # print(form)
-
+            #form.instance.farmer_name = req.user
+            #form.save()
+            work = Work()
+            work.farmer_name = req.user
+            work.area = req.POST['area']
+            work.rice_type = Rice_type.objects.get(pk=req.POST['rice_type'])
+            work.rice = req.POST['rice']
+            work.workDetail = req.POST['workDetail']
+            work.save()
             return redirect('/addWork')
     else:
         form = FarmerWorkForm()
@@ -152,15 +159,10 @@ def ownerShowaddWork(req):
     })
 
 def showWork(request):
-    showWork = Work.objects.all() 
-    user = Farmer.objects.get(username=request.user.username) 
-    # farmer = Farmer.objects.get(username=req.user.username)
-    # user = request.user
-    # user = request.user
+    works = Work.objects.filter(farmer_name = request.user) 
     
     return render(request, 'api/showWork.html', {
-        'showWork': showWork,
-        'user': user,
+        'works': works
     })
 
 def farmerWork(request):
