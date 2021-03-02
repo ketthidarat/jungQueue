@@ -24,9 +24,7 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.hashers import make_password
 
 def index(req):
-    # farmer = Farmer.objects.get(username=req.user.username)
     return render(req, 'api/index.html', {
-    # 'farmer': farmer,
     })
 
 def ownerBase(req):
@@ -38,14 +36,11 @@ def profile(req):
         'farmer': farmer,
         })
 
-# def farmerWork(req):
-#     farmerWork =  Work.objects.all() 
-#     return render(req, 'api/farmerWork.html', {
-#         'farmerWork': farmerWork,
-#         })
-
 def schedule(req):
     return render(req, 'api/schedule.html')
+
+def profileAdmin(req):
+    return render(req, 'api/profileAdmin.html')
 
 def register(req):
     print('register()')
@@ -64,7 +59,6 @@ def register(req):
             print(form.errors)
     return render(req, 'api/register.html', { 
         'form': form,
-       
         })
 
 def login(req):
@@ -84,12 +78,10 @@ def addWork(req):
     # user = Farmer.objects.get(username=request.user.username) 
     print(req.user)
     if req.method == 'POST':
-        
         print(req.POST)
         form = FarmerWorkForm(req.POST)# ,req.FILES)
         if form.is_valid():
-            #form.instance.farmer_name = req.user
-            #form.save()
+          
             work = Work()
             work.farmer_name = req.user
             work.area = req.POST['area']
@@ -104,14 +96,41 @@ def addWork(req):
                   {
                       'form': form,
                       'rice_type': Rice_type.objects.all(),
-                    #   'user': Farmer.objects.all(),
-                    #   'workt_statuss': workt_Status.objects.all(),
+                   
                   })
 
 def logout(req):
     # if req.adminn.is_/authenticated:
     auth_logout(req)
     return redirect('/')
+
+def editShowWork(request, id=0):
+    print(f'/editShowWork id={id}')
+    work = Work.objects.get(pk=id)
+    rice_type = Rice_type.objects.all()
+    money_status = Money_status.objects.all()
+    work_status = Work_status.objects.all()
+    if request.method == 'POST':
+        print(request.POST)
+        form = FarmerWorkForm(request.POST, request.FILES, instance=work)
+        print(form.is_valid())
+        if form.is_valid():
+            form.save()
+            work = form.instance
+            # print(work)
+
+            # print("==== form.errors ====")
+            # print(form.errors)
+    else:
+        form = FarmerWorkForm(work)
+       
+    return render(request, 'api/editShowWork.html' ,{ 
+        'form': form,
+        'work': work,
+        'rice_type': rice_type,
+        'money_status': money_status,
+        'work_status': work_status,
+    })
     
 def editShowaddWork(request, id=0):
     print(f'/editShowAddWork id={id}')
@@ -126,12 +145,10 @@ def editShowaddWork(request, id=0):
         if form.is_valid():
             form.save()
             work = form.instance
-            print(work)
-            # messages.success(request, 'Member was created successfully!')
-            # return redirect('/editproduct/{<int:id>/')
-        else:
-            print("==== form.errors ====")
-            print(form.errors)
+            # print(work)
+
+            # print("==== form.errors ====")
+            # print(form.errors)
     else:
         form = TractorWorkForm(work)
        
@@ -142,7 +159,6 @@ def editShowaddWork(request, id=0):
         'money_status': money_status,
         'work_status': work_status,
     })
-
 
 def deleteShowaddWork(req, id=0):
     work = Work.objects.get(pk=id)
@@ -157,39 +173,24 @@ def ownerShowaddWork(req):
 
 def farmerWork(request):
     farmerWork = Work.objects.all() 
-    # user = Farmer.objects.get(username=request.user.username) 
-    # farmer = Farmer.objects.get(username=req.user.username)
-    # user = request.user
-    # user = request.user
     
     return render(request, 'api/farmerWork.html', {
         'farmerWork': farmerWork,
         # 'user': user,
     })
-    
+
 def showWork(request):
     works = Work.objects.filter(farmer_name = request.user) 
     return render(request, 'api/showWork.html', {
         'works': works
     })
 
-# def showFarmerWork(request):
-#     works = Work.objects.filterWork.objects.all()  
-    
-#     return render(request, 'api/showWork.html', {
-#         'works': works
-#     })
-
 def farmerWork(request):
     farmerWork = Work.objects.all() 
-    # user = Farmer.objects.get(username=request.user.username) 
-    # farmer = Farmer.objects.get(username=req.user.username)
-    # user = request.user
-    # user = request.user
     
     return render(request, 'api/farmerWork.html', {
         'farmerWork': farmerWork,
-        # 'user': user,
+
     })
 
 def deleteShowWork(req, id=0):
@@ -216,6 +217,7 @@ def addTractor(request):
                       'form': form,
                       'tractor_status': Tractor_status.objects.all(),
                   }) 
+
 def showaddTractor(req):
     showaddTractor = AddTractor.objects.all() 
     return render(req, 'api/showaddTractor.html', {
@@ -228,7 +230,6 @@ def ownerShowaddTractor(req):
         'ownerShowaddTractor': ownerShowaddTractor,
     })
 
-
 def editShowaddTractor(request, id=0):
     addTractor = AddTractor.objects.get(pk=id)
     tractor_status = Tractor_status.objects.all()
@@ -238,8 +239,7 @@ def editShowaddTractor(request, id=0):
         if form.is_valid():
             
             form.save()
-            # messages.success(request, 'Member was created successfully!')
-            # return redirect('/editproduct/{<int:id>/')
+
         else:
             print("==== form.errors ====")
             print(form.errors)
@@ -250,8 +250,7 @@ def editShowaddTractor(request, id=0):
         'form': form,
         'addTractor': addTractor,
         'tractor_status': tractor_status,
-        # 'product_types': product_types,
-        # 'product_statuss': product_statuss,
+
     })
 
 def deleteShowaddTractor(req, id=0):
@@ -265,9 +264,7 @@ def editProfile(request, id=0):
     if request.method == 'POST':
         form = EditFarmerForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
-            
             form.save()
-           
         else:
             print("==== form.errors ====")
             print(form.errors)
@@ -278,7 +275,6 @@ def editProfile(request, id=0):
         'form': form,
         'profile': profile,
     })
-
 
 # def productpage(request):
 #     # list all users.

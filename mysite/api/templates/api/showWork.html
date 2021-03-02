@@ -22,8 +22,9 @@
                         <th>ชื่อ</th>
                           <th>จำนวนไร่ที่ต้องการเก็บเกี่ยว</th>
                           <th>ลักษณะต้นข้าว</th>
-                          <th>รายละเอียด</th>
                           <th>พันธุ์ข้าว</th>
+                          <th>รายละเอียด</th>
+                          
                           <th>ราคา</th>
                           <th>สถานะการชำระเงิน</th>
                           <th>สถานะงาน</th>
@@ -48,10 +49,10 @@
                               <td>{{ work.work_status }}</td>
                              {% comment %} {% if request.user.is_superuser %} {% endcomment %}
                             <td>                                   
-                                  <a class="btn btn-sm btn-warning" href="/editShowaddWork/{{work.id}}"> <span class="fa fa-edit"></span> Edit</a>
+                                  <a class="btn btn-sm btn-warning" href="/editShowWork/{{work.id}}"> <span class="fa fa-edit"></span> Edit</a>
                                   
                               </td>
-                              <td><a class="btn btn-sm btn-danger" href="/deleteShowaddWork/{{work.id}}"><span class="fa fa-trash"></span> Delete</a></td>
+                              <td><a class="btn btn-sm btn-danger" href="/deleteShowWork/{{work.id}}"><span class="fa fa-trash"></span> Delete</a></td>
                          
                           </tr>
 
