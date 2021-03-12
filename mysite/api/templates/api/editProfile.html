@@ -13,6 +13,8 @@
               <a  class="btn btn-sm btn-success" href="/profile" style="padding: 8px; float: right; background-color: rgb(53, 122, 155); color: white;">Back</a>
           </div>
           <div class="card-body">
+            <form class="form-horizontal" action="/editProfile/{{ profile.id }}/" method="POST"  enctype="multipart/form-data">
+            {% csrf_token %}
             {% for message in messages %}
             <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
                 {{ message }}

@@ -114,6 +114,11 @@ class Work(models.Model):
     money_status = models.ForeignKey(Money_status, on_delete=models.CASCADE, default=1,null=True, verbose_name='สถานะการชำระเงิน') # ให้นิยามเพิ่มเติม
     work_status = models.ForeignKey(Work_status, on_delete=models.CASCADE, default=1,null=True, verbose_name='สถานะงาน') # รับ ไม่รับ จ่าย
 
+    @property
+    def get_html_url(self):
+        url = reverse('api:addWork', args=(self.id,))
+        return f'<a href="{url}"> {self.farmer_name} </a>'
+
     def __str__(self):
          return f'{self.area} {self.rice_type} {self.rice}'
 

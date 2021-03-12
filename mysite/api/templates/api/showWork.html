@@ -24,7 +24,7 @@
                           <th>ลักษณะต้นข้าว</th>
                           <th>พันธุ์ข้าว</th>
                           <th>รายละเอียด</th>
-                          
+                          <th>วันที่เก็บเกี่ยว</th>
                           <th>ราคา</th>
                           <th>สถานะการชำระเงิน</th>
                           <th>สถานะงาน</th>
@@ -39,11 +39,12 @@
                     
                           <tr>
                             <td>{{ work.id }}</td>
-                            <td>{{ work.farmer_name }}</td>
+                            <td>{{ work.farmer_name }} </td>
                               <td>{{ work.area }}</td>
                               <td>{{ work.rice_type }}</td>
                               <td>{{ work.rice }}</td>
-                              <td>{{ work.workDetail }}</td>
+                               <td>{{ work.workDetail }}</td>
+                               <td>{{ work.start_time }}</td>
                               <td>{{ work.price }}</td>
                               <td>{{ work.money_status }}</td>
                               <td>{{ work.work_status }}</td>

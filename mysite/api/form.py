@@ -18,13 +18,13 @@ class EditFarmerForm(forms.ModelForm):
 
     class Meta:
         model = Farmer 
-        fields = [ 'farmer_name' , 'address', 'phone','email' ]
+        fields = [ 'farmer_name' ,'image',  'address', 'phone','email' ]
 
 class TractorWorkForm(forms.ModelForm):
 
     class Meta:
         model = Work
-        fields = [ 'price', 'money_status', 'work_status' ]
+        fields = [ 'start_time', 'price', 'money_status', 'work_status' ]
 
 class FarmerWorkForm(forms.ModelForm):
     class Meta:
@@ -38,7 +38,6 @@ class TractorForm(forms.ModelForm):
         model = AddTractor
         fields = '__all__'
 
-        # fields = [  'product_name','product_price', 'product_detail', 'product_img','product_type','product_status','product_amount' ]
 
 class EventForm(forms.ModelForm):
   class Meta:
@@ -55,19 +54,4 @@ class EventForm(forms.ModelForm):
     # input_formats parses HTML5 datetime-local input to datetime field
     self.fields['start_time'].input_formats = ('%Y-%m-%dT%H:%M',)
     self.fields['end_time'].input_formats = ('%Y-%m-%dT%H:%M',)
-    
-# class MechanicForm(forms.ModelForm):
-#     class Meta:
-#         model = Mechanic
-#         fields = '__all__'
-
-
-# class Order_ProductForm(forms.ModelForm):
-#     class Meta:
-#         model = Order_Product
-#         fields = '__all__'
-
-# class StorckForm(forms.ModelForm):
-#     class Meta:
-#         model = Storck
-#         fields = '__all__'
+  

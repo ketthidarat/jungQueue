@@ -23,6 +23,9 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.hashers import make_password
 
+# def line(req):
+#     return render(req, 'api/line.html')
+
 def index(req):
     return render(req, 'api/index.html', {
     })
@@ -75,29 +78,37 @@ def login(req):
     return render(req, 'api/login.html')
 
 def addWork(req):
-    # user = Farmer.objects.get(username=request.user.username) 
-    print(req.user)
-    if req.method == 'POST':
-        print(req.POST)
-        form = FarmerWorkForm(req.POST)# ,req.FILES)
-        if form.is_valid():
-          
-            work = Work()
-            work.farmer_name = req.user
-            work.area = req.POST['area']
-            work.rice_type = Rice_type.objects.get(pk=req.POST['rice_type'])
-            work.rice = req.POST['rice']
-            work.workDetail = req.POST['workDetail']
-            work.save()
+    # if req.method == 'POST':
+    #     import requests
+    #     url = 'https://notify-api.line.me/api/notify'
+    #     token = 'aujNg0manEcga69uaifUSyoERM5SCVGssRgnR1PJ6kU'
+    #     headers = {'content-type':'application/x-www-form-urlencoded','Authorization':'Bearer '+token}
+        
+        if req.method == 'POST':
+            # import requests
+            # url = 'https://notify-api.line.me/api/notify'
+            # token = 'aujNg0manEcga69uaifUSyoERM5SCVGssRgnR1PJ6kU'
+            # headers = {'content-type':'application/x-www-form-urlencoded','Authorization':'Bearer '+token}
+            print(req.POST)
+            form = FarmerWorkForm(req.POST)# ,req.FILES)
+            if form.is_valid():
+                work = Work()
+                work.farmer_name = req.user
+                work.area = req.POST['area']
+                work.rice_type = Rice_type.objects.get(pk=req.POST['rice_type'])
+                work.rice = req.POST['rice']
+                work.workDetail = req.POST['workDetail']
+                # msg = "จองคิว"
+                # r = requests.post(url, headers=headers , data = {'message':msg})
+                work.save()
             return redirect('/addWork')
-    else:
-        form = FarmerWorkForm()
-    return render(req, 'api/addWork.html',
-                  {
-                      'form': form,
-                      'rice_type': Rice_type.objects.all(),
-                   
-                  })
+        else:
+            form = FarmerWorkForm()
+        return render(req, 'api/addWork.html',
+                    {
+                        'form': form,
+                        'rice_type': Rice_type.objects.all(),
+                    })
 
 def logout(req):
     # if req.adminn.is_/authenticated:
@@ -276,50 +287,6 @@ def editProfile(request, id=0):
         'profile': profile,
     })
 
-# def productpage(request):
-#     # list all users.
-#     products = Product.objects.all()
-#     page_number = request.GET.get('page', 1)
-#     paginate_result = do_paginate(products, page_number)
-#     product = paginate_result[0]
-#     paginator = paginate_result[1]
-#     base_url = '/api/product/?'
-#     users = Users.objects.get(username=request.user.username)
-#     return render(request, 'api/product.html',
-#                       {'products': products, 'paginator' : paginator, 'base_url': base_url ,'users':users})
-# #ค้นหาสินค้า
-# def product(request):
-#     product_name = request.POST.get('product_name', '').strip()
-#     if len(product_name) == 0:
-#         product_name = request.GET.get('product_name', '').strip()
-#     product = Product.objects.filter(product_name__contains=product_name)
-#     page_number = request.GET.get('page', 1)
-#     paginate_result = do_paginate(product, page_number)
-#     product = paginate_result[0]
-#     paginator = paginate_result[1]
-#     base_url = '/api/user_search/?product_name=' + product_name + "&"
-#     users = Users.objects.get(username=request.user.username)
-#     return render(request, 'api/product.html',
-#                       {'product': product, 'paginator' : paginator, 'base_url': base_url, 'search_product_name': product_name,'users':users})
-
-# def do_paginate(data_list, page_number):
-#     ret_data_list = data_list
-#     #  หน้า มี 5รายการ
-#     result_per_page = 5
-#     # build the paginator object.
-#     paginator = Paginator(data_list, result_per_page)
-#     try:
-#         # get data list for the specified page_number.
-#         ret_data_list = paginator.page(page_number)
-#     except EmptyPage:
-#         # get the lat page data if the page_number is bigger than last page number.
-#         ret_data_list = paginator.page(paginator.num_pages)
-#     except PageNotAnInteger:
-#         # if the page_number is not an integer then return the first page data.
-#         ret_data_list = paginator.page(1)
-#     return [ret_data_list, paginator]
-
-
 class CalendarView(generic.ListView):
     model = Event
     template_name = 'api/calendar.html'
@@ -365,8 +332,6 @@ def event(request, event_id=None):
         form.save()
         return HttpResponseRedirect(reverse('api:calendar'))
     return render(request, 'api/event.html', {'form': form})
-
-
 
 
 

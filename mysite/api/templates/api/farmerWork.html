@@ -10,6 +10,7 @@
           <div class="card-header">
               <i class="fas fa-table"></i>
               รายการ
+               {% comment %} <a  class="btn btn-sm btn-primary" href="/cal/calendar" style="padding: 8px; float: right;  color: white;" > <span class="fa fa-edit"></span> เพิ่มตารางงาน</a> {% endcomment %}
           </div>
 
           <div class="card-body">
@@ -24,14 +25,14 @@
                           <th>ลักษณะต้นข้าว</th>
                           <th>พันธุ์ข้าว</th>
                           <th>รายละเอียด</th>
-                          
+                          <th>วันที่เก็บเกี่ยว</th>
                           <th>ราคา</th>
                           <th>สถานะการชำระเงิน</th>
                           <th>สถานะงาน</th>
                           
                           <th>แก้ไข</th> 
                           <th>ลบ</th>
-                         {% comment %} {% endif %} {% endcomment %}
+                         
                       </tr>
                       </thead>
                       <tbody>
@@ -39,15 +40,18 @@
                     
                           <tr>
                             <td>{{ work.id }}</td>
-                            <td>{{ work.farmer_name }}</td>
+                            <td>
+                            <a href="/profile/{{ work.farmer_name }}">{{ work.farmer_name }}</a>
+                            </td> 
                               <td>{{ work.area }}</td>
                               <td>{{ work.rice_type }}</td>
                               <td>{{ work.rice }}</td>
                               <td>{{ work.workDetail }}</td>
+                              <td>{{ work.start_time }}</td>
                               <td>{{ work.price }}</td>
                               <td>{{ work.money_status }}</td>
                               <td>{{ work.work_status }}</td>
-                             {% comment %} {% if request.user.is_superuser %} {% endcomment %}
+                             
                             <td>                                   
                                   <a class="btn btn-sm btn-warning" href="/editShowaddWork/{{work.id}}"> <span class="fa fa-edit"></span> Edit</a>
                                   

@@ -5,13 +5,6 @@
 <div id="content-wrapper">
 
   <div class="container-fluid">
-      <!-- Breadcrumbs-->
-      <!-- <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-              <a href="#">CRUD</a>
-          </li>
-          <li class="breadcrumb-item active">Add</li>
-      </ol> -->
       <div class="card mb-3">
           <div class="card-header">
               <i class="fas fa-table"></i>
@@ -26,6 +19,18 @@
         {% endfor %}
             <form class="form-horizontal" action="/editShowaddWork/{{ work.id }}/" method="POST"  enctype="multipart/form-data">
               {% csrf_token %}
+              <div class="form-group">
+                  <div class="form-row">
+                      <div class="col-md-9">
+                          <div class="form-label-group">
+                            <label for="work.farmer_name"><b>ชื่อ</b></label><br>
+                            <label name="work.farmer_name" value="{{ work.farmer_name }}"  required><h3>{{ work.farmer_name }}</h3></label>
+                            {% comment %} <input type="text" class="form-control" name="work.farmer_name" value="{{ work.farmer_name }}"  required> {% endcomment %}
+                          </div>
+                      </div>
+                   
+                  </div>
+              </div>
               <div class="form-group">
                   <div class="form-row">
                       <div class="col-md-9">
@@ -71,8 +76,7 @@
                    
                   </div>
               </div>
-  
-            <div class="form-group">
+              <div class="form-group">
               <div class="form-row">
                   <div class="col-md-9">
                       <div class="form-label-group">
@@ -86,6 +90,18 @@
                
               </div>
           </div>
+              <div class="form-group">
+                  <div class="form-row">
+                      <div class="col-md-9">
+                          <div class="form-label-group">
+                            <label for="start_time"><b>วันที่เก็บเกี่ยว</b></label>
+                            <input type="date" id="start" name="start_time" value="{{ work.start_time }}" required>
+                             </div>
+                      </div>
+                   
+                  </div>
+              </div> 
+            
 
            <div class="form-group">
                   <div class="form-row">
@@ -145,8 +161,9 @@
 
 
 
-            <button class="btn btn-primary btn-block" type="submit">Submit &nbsp;&nbsp;&nbsp;<span></span></button>
-          </form>
+            <button class="btn btn-primary btn-block" type="submit" >Submit &nbsp;&nbsp;&nbsp;<span></span></button>
+         
+       </form>
           </div>
       </div>
   </div>

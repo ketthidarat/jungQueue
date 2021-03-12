@@ -5,18 +5,15 @@
 <div id="content-wrapper">
 
   <div class="container-fluid">
-      <!-- Breadcrumbs-->
-      <!-- <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-              <a href="#">CRUD</a>
-          </li>
-          <li class="breadcrumb-item active">Add</li> -->
+
       </ol>
       <div class="card mb-3">
           <div class="card-header">
               <i class="fas fa-table"></i>
               โปรไฟล์
+              {% if request.user.is_superuser %}
               <a  class="btn btn-sm btn-warning" href="/editProfile/{{farmer.id}}"" style="padding: 8px; float: right;  color: white;" > <span class="fa fa-edit"></span> Edit</a>
+          {% endif %}
           </div>
           <div class="card-body">
             <form class="form-horizontal" action="/profile" method="POST"  enctype="multipart/form-data">

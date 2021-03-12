@@ -147,25 +147,7 @@
                         <li class="nav-item dropdown no-arrow">
                          {% csrf_token %}
                      {% if user.is_authenticated %}
-             
-              {% if request.user.is_superuser %}
-                
-                  <!-- แอดมิน -->
-              {% comment %} <li class="nav-item submenu dropdown"> {% endcomment %}
-              
-             {% comment %} <div class="topbar-divider d-none d-sm-block"></div> {% endcomment %}
-
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{user.username}}  </span>
-                                <img class="img-profile rounded-circle"
-                                    src="{% static 'api/img/undraw_profile.svg'%}">
-                            </a>
-             {% else %}
-
-              {% comment %} <li class="nav-item submenu dropdown"> {% endcomment %}
+            
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                 aria-expanded="false">
                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{user.farmer_name}}  </span>
@@ -175,9 +157,6 @@
                 <img class="img-profile rounded-circle"
                 src="{{user.image.url}} " >
             </a>    
-
-            {% endif %}
-            
            
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -201,10 +180,8 @@
                             </div>
                         </li>
 
-
-                        {% comment %} {% endif %} {% endcomment %}
                     </ul>
- {% comment %} {% endif %} {% endcomment %}
+
                      {% else %}
              
                   <li class="nav-item"><a class="nav-link" href="/login">เข้าสู่ระบบ</a></li>

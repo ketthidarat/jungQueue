@@ -16,7 +16,7 @@
           <div class="card-header">
               <i class="fas fa-table"></i>
               Crud Add
-              <a  class="btn btn-sm btn-success" href="/ownerShowWork" style="padding: 8px; float: right; background-color: rgb(53, 122, 155); color: white;">Back</a>
+              <a  class="btn btn-sm btn-success" href="/showWork" style="padding: 8px; float: right; background-color: rgb(53, 122, 155); color: white;">Back</a>
           </div>
           <div class="card-body">
             {% for message in messages %}
@@ -26,6 +26,18 @@
         {% endfor %}
             <form class="form-horizontal" action="/editShowWork/{{ work.id }}/" method="POST"  enctype="multipart/form-data">
               {% csrf_token %}
+              <div class="form-group">
+                  <div class="form-row">
+                      <div class="col-md-9">
+                          <div class="form-label-group">
+                            <label for="work.farmer_name"><b>ชื่อ</b></label><br>
+                            <label name="work.farmer_name" value="{{ work.farmer_name }}"  required><h1>{{ work.farmer_name }}</h1></label>
+                            {% comment %} <input type="text" class="form-control" name="work.farmer_name" value="{{ work.farmer_name }}"  required> {% endcomment %}
+                          </div>
+                      </div>
+                   
+                  </div>
+              </div>
               <div class="form-group">
                   <div class="form-row">
                       <div class="col-md-9">
@@ -71,7 +83,21 @@
                    
                   </div>
               </div>
-  
+              <div class="form-group">
+                  <div class="form-row">
+                      <div class="col-md-9">
+                          <div class="form-label-group">
+                            <label for="start_time"><b>วันที่ต้องการเก็บเกี่ยว</b></label>
+                            {% comment %} <input type="text" class="form-control"  name="rice" value="{{ work.rice }}" required> {% endcomment %}
+                           
+                              <!-- <input type="text" class="form-control" name="product_name" placeholder="กรุณากรอกชื่อสินค้า" id="inputFirst" required>  -->
+                          </div>
+                      </div>
+                   
+                  </div>
+              </div>
+   
+
             <div class="form-group">
               <div class="form-row">
                   <div class="col-md-9">
