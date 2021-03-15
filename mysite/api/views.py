@@ -15,6 +15,7 @@ from django.views import generic
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 import calendar
+import time 
 from .models import *
 from .utils import Calendar
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -332,6 +333,30 @@ def event(request, event_id=None):
         form.save()
         return HttpResponseRedirect(reverse('api:calendar'))
     return render(request, 'api/event.html', {'form': form})
+
+
+
+# # import the time module 
+
+  
+# # define the countdown func. 
+# def countdown(t): 
+    
+#     while t: 
+#         mins, secs = divmod(t, 60) 
+#         timer = '{:02d}:{:02d}'.format(mins, secs) 
+#         print(timer, end="\r") 
+#         time.sleep(1) 
+#         t -= 1
+      
+#     print('0') 
+  
+  
+# # input time in seconds 
+# t = input("Enter the time in seconds: ") 
+  
+# # function call 
+# countdown(int(t)) 
 
 
 

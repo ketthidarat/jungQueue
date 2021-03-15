@@ -1,7 +1,32 @@
 {% extends 'api/base.html' %}
 
 {% block content %}
+{% comment %} 
+ <div id="countdown"></div>
+    <script>
+      function countdownTimer() {
+function countdownTimer() {
+  const difference = +new Date("2020-01-01") - +new Date();
+  let remaining = "Time's up!";
 
+  if (difference > 0) {
+    const parts = {
+      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((difference / 1000 / 60) % 60),
+      seconds: Math.floor((difference / 1000) % 60),
+    };
+    remaining = Object.keys(parts).map(part => {
+    return `${parts[part]} ${part}`;
+    }).join(" ");
+  }
+
+  document.getElementById("countdown").innerHTML = remaining;
+}
+
+countDownTimer();
+      }
+    </script> {% endcomment %}
 <div id="content-wrapper">
 
   <div class="container-fluid">
@@ -61,7 +86,7 @@
                       <div class="col-md-9">
                           <div class="form-label-group">
                             <label for="tractor_timeHarvers"><b>เวลาที่ใช้ในการเก็บเกี่ยว</b></label>
-                            <input type="text" class="form-control"  name="tractor_timeHarvers" required>
+                            <input type="text" class="form-control" name="tractor_timeHarvers" required>
                            
                               <!-- <input type="text" class="form-control" name="product_name" placeholder="กรุณากรอกชื่อสินค้า" id="inputFirst" required>  -->
                           </div>
@@ -74,7 +99,7 @@
                       <div class="col-md-9">
                           <div class="form-label-group">
                             <label for="tractor_timeRepair"><b>เวลาที่ใช้ในการซ่อม</b></label>
-                            <input type="text" class="form-control"  name="tractor_timeRepair" required>
+                            <input type="text" class="form-control" name="tractor_timeRepair" required>
                            
                               <!-- <input type="text" class="form-control" name="product_name" placeholder="กรุณากรอกชื่อสินค้า" id="inputFirst" required>  -->
                           </div>

@@ -12,7 +12,7 @@
               <i class="fas fa-table"></i>
               โปรไฟล์
               {% if request.user.is_superuser %}
-              <a  class="btn btn-sm btn-warning" href="/editProfile/{{farmer.id}}"" style="padding: 8px; float: right;  color: white;" > <span class="fa fa-edit"></span> Edit</a>
+              <a  class="btn btn-sm btn-warning" href="/editProfile/{{farmer.username}}"" style="padding: 8px; float: right;  color: white;" > <span class="fa fa-edit"></span> Edit</a>
           {% endif %}
           </div>
           <div class="card-body">
