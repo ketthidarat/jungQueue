@@ -13,6 +13,7 @@ pillow = "*"
 djangorestframework = "*"
 markdown = "*"
 django-filter = "*"
+django-extensions = "*"
 
 [scripts]
 rmdb = "rm -rf db.sqlite3 api/migrations"

@@ -36,7 +36,9 @@ from django.contrib.auth.hashers import make_password
 
 def testline(req, id):
     test = Work.objects.all()
-    user = Farmer.objects.get(username=req.user.username)
+    user = Farmer.objects.filter(id=id)
+    if user:
+        user = user.first()
     print(user)
     return render(req, 'api/testline.html', {
         'test': test,
