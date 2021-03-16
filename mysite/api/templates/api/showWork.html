@@ -50,15 +50,16 @@
                               <td>{{ work.work_status }}</td>
                              {% comment %} {% if request.user.is_superuser %} {% endcomment %}
                             <td>                                   
-                                  <a class="btn btn-sm btn-warning" href="/editShowWork/{{work.id}}"> <span class="fa fa-edit"></span> Edit</a>
+                                  <a class="btn btn-sm btn-warning" href="/editShowWork/{{work.id}}"> <span class="fa fa-edit"></span> แก้ไข</a>
                                   
                               </td>
-                              <td><a class="btn btn-sm btn-danger" href="/deleteShowWork/{{work.id}}"><span class="fa fa-trash"></span> Delete</a></td>
+                              <td><a class="btn btn-sm btn-danger" onclick="myFunction" href="/deleteShowWork/{{work.id}}" ><span class="fa fa-trash" ></span> ยกเลิก</a></td>
                          
                           </tr>
 
                       {% endfor %}
-
+   
+          
                       </tbody>
 
                     </table>

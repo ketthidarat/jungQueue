@@ -1,1 +1,44 @@
-{{farmer_name}}
+{% extends 'api/base.html' %}
+
+{% block content %}
+
+<div id="content-wrapper">
+
+  <div class="container-fluid">
+
+      </ol>
+      <div class="card mb-3">
+          <div class="card-header">
+              <i class="fas fa-table"></i>
+              โปรไฟล์
+              {% if request.user.is_superuser %}
+              <a  class="btn btn-sm btn-warning" href="/editProfile/{{farmer.id}}"" style="padding: 8px; float: right;  color: white;" > <span class="fa fa-edit"></span> Edit</a>
+          {% endif %}
+          </div>
+          <div class="card-body">
+            <form class="form-horizontal" action="/profile" method="POST"  enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="form-group">
+                  <div class="form-row">
+                      <div class="col-md-12">
+                          <div class="form-label-group">
+                          
+                           <br>
+                           <center> <img src="/media/{{testline.image}}" width="200" height="200"> </center> <br>
+                           <center><label for="profile"><b>ชื่อ-สกุล : </b>{{testline.farmer_name}}</label> </center>
+                           <center><label for="profile"><b>ที่อยู่ : </b>{{testline.address}}</label> </center>  
+                           <center><label for="profile"><b>phone : </b>{{testline.phone}}</label> </center>
+                           <center><label for="profile"><b>email : </b>{{testline.email}}</label> </center> 
+                                    
+                          </div>
+                      </div>
+                   
+                  </div>
+              </div>
+              
+          </form>
+          </div>
+      </div>
+  </div>
+</div>
+{% endblock %}

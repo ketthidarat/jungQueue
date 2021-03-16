@@ -40,7 +40,7 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
     path('cal/', include('api.urls')),
-    # path('line/', views.line),
+    path('testline/<int:id>', views.testline),
 
 ]
 

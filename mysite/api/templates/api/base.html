@@ -145,7 +145,7 @@
                             </div>
                         </li>
 
-                        {% if request.user.is_superuser %}
+                        {% comment %} {% if request.user.is_superuser %}
                  <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -196,7 +196,7 @@
                             </div>
                         </li>
 
-                        {% endif %}
+                        {% endif %} {% endcomment %}
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                          {% csrf_token %}

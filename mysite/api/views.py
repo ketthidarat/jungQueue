@@ -24,8 +24,24 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.hashers import make_password
 
-# def line(req):
-#     return render(req, 'api/line.html')
+# def testline(request):
+#     # test = get_object_or_404(Farmer, id=farmer_id)
+#     testline = Farmer.objects.all() 
+
+#     # form = FarmerForm(request, initial={'farmer_id': farmer.id})
+#     return render(req, 'api/testline.html', {
+#         'testline': testline,
+#     })
+#     # return render(req, 'api/testline.html')
+
+def testline(req, id):
+    test = Work.objects.all()
+    user = Farmer.objects.get(username=req.user.username)
+    print(user)
+    return render(req, 'api/testline.html', {
+        'test': test,
+        'user': user,
+    })
 
 def index(req):
     return render(req, 'api/index.html', {
@@ -79,6 +95,10 @@ def login(req):
     return render(req, 'api/login.html')
 
 def addWork(req):
+    # if request.user.is_anonymous:
+    #     return redirect('/login')
+    # else: 
+    #     users= Users.objects.get(username=request.user.username)
     # if req.method == 'POST':
     #     import requests
     #     url = 'https://notify-api.line.me/api/notify'

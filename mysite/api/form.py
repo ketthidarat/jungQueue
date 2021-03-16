@@ -3,7 +3,8 @@ from django.forms import DateInput
 from .models import *
 
 class FarmerForm(forms.ModelForm):
-
+    # quantity = forms.IntegerField(initial='1')
+    # farmer_id = forms.IntegerField(widget=forms.HiddenInput)
     class Meta:
         model = Farmer 
         fields = [ 'farmer_name' ,'image', 'address', 'phone','email', 'username','password' ]
