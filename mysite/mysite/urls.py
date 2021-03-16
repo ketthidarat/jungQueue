@@ -7,12 +7,16 @@ from django.utils import translation
 from django.conf import settings # new
 from django.conf.urls.static import static
 from django.conf.urls import url
-
+from api import views as api_views
+# from mysite import views as mysite_views
 translation.activate('th')
 
 urlpatterns = [
+    # testProfile
+    # path('profile/<int:id>/', views.testprofile),
+    path('farmer/<int:pk>/',views.ProfileDetailView.as_view(),name='profile_detail'),
     path('admin/', admin.site.urls),
-     path('index',views.index),
+    path('index',views.index),
     path('', views.index, name='index'),
     path('login/',views.login),
     path('register/',views.register), 
@@ -23,6 +27,7 @@ urlpatterns = [
     path('addTractor',views.addTractor),
     path('showaddTractor',views.showaddTractor),
     path('profile',views.profile),
+    
     path('profileAdmin',views.profileAdmin),
     path('farmerWork',views.farmerWork),
     path('schedule',views.schedule),
@@ -40,7 +45,7 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
     path('cal/', include('api.urls')),
-    path('testline/<int:id>', views.testline),
+    
 
 ]
 

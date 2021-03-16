@@ -56,3 +56,7 @@ class EventForm(forms.ModelForm):
     self.fields['start_time'].input_formats = ('%Y-%m-%dT%H:%M',)
     self.fields['end_time'].input_formats = ('%Y-%m-%dT%H:%M',)
   
+class ProfileDetailFrom(forms.ModelForm):
+   
+        model = Farmer
+        fields = '__all__'

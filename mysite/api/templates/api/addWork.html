@@ -18,7 +18,7 @@
           <div class="card-body">
             <form class="form-horizontal" action="/addWork" method="POST"  enctype="multipart/form-data">
               {% csrf_token %}
-                       <body>
+                       {% comment %} <body>
 <button type="button" onclick="showPosition();">Show My Position on Google Map</button>
  </body>
               <div id="googleMap" style="width:100%;height:400px;"></div> 
@@ -43,7 +43,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?AIzaSyBhaFLM4M_bLyWG9HcQHKk60NV9wmfiu_0&callback=myMap"></script>
 
 </body>
-</html> 
+</html> {% endcomment %}
 
 
                 </div>
@@ -65,7 +65,7 @@
         </script> {% endcomment %}
            
 
-              <script>
+              {% comment %} <script>
                 function showPosition() {
                   if(navigator.geolocation) {
 
@@ -119,7 +119,7 @@
               }
             }
               </script>
-              </head> 
+              </head> {% endcomment %}
                {% comment %}
               <body>
                 <button type="button" onclick="showPosition();">Show My Position on Google Map</button>
