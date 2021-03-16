@@ -15,7 +15,7 @@ from django.views import generic
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 import calendar
-import time 
+import time ,requests
 from .models import *
 from .utils import Calendar
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -23,23 +23,18 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.hashers import make_password
+from django.views.generic import DetailView 
 
-# def testline(request):
-#     # test = get_object_or_404(Farmer, id=farmer_id)
-#     testline = Farmer.objects.all() 
 
-#     # form = FarmerForm(request, initial={'farmer_id': farmer.id})
-#     return render(req, 'api/testline.html', {
-#         'testline': testline,
-#     })
-#     # return render(req, 'api/testline.html')
+class ProfileDetailView(DetailView):
+    # pass
+    model = Farmer
 
-def testline(req, id):
-    test = Work.objects.all()
-    user = Farmer.objects.get(username=req.user.username)
+def testprofile(request, id):
+    user = Farmer.objects.all()
+    # s = Store.objects.filter(member=member).first()
     print(user)
-    return render(req, 'api/testline.html', {
-        'test': test,
+    return render(request, 'api/testline.html', {
         'user': user,
     })
 
@@ -94,24 +89,16 @@ def login(req):
         print('ยังไม่ได้กรอก login/password')
     return render(req, 'api/login.html')
 
+
 def addWork(req):
-    # if request.user.is_anonymous:
-    #     return redirect('/login')
-    # else: 
-    #     users= Users.objects.get(username=request.user.username)
-    # if req.method == 'POST':
-    #     import requests
-    #     url = 'https://notify-api.line.me/api/notify'
-    #     token = 'aujNg0manEcga69uaifUSyoERM5SCVGssRgnR1PJ6kU'
-    #     headers = {'content-type':'application/x-www-form-urlencoded','Authorization':'Bearer '+token}
-        
+    
         if req.method == 'POST':
-            # import requests
-            # url = 'https://notify-api.line.me/api/notify'
-            # token = 'aujNg0manEcga69uaifUSyoERM5SCVGssRgnR1PJ6kU'
-            # headers = {'content-type':'application/x-www-form-urlencoded','Authorization':'Bearer '+token}
+            
+            url = 'https://notify-api.line.me/api/notify'
+            token = 'yrpItRRDCVa9eiFSOXexHi3vXcxp9VBJpu9i2xTSaPP'
+            headers = {'content-type':'application/x-www-form-urlencoded','Authorization':'Bearer '+token}
             print(req.POST)
-            form = FarmerWorkForm(req.POST)# ,req.FILES)
+            form = FarmerWorkForm(req.POST)
             if form.is_valid():
                 work = Work()
                 work.farmer_name = req.user
@@ -119,8 +106,8 @@ def addWork(req):
                 work.rice_type = Rice_type.objects.get(pk=req.POST['rice_type'])
                 work.rice = req.POST['rice']
                 work.workDetail = req.POST['workDetail']
-                # msg = "จองคิว"
-                # r = requests.post(url, headers=headers , data = {'message':msg})
+                msg = "จองคิวแล้ว"
+                r = requests.post(url, headers=headers, data = {'message':msg})
                 work.save()
             return redirect('/addWork')
         else:
@@ -354,7 +341,8 @@ def event(request, event_id=None):
         return HttpResponseRedirect(reverse('api:calendar'))
     return render(request, 'api/event.html', {'form': form})
 
-
+class ProfileFarmerDetail(DetailView):
+    models = Farmer
 
 # # import the time module 
 
