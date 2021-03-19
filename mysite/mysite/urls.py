@@ -7,7 +7,7 @@ from django.utils import translation
 from django.conf import settings # new
 from django.conf.urls.static import static
 from django.conf.urls import url
-from api import views as api_views
+# from api import views as api_views
 # from mysite import views as mysite_views
 translation.activate('th')
 
@@ -22,6 +22,7 @@ urlpatterns = [
     path('register/',views.register), 
     path('logout/',views.logout),
     path('addWork',views.addWork),
+    path('map', views.MapView.as_view()), # folium map
     path('showWork',views.showWork),
     path('tractor',views.tractor),
     path('addTractor',views.addTractor),

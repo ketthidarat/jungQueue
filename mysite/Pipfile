@@ -15,6 +15,7 @@ markdown = "*"
 django-filter = "*"
 django-extensions = "*"
 requests = "*"
+folium = "*"
 
 [scripts]
 rmdb = "rm -rf db.sqlite3 api/migrations"

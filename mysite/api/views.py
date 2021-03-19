@@ -23,8 +23,32 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.hashers import make_password
-from django.views.generic import DetailView 
+from django.views.generic import DetailView, TemplateView
 
+import folium
+
+class MapView(TemplateView):
+
+    template_name = 'api/map.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        figure = folium.Figure()
+        m = folium.Map(
+            location=[15.1383833,104.8885447],
+            zoom_start=13,
+            tiles='OpenStreetMap', ## https://python-visualization.github.io/folium/modules.html#module-folium.map
+        )
+        m.add_to(figure)
+        ptt = folium.Marker(
+            location = [15.1143996,104.9018809],
+            popup = 'ปั๊มน้ำมันปตท. ม.อุบล',
+            icon = folium.Icon(icon='cloud') # fontawesome icon name
+        )
+        ptt.add_to(m)
+        figure.render()
+        context['map'] = figure
+        return context
 
 class ProfileDetailView(DetailView):
     # pass
