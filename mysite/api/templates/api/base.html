@@ -48,13 +48,13 @@
              
             </div>
             <!-- Nav Item - Dashboard -->
-            
+            {% if user.is_authenticated %}
             <li class="nav-item active">
                 <a class="nav-link" href="/addWork">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>จองคิวรถเกี่ยวนวดข้าว</span></a>
             </li>
- {% if user.is_authenticated %}
+ 
              <hr class="sidebar-divider">
              <li class="nav-item active">
                 <a class="nav-link" href="/showWork">
