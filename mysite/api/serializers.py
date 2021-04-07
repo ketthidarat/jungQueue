@@ -13,7 +13,7 @@ class OwnerSerializer(serializers.HyperlinkedModelSerializer):
 
 class TractorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Tractor
+        model = AddTractor
         fields = '__all__'
 
 class RiceTypeSerializer(serializers.HyperlinkedModelSerializer):

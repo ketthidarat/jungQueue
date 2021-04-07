@@ -14,7 +14,13 @@
           </div>
 
           <div class="card-body">
-            
+            {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+          {{ message }}
+        </div>
+        {% endfor %}
+		{% endif %}
                <div class="table-responsive">
                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" align="center">
                       <thead>
@@ -67,7 +73,32 @@
                       </tbody>
 
                     </table>
-                    
+                    {% if work.has_other_pages %}
+                    <ul class="pagination">
+                      {% if work.has_previous %}
+                        <li><a class="page-link" href="?page={{ work.previous_page_number }}">&laquo;  Previous</a></li>
+                        <li><a class="page-link" href="?page={{ work.previous_page_number }}">{{ work.previous_page_number }} </a></li>
+                      {% else %}
+                        <li class="disabled page-link"><span>&laquo;Previous</span></li>
+                      {% endif %}
+                        <!--   หน้าปัจจุบัน -->
+                      <li class="page-item active">
+                        <span class="page-link">
+                            <span class="current" >
+                                {{ work.number }} 
+                              </span>
+                         
+                        </span>
+                      </li>
+                          <!-- หน้าถัดไป -->
+                      {% if work.has_next %}
+                        
+                        <li><a class="page-link"  href="?page={{ work.next_page_number }}">Next &raquo; </a></li>
+                      {% else %}
+                        <li class="disabled page-link"><span>Next &raquo;</span></li>
+                      {% endif %}
+                    </ul>
+                  {% endif %}
                 </div>
                 </div>
                 </div>

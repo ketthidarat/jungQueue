@@ -50,20 +50,20 @@ class Tractor_status(models.Model):
         verbose_name = 'สถานะรถเกี่ยวนวดข้าว'
 
 
-class Tractor(models.Model):
-    id = models.AutoField(primary_key=True) 
-    # owner_name = models.ForeignKey(Owner, on_delete=models.CASCADE)
-    tractor = models.CharField(max_length=1000)
-    tractor_status = models.ForeignKey(Tractor_status, on_delete=models.CASCADE, null=True, default=1 )
-    # work = models.ForeignKey(Owner, on_delete=models.CASCADE)
+# class Tractor(models.Model):
+#     id = models.AutoField(primary_key=True) 
+#     # owner_name = models.ForeignKey(Owner, on_delete=models.CASCADE)
+#     tractor = models.CharField(max_length=1000)
+#     tractor_status = models.ForeignKey(Tractor_status, on_delete=models.CASCADE, null=True, default=1 )
+#     # work = models.ForeignKey(Owner, on_delete=models.CASCADE)
 
-    # def __str__(self):
-    #     return f'{self.owner}'
+#     # def __str__(self):
+#     #     return f'{self.owner}'
 
-    def __str__(self):
-        return f'{self.tractor} {self.tractor_status}'
-    class Meta:
-        verbose_name = 'รถเกี่ยวนวดข้าว'
+#     def __str__(self):
+#         return f'{self.tractor} {self.tractor_status}'
+#     class Meta:
+#         verbose_name = 'รถเกี่ยวนวดข้าว'
 
 
 class Rice_type(models.Model):
@@ -98,10 +98,6 @@ class Money_status(models.Model):
 class Work(models.Model):
     # id = models.AutoField(primary_key=True) 
     farmer_name = models.ForeignKey(Farmer, on_delete=models.CASCADE, null=True,  verbose_name='เกษตรกร')
-    # farmer_lastname = models.ForeignKey(Farmer, on_delete=models.CASCADE)
-    # tractor = models.ForeignKey(Tractor, on_delete=models.CASCADE, null=True,  verbose_name='รถเกี่ยวนวดข้าว')
-    # work_id = models.AutoField(primary_key=True)
-    # work_status = models.CharField(max_length=1000)
     lat = models.CharField(max_length=1000, verbose_name='ละติจูด')
     lng = models.CharField(max_length=1000, verbose_name='ลองติจูด')
     area = models.CharField(max_length=1000, verbose_name='พื้นที่ (ไร่)')
@@ -133,6 +129,18 @@ class AddTractor(models.Model):
     tractor_timeHarvers = models.CharField(max_length=1000)
     tractor_timeRepair = models.CharField(max_length=1000)
     tractor_status = models.ForeignKey(Tractor_status, on_delete=models.CASCADE, null=True, default=1 )
+
+    def time_repair(self):
+        now = timezone.now()
+        remain_time = now - tractor_timeRepair_start
+        tractor_timeRepair = remain_time.hour
+        return remain_time
+
+    def time_harvers(self):
+        now = timezone.now()
+        remain_time = now - tractor_timeHarvers_start
+        tractor_timeHarvers = remain_time.hour
+        return remain_time
 
     def __str__(self):
         return f'{self.tractor_name}'

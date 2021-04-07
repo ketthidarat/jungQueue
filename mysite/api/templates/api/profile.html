@@ -11,9 +11,9 @@
           <div class="card-header">
               <i class="fas fa-table"></i>
               โปรไฟล์
-              {% if request.user.is_superuser %}
+              {% comment %} {% if request.user.is_superuser %} {% endcomment %}
               <a  class="btn btn-sm btn-warning" href="/editProfile/{{farmer.id}}"" style="padding: 8px; float: right;  color: white;" > <span class="fa fa-edit"></span> Edit</a>
-          {% endif %}
+          {% comment %} {% endif %} {% endcomment %}
           </div>
           <div class="card-body">
             <form class="form-horizontal" action="/profile" method="POST"  enctype="multipart/form-data">

@@ -2,6 +2,18 @@
 
 {% block content %}
 
+<script>
+function myFunction() {
+  var txt;
+  var r = confirm("ยืนยันการจอง");
+  if (r == true) {
+    txt = "You pressed OK!";
+  } else {
+    txt = "You pressed Cancel!";
+  }
+}
+</script>
+
 <div id="content-wrapper">
 
   <div class="container-fluid">
@@ -82,13 +94,9 @@
               
   
               <button class="btn btn-primary btn-block" onclick="myFunction()" type="submit">ยืนยัน &nbsp;&nbsp;&nbsp;<span></span></button>
-              <button class="btn btn-danger btn-block" type="cancel">ยกเลิก &nbsp;&nbsp;&nbsp;<span></span></button>
+              <button class="btn btn-danger btn-block" onclick="myFunction()" type="cancel" >ยกเลิก &nbsp;&nbsp;&nbsp;<span></span></button>
           </form>
-            <script>
-            function myFunction() {
-              alert("ยืนยันการจอง");
-            }
-            </script> 
+           
           </div>
       </div>
   </div>

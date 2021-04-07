@@ -24,7 +24,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.hashers import make_password
 from django.views.generic import DetailView, TemplateView
-
+from django.contrib import messages
 import folium
 
 class MapView(TemplateView):
@@ -103,6 +103,7 @@ def register(req):
             print('form valid')
             form.instance.password = make_password(req.POST['password'])
             form.save()
+            return redirect('/login')
         else:
             print("==== form.errors ====")
             print(form.errors)
@@ -118,11 +119,23 @@ def login(req):
         if users is not None:
             print(users)
             auth_login(req, users)
+            messages.success(req, 'เข้าสู่ระบบสำเร็จ')
             return redirect('/index')
+        else:
+            messages.warning(req, 'เข้าสู่ระบบไม่สำเร็จ')
+            return redirect('/login')
     else:
         print('ยังไม่ได้กรอก login/password')
     return render(req, 'api/login.html')
 
+ # if users.is_activate:
+            #     print(users)
+            #     auth_login(req, users)
+            #     messages.success(req, 'เข้าสู่ระบบสำเร็จ')
+            #     return redirect('/index')
+            # else:
+            #     messages.warning(req, 'เข้าสู่ระบบไม่สำเร็จ')
+            #     return redirect('/login')
 
 def addWork(req):
     
@@ -143,7 +156,8 @@ def addWork(req):
                 msg = "จองคิวแล้ว"
                 r = requests.post(url, headers=headers, data = {'message':msg})
                 work.save()
-            return redirect('/addWork')
+                messages.success(req, 'จองคิวสำเร็จ')
+            return redirect('/showWork')
         else:
             form = FarmerWorkForm()
         return render(req, 'api/addWork.html',
@@ -170,6 +184,8 @@ def editShowWork(request, id=0):
         if form.is_valid():
             form.save()
             work = form.instance
+            messages.success(request, 'แก้ไขสำเร็จ')
+            # return redirect('/showWork')
             # print(work)
 
             # print("==== form.errors ====")
@@ -198,10 +214,9 @@ def editShowaddWork(request, id=0):
         if form.is_valid():
             form.save()
             work = form.instance
-            # print(work)
-
-            # print("==== form.errors ====")
-            # print(form.errors)
+            messages.success(request, 'แก้ไขสำเร็จ')
+            # return redirect('/showWork')
+         
     else:
         form = TractorWorkForm(work)
        
@@ -216,6 +231,7 @@ def editShowaddWork(request, id=0):
 def deleteShowaddWork(req, id=0):
     work = Work.objects.get(pk=id)
     work.delete()
+    messages.success(req, 'ลบสำเร็จ')
     return HttpResponseRedirect(req.META.get('HTTP_REFERER'))
 
 def ownerShowaddWork(req):
@@ -249,6 +265,7 @@ def farmerWork(request):
 def deleteShowWork(req, id=0):
     work = Work.objects.get(pk=id)
     work.delete()
+    messages.success(req, 'ลบสำเร็จ')
     return HttpResponseRedirect(req.META.get('HTTP_REFERER'))
 
 def tractor(req):
@@ -262,7 +279,7 @@ def addTractor(request):
         form = TractorForm(request.POST ,request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('/addTractor')
+            return redirect('/ownerShowaddTractor')
     else:
         form = TractorForm()
     return render(request, 'api/addTractor.html',
@@ -290,8 +307,9 @@ def editShowaddTractor(request, id=0):
     if request.method == 'POST':
         form = TractorForm(request.POST, request.FILES, instance=addTractor)
         if form.is_valid():
-            
             form.save()
+            messages.success(request, 'แก้ไขสำเร็จ')
+            # return redirect('/showWork')
 
         else:
             print("==== form.errors ====")
@@ -318,6 +336,8 @@ def editProfile(request, id=0):
         form = EditFarmerForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
+            messages.success(request, 'แก้ไขสำเร็จ')
+             # return redirect('/showWork')
         else:
             print("==== form.errors ====")
             print(form.errors)
@@ -378,27 +398,24 @@ def event(request, event_id=None):
 class ProfileFarmerDetail(DetailView):
     models = Farmer
 
-# # import the time module 
+def do_paginate(data_list, page_number):
+    ret_data_list = data_list
+    #  หน้า มี 5รายการ
+    result_per_page = 20
+    # build the paginator object.
+    paginator = Paginator(data_list, result_per_page)
+    try:
+        # get data list for the specified page_number.
+        ret_data_list = paginator.page(page_number)
+    except EmptyPage:
+        # get the lat page data if the page_number is bigger than last page number.
+        ret_data_list = paginator.page(paginator.num_pages)
+    except PageNotAnInteger:
+        # if the page_number is not an integer then return the first page data.
+        ret_data_list = paginator.page(1)
+    return [ret_data_list, paginator]
 
-  
-# # define the countdown func. 
-# def countdown(t): 
-    
-#     while t: 
-#         mins, secs = divmod(t, 60) 
-#         timer = '{:02d}:{:02d}'.format(mins, secs) 
-#         print(timer, end="\r") 
-#         time.sleep(1) 
-#         t -= 1
-      
-#     print('0') 
-  
-  
-# # input time in seconds 
-# t = input("Enter the time in seconds: ") 
-  
-# # function call 
-# countdown(int(t)) 
+
 
 
 
@@ -412,7 +429,7 @@ class OwnerViewSet(viewsets.ModelViewSet):
     serializer_class = OwnerSerializer
 
 class TractorViewSet(viewsets.ModelViewSet):
-    queryset = Tractor.objects.all()
+    queryset = AddTractor.objects.all()
     serializer_class = TractorSerializer
 
 class RiceTypeViewSet(viewsets.ModelViewSet):
