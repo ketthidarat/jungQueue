@@ -36,7 +36,7 @@
                           <th>สถานะงาน</th>
                           
                           <th>แก้ไข</th> 
-                          <th>ลบ</th>
+                          <th>ยกเลิก</th>
                          {% comment %} {% endif %} {% endcomment %}
                       </tr>
                       </thead>
@@ -56,10 +56,10 @@
                               <td>{{ work.work_status }}</td>
                              {% comment %} {% if request.user.is_superuser %} {% endcomment %}
                             <td>                                   
-                                  <a class="btn btn-sm btn-warning" href="/editShowWork/{{work.id}}"> <span class="fa fa-edit"></span> แก้ไข</a>
+                                  <a class="btn btn-sm btn-warning" href="/editShowWork/{{work.id}}" > <span class="fa fa-edit"></span> แก้ไข</a>
                                   
                               </td>
-                              <td><a class="btn btn-sm btn-danger"  href="/deleteShowWork/{{work.id}}" ><span class="fa fa-trash" ></span> ยกเลิก</a></td>
+                              <td><a class="btn btn-sm btn-danger"  href="/deleteShowWork/{{work.id}}" onclick="return confirm('ยืนยันการลบ ?')"><span class="fa fa-trash" ></span> ยกเลิก</a></td>
                          
                           </tr>
 

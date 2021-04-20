@@ -87,9 +87,9 @@
                   <div class="form-row">
                       <div class="col-md-9">
                           <div class="form-label-group">
-                            <label for="start_time"><b>วันที่ต้องการเก็บเกี่ยว</b></label>
+                            <label for="start_time"><b>วันที่เก็บเกี่ยว</b></label>
                             {% comment %} <input type="text" class="form-control"  name="rice" value="{{ work.rice }}" required> {% endcomment %}
-                           
+                            <br><input type="datetime" id="start" name="start_time" value="{{ work.start_time }}" required>
                               <!-- <input type="text" class="form-control" name="product_name" placeholder="กรุณากรอกชื่อสินค้า" id="inputFirst" required>  -->
                           </div>
                       </div>
@@ -171,8 +171,10 @@
 
 
 
-            <button class="btn btn-primary btn-block" type="submit">Submit &nbsp;&nbsp;&nbsp;<span></span></button>
+           <button class="btn btn-primary btn-block" onclick="return confirm('ยืนยันการการแก้ไขการจองคิว ?')" type="submit">ยืนยัน &nbsp;&nbsp;&nbsp;<span></span></button>
+          <button class="btn btn-danger btn-block"  type="reset" > ยกเลิก &nbsp;&nbsp;&nbsp;<span></span></button>
           </form>
+          {% comment %} <button class="btn btn-danger btn-block" type="cancel">ยกเลิก &nbsp;&nbsp;&nbsp;<span></span></button> {% endcomment %}
           </div>
       </div>
   </div>

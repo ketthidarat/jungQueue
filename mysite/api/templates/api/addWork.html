@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<script>
+{% comment %} <script>
 function myFunction() {
   var txt;
   var r = confirm("ยืนยันการจอง");
@@ -12,7 +12,7 @@ function myFunction() {
     txt = "You pressed Cancel!";
   }
 }
-</script>
+</script> {% endcomment %}
 
 <div id="content-wrapper">
 
@@ -91,12 +91,11 @@ function myFunction() {
                
               </div>
           </div>
-              
   
-              <button class="btn btn-primary btn-block" onclick="myFunction()" type="submit">ยืนยัน &nbsp;&nbsp;&nbsp;<span></span></button>
-              <button class="btn btn-danger btn-block" onclick="myFunction()" type="cancel" >ยกเลิก &nbsp;&nbsp;&nbsp;<span></span></button>
+              <button class="btn btn-primary btn-block" onclick="return confirm('ยืนยันการจองคิว ?')" type="submit">ยืนยัน &nbsp;&nbsp;&nbsp;<span></span></button>
+              <button class="btn btn-danger btn-block"  type="reset"  > ยกเลิก &nbsp;&nbsp;&nbsp;<span></span></button>
           </form>
-           
+           {% comment %} <button class="btn btn-danger btn-block" type="cancel">ยกเลิก &nbsp;&nbsp;&nbsp;<span></span></button> {% endcomment %}
           </div>
       </div>
   </div>

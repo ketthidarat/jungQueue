@@ -35,15 +35,15 @@
                           <th>ราคา</th>
                           <th>สถานะการชำระเงิน</th>
                           <th>สถานะงาน</th>
-                          
                           <th>แก้ไข</th> 
-                          <th>ลบ</th>
+                          <th>ยกเลิก</th>
                          
                       </tr>
                       </thead>
                       <tbody>
+                     
                       {% for work in farmerWork %}
-                    
+                        
                           <tr>
                             <td>{{ work.id }}</td>
                             <td>
@@ -61,23 +61,23 @@
                               <td>{{ work.work_status }}</td>
                              
                             <td>                                   
-                                  <a class="btn btn-sm btn-warning" href="/editShowaddWork/{{work.id}}"> <span class="fa fa-edit"></span> Edit</a>
+                                  <a class="btn btn-sm btn-warning" href="/editShowaddWork/{{work.id}}"> <span class="fa fa-edit"></span> แก้ไข</a>
                                   
                               </td>
-                              <td><a class="btn btn-sm btn-danger" href="/deleteShowaddWork/{{work.id}}"><span class="fa fa-trash"></span> Delete</a></td>
+                              <td><a class="btn btn-sm btn-danger" href="/deleteShowaddWork/{{work.id}}" onclick="return confirm('ยืนยันการยกเลิกการจองคิว ?')"><span class="fa fa-trash"></span>ยกเลิก</a></td>
                          
                           </tr>
 
                       {% endfor %}
-
                       </tbody>
 
                     </table>
-                    {% if work.has_other_pages %}
+                  
+                   {% comment %} {% if farmerWork.has_other_pages %} {% endcomment %}
                     <ul class="pagination">
-                      {% if work.has_previous %}
-                        <li><a class="page-link" href="?page={{ work.previous_page_number }}">&laquo;  Previous</a></li>
-                        <li><a class="page-link" href="?page={{ work.previous_page_number }}">{{ work.previous_page_number }} </a></li>
+                      {% if page_obj.has_previous %}
+                        <li><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;  Previous</a></li>
+                        <li><a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }} </a></li>
                       {% else %}
                         <li class="disabled page-link"><span>&laquo;Previous</span></li>
                       {% endif %}
@@ -85,20 +85,24 @@
                       <li class="page-item active">
                         <span class="page-link">
                             <span class="current" >
-                                {{ work.number }} 
+                                {{ page_obj.number }} 
                               </span>
                          
                         </span>
                       </li>
                           <!-- หน้าถัดไป -->
-                      {% if work.has_next %}
+                      {% if page_obj.has_next %}
                         
-                        <li><a class="page-link"  href="?page={{ work.next_page_number }}">Next &raquo; </a></li>
+                        <li><a class="page-link"  href="?page={{ page_obj.next_page_number }}">Next &raquo; </a></li>
                       {% else %}
                         <li class="disabled page-link"><span>Next &raquo;</span></li>
                       {% endif %}
                     </ul>
-                  {% endif %}
+                  {% comment %} {% endif  %} {% endcomment %}
+                    </div>
+                    
+                    </div> 
+
                 </div>
                 </div>
                 </div>

@@ -242,9 +242,13 @@ def ownerShowaddWork(req):
 
 def farmerWork(request):
     farmerWork = Work.objects.all() 
+    paginator = Paginator(farmerWork, 5) # So limited to 25 profiles in a page
     
+    page = request.GET.get('page')
+    page_obj= paginator.get_page(page) #data
     return render(request, 'api/farmerWork.html', {
-        'farmerWork': farmerWork,
+        # 'farmerWork': farmerWork,
+        'page_objs':page_obj
         # 'user': user,
     })
 
@@ -279,6 +283,7 @@ def addTractor(request):
         form = TractorForm(request.POST ,request.FILES)
         if form.is_valid():
             form.save()
+            messages.success(request, 'เพิ่มสำเร็จ')
             return redirect('/ownerShowaddTractor')
     else:
         form = TractorForm()
@@ -290,12 +295,14 @@ def addTractor(request):
 
 def showaddTractor(req):
     showaddTractor = AddTractor.objects.all() 
+    
     return render(req, 'api/showaddTractor.html', {
         'showaddTractor': showaddTractor,
     })
 
 def ownerShowaddTractor(req):
     ownerShowaddTractor = AddTractor.objects.all() 
+    # messages.success(req, 'เพิ่มสำเร็จ')
     return render(req, 'api/ownerShowaddTractor.html', {
         'ownerShowaddTractor': ownerShowaddTractor,
     })
@@ -327,6 +334,7 @@ def editShowaddTractor(request, id=0):
 def deleteShowaddTractor(req, id=0):
     addTractor = AddTractor.objects.get(pk=id)
     addTractor.delete()
+    messages.success(req, 'ลบสำเร็จ')
     return HttpResponseRedirect(req.META.get('HTTP_REFERER'))
 
 
@@ -398,25 +406,34 @@ def event(request, event_id=None):
 class ProfileFarmerDetail(DetailView):
     models = Farmer
 
-def do_paginate(data_list, page_number):
-    ret_data_list = data_list
-    #  หน้า มี 5รายการ
-    result_per_page = 20
-    # build the paginator object.
-    paginator = Paginator(data_list, result_per_page)
-    try:
-        # get data list for the specified page_number.
-        ret_data_list = paginator.page(page_number)
-    except EmptyPage:
-        # get the lat page data if the page_number is bigger than last page number.
-        ret_data_list = paginator.page(paginator.num_pages)
-    except PageNotAnInteger:
-        # if the page_number is not an integer then return the first page data.
-        ret_data_list = paginator.page(1)
-    return [ret_data_list, paginator]
+# def do_paginate(data_list, page_number):
+#     ret_data_list = data_list
+#     #  หน้า มี 5รายการ
+#     result_per_page = 20
+#     # build the paginator object.
+#     paginator = Paginator(data_list, result_per_page)
+#     try:
+#         # get data list for the specified page_number.
+#         ret_data_list = paginator.page(page_number)
+#     except EmptyPage:
+#         # get the lat page data if the page_number is bigger than last page number.
+#         ret_data_list = paginator.page(paginator.num_pages)
+#     except PageNotAnInteger:
+#         # if the page_number is not an integer then return the first page data.
+#         ret_data_list = paginator.page(1)
+#     return [ret_data_list, paginator]
 
+def viewwork(request):
+   work = Work.objects.all()
+   paginator = Paginator(work, 25) # So limited to 25 profiles in a page
+   page = request.GET.get('page')
+   work= paginator.get_page(page) #data
+   return render(request, 'farmerWork.html', {'work': work})
 
+#  paginator = Paginator(contact_list, 25) # Show 25 contacts per page.
 
+#     page_number = request.GET.get('page')
+#     page_obj = paginator.get_page(page_number)
 
 
 

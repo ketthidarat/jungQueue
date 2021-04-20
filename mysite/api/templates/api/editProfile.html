@@ -18,7 +18,7 @@
           <div class="card-header">
               <i class="fas fa-table"></i>
               Crud Add
-              <a  class="btn btn-sm btn-success" href="/profile" style="padding: 8px; float: right; background-color: rgb(53, 122, 155); color: white;">Back</a>
+              <a  class="btn btn-sm btn-success" href="/profile" style="padding: 8px; float: right; background-color: rgb(53, 122, 155); color: white;">กลับ</a>
           </div>
           <div class="card-body">
             <form class="form-horizontal" action="/editProfile/{{ profile.id }}/" method="POST"  enctype="multipart/form-data">
@@ -93,7 +93,8 @@
               </div>
 
               
-            <button class="btn btn-primary btn-block" type="submit">Submit &nbsp;&nbsp;&nbsp;<span></span></button>
+           <button class="btn btn-primary btn-block" onclick="return confirm('ยืนยันการแก้ไข ?')" type="submit">ยืนยัน &nbsp;&nbsp;&nbsp;<span></span></button>
+              <button class="btn btn-danger btn-block"  type="reset"  > ยกเลิก &nbsp;&nbsp;&nbsp;<span></span></button>
           </form>
           </div>
       </div>

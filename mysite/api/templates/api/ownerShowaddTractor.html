@@ -12,7 +12,14 @@
           </li>
           <li class="breadcrumb-item active">CRUD</li>
       </ol> -->
-      
+         {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+          {{ message }}
+        </div>
+        {% endfor %}
+		{% endif %}
+    
       <div class="card mb-3">
           <div class="card-header">
               <i class="fas fa-table"></i>
@@ -54,7 +61,7 @@
                           {% comment %} <th>เพิ่ม</th>  {% endcomment %}
                           {% if request.user.is_superuser %}
                           <th>แก้ไข</th> 
-                          <th>ลบ</th> 
+                          <th>ยกเลิก</th> 
                           {% endif %}
                       </tr>
                       </thead>
@@ -77,10 +84,10 @@
                               </td> {% endcomment %}
                               {% if request.user.is_superuser %}
                               <td>                                   
-                                  <a class="btn btn-sm btn-warning" href="/editShowaddTractor/{{ownerShowaddTractor.id}}"> <span class="fa fa-edit"></span> Edit</a>
+                                  <a class="btn btn-sm btn-warning" href="/editShowaddTractor/{{ownerShowaddTractor.id}}"> <span class="fa fa-edit"></span> แก้ไข</a>
                                   
                               </td>
-                              <td><a class="btn btn-sm btn-danger" href="/deleteShowaddTractor/{{ownerShowaddTractor.id}}"><span class="fa fa-trash"></span> Delete</a></td>
+                              <td><a class="btn btn-sm btn-danger" href="/deleteShowaddTractor/{{ownerShowaddTractor.id}}" onclick="return confirm('ยืนยันการลบ ?')"><span class="fa fa-trash"></span> ยกเลิก</a></td>
                           {% endif %}
                           </tr>
                           

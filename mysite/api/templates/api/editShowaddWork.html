@@ -95,7 +95,7 @@
                       <div class="col-md-9">
                           <div class="form-label-group">
                             <label for="start_time"><b>วันที่เก็บเกี่ยว</b></label>
-                            <input type="date" id="start" name="start_time" value="{{ work.start_time }}" required>
+                            <input type="datetime-local" id="start" name="start_time" value="{{ work.start_time }}" required>
                              </div>
                       </div>
                    
@@ -161,7 +161,8 @@
 
 
 
-            <button class="btn btn-primary btn-block" type="submit" >Submit &nbsp;&nbsp;&nbsp;<span></span></button>
+            <button class="btn btn-primary btn-block" onclick="return confirm('ยืนยันการแก้ไข ?')" type="submit">ยืนยัน &nbsp;&nbsp;&nbsp;<span></span></button>
+            <button class="btn btn-danger btn-block"  type="reset"> ยกเลิก &nbsp;&nbsp;&nbsp;<span></span></button>
          
        </form>
           </div>

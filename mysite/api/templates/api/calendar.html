@@ -9,7 +9,7 @@ Calendar
 	<a class="btn btn-info left" href="/cal/calendar?{{ prev_month }}"> Previous Month </a>
 	<a class="btn btn-info right" href="/cal/calendar?{{ next_month }}"> Next Month </a>
 		{% if request.user.is_superuser %}
-	<a class="btn btn-info right" href="/cal/event/new"> New Event </a>
+	<a class="btn btn-info right" href="/cal/event/new"> เพิ่มตารางงาน </a>
 	{% endif %}
 </div>
 
