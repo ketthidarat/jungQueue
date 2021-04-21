@@ -49,23 +49,6 @@ class Tractor_status(models.Model):
     class Meta:
         verbose_name = 'สถานะรถเกี่ยวนวดข้าว'
 
-
-# class Tractor(models.Model):
-#     id = models.AutoField(primary_key=True) 
-#     # owner_name = models.ForeignKey(Owner, on_delete=models.CASCADE)
-#     tractor = models.CharField(max_length=1000)
-#     tractor_status = models.ForeignKey(Tractor_status, on_delete=models.CASCADE, null=True, default=1 )
-#     # work = models.ForeignKey(Owner, on_delete=models.CASCADE)
-
-#     # def __str__(self):
-#     #     return f'{self.owner}'
-
-#     def __str__(self):
-#         return f'{self.tractor} {self.tractor_status}'
-#     class Meta:
-#         verbose_name = 'รถเกี่ยวนวดข้าว'
-
-
 class Rice_type(models.Model):
     id = models.AutoField(primary_key=True) 
     rice_type = models.CharField(max_length=100) 

@@ -26,9 +26,9 @@ urlpatterns = [
     path('showWork',views.showWork),
     path('tractor',views.tractor),
     path('addTractor',views.addTractor),
-    path('showaddTractor',views.showaddTractor),
+    path('showaddTractor',views.showaddTractor), 
     path('profile',views.profile),
-    
+    # path('testline/<int:id>/',views.testline),
     path('profileAdmin',views.profileAdmin),
     path('farmerWork',views.farmerWork),
     path('schedule',views.schedule),
