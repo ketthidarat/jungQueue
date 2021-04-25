@@ -153,7 +153,7 @@ def addWork(req):
                 work.rice_type = Rice_type.objects.get(pk=req.POST['rice_type'])
                 work.rice = req.POST['rice']
                 work.workDetail = req.POST['workDetail']
-                msg = "จองคิวแล้ว"
+                msg = f'ชื่อ:{work.farmer_name} จำนวนไร่: {work.area} ลักษณะต้นข้าว: {work.rice_type} พันธุ์ข้าว: {work.rice} รายละเอียดอื่นๆ: {work.workDetail}'
                 r = requests.post(url, headers=headers, data = {'message':msg})
                 work.save()
                 messages.success(req, 'จองคิวสำเร็จ')
@@ -185,11 +185,6 @@ def editShowWork(request, id=0):
             form.save()
             work = form.instance
             messages.success(request, 'แก้ไขสำเร็จ')
-            # return redirect('/showWork')
-            # print(work)
-
-            # print("==== form.errors ====")
-            # print(form.errors)
     else:
         form = FarmerWorkForm(work)
        
@@ -215,7 +210,7 @@ def editShowaddWork(request, id=0):
             form.save()
             work = form.instance
             messages.success(request, 'แก้ไขสำเร็จ')
-            # return redirect('/showWork')
+            return redirect('/farmerWork')
          
     else:
         form = TractorWorkForm(work)
@@ -242,29 +237,42 @@ def ownerShowaddWork(req):
 
 def farmerWork(request):
     farmerWork = Work.objects.all() 
-    paginator = Paginator(farmerWork, 5) # So limited to 25 profiles in a page
-    
-    page = request.GET.get('page')
-    page_obj= paginator.get_page(page) #data
+    page = request.GET.get('page',1)
+    paginator = Paginator(farmerWork, 7) # So limited to 25 profiles in a page
+    # page_obj= paginator.get_page(page) #data
     return render(request, 'api/farmerWork.html', {
-        # 'farmerWork': farmerWork,
-        'page_objs':page_obj
-        # 'user': user,
+        'farmerWork': farmerWork,
+        'paginator':paginator,
+        # 'page_objs':page_obj,
+         'farmerWork_p': farmerWork_p
     })
 
 def showWork(request):
     works = Work.objects.filter(farmer_name = request.user) 
+    page = request.GET.get('page',1)
+    paginator = Paginator(works, 1) # So limited to 25 profiles in a page
+    # page_obj= paginator.get_page(page) #data
+    print("____________",page,paginator,"___________________-")
+    try:
+        works_p = paginator.page(page)
+    except PageNotAnInteger:
+        works_p = paginator.page(1)
+    except EmptyPage:
+        works_p = paginator.page(paginator.num_pages)
+    print(works)
     return render(request, 'api/showWork.html', {
-        'works': works
+        'works': works,
+        'works_p': works_p,
+        'paginator': paginator
     })
 
-def farmerWork(request):
-    farmerWork = Work.objects.all() 
+# def farmerWork(request):
+#     farmerWork = Work.objects.all() 
     
-    return render(request, 'api/farmerWork.html', {
-        'farmerWork': farmerWork,
+#     return render(request, 'api/farmerWork.html', {
+#         'farmerWork': farmerWork,
 
-    })
+#     })
 
 def deleteShowWork(req, id=0):
     work = Work.objects.get(pk=id)
@@ -310,14 +318,12 @@ def ownerShowaddTractor(req):
 def editShowaddTractor(request, id=0):
     addTractor = AddTractor.objects.get(pk=id)
     tractor_status = Tractor_status.objects.all()
-    # product_statuss = Product_Status.objects.all()
     if request.method == 'POST':
         form = TractorForm(request.POST, request.FILES, instance=addTractor)
         if form.is_valid():
             form.save()
             messages.success(request, 'แก้ไขสำเร็จ')
-            # return redirect('/showWork')
-
+          
         else:
             print("==== form.errors ====")
             print(form.errors)
@@ -403,6 +409,16 @@ def event(request, event_id=None):
         return HttpResponseRedirect(reverse('api:calendar'))
     return render(request, 'api/event.html', {'form': form})
 
+
+def deleteEvent(req, id=0):
+    event = Event.objects.get(pk=id)
+    event.delete()
+    messages.success(req, 'ลบสำเร็จ')
+    return HttpResponseRedirect(req.META.get('HTTP_REFERER'))
+
+
+
+
 class ProfileFarmerDetail(DetailView):
     models = Farmer
 
@@ -441,9 +457,9 @@ class FarmerViewSet(viewsets.ModelViewSet):
     queryset = Farmer.objects.all()
     serializer_class = FarmerSerializer
 
-class OwnerViewSet(viewsets.ModelViewSet):
-    queryset = Owner.objects.all()
-    serializer_class = OwnerSerializer
+# class OwnerViewSet(viewsets.ModelViewSet):
+#     queryset = Owner.objects.all()
+#     serializer_class = OwnerSerializer
 
 class TractorViewSet(viewsets.ModelViewSet):
     queryset = AddTractor.objects.all()
@@ -472,7 +488,7 @@ class WorkViewSet(viewsets.ModelViewSet):
 
 router = routers.DefaultRouter()
 router.register(r'farmer', FarmerViewSet)
-router.register(r'owner', OwnerViewSet)
+# router.register(r'owner', OwnerViewSet)
 router.register(r'tractor', TractorViewSet)
 router.register(r'ricetype', RiceTypeViewSet)
 router.register(r'tractorstatus', TractorStatusViewSet)

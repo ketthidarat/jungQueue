@@ -6,10 +6,10 @@ class FarmerSerializer(serializers.HyperlinkedModelSerializer):
         model = Farmer
         fields = '__all__'
 
-class OwnerSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Owner
-        fields = '__all__'
+# class OwnerSerializer(serializers.HyperlinkedModelSerializer):
+#     class Meta:
+#         model = Owner
+#         fields = '__all__'
 
 class TractorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

@@ -4,7 +4,7 @@ from .models import *
 
 # Register your models here.
 admin.site.register(Farmer)
-admin.site.register(Owner)
+# admin.site.register(Owner)
 admin.site.register(Work)
 # admin.site.register(Tractor)
 admin.site.register(Tractor_status)

@@ -9,11 +9,10 @@ class FarmerForm(forms.ModelForm):
         model = Farmer 
         fields = [ 'farmer_name' ,'image', 'address', 'phone','email', 'username','password' ]
 
-class OwnerForm(forms.ModelForm):
-
-    class Meta:
-        model = Owner 
-        fields = [ 'owner_name' ,'image', 'address', 'phone','email', 'username','password', ]
+# class OwnerForm(forms.ModelForm):
+#     class Meta:
+#         model = Owner 
+#         fields = [ 'owner_name' ,'image', 'address', 'phone','email', 'username','password', ]
 
 class EditFarmerForm(forms.ModelForm):
 
@@ -31,8 +30,8 @@ class FarmerWorkForm(forms.ModelForm):
     class Meta:
         model = Work
         # fields = '__all__'
-        fields = [ 'area', 'rice_type', 'rice', 'workDetail' ]
-
+        fields = [  'lat', 'lng','area', 'rice_type', 'rice', 'workDetail' ]
+# 'lat', 'lng', 
 class TractorForm(forms.ModelForm):
 
     class Meta:

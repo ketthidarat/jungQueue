@@ -17,27 +17,27 @@ class Farmer(AbstractUser):
     password = models.CharField(max_length=1000)
     
     def __str__(self):
-        return f'{self.username} '
+        return f'{self.farmer_name}'
 
     class Meta:
         verbose_name = 'เกษตรกร'
-class Owner(models.Model):
-    id = models.AutoField(primary_key=True) 
-    # owner_id = models.AutoField(primary_key=True)
-    owner_name = models.CharField(max_length=1000, verbose_name = 'ชื่อ-สกุล')
-    # owner_lastname = models.CharField(max_length=1000)
-    image = models.ImageField(upload_to='media/', verbose_name = 'รูปโปรไฟล์')
-    address = models.CharField(max_length=1000, verbose_name = 'ที่อยู่')
-    phone = models.CharField(max_length=1000, verbose_name = 'เบอร์โทรศัพท์')
-    email = models.CharField(max_length=1000)
-    username = models.CharField(max_length=1000)
-    password = models.CharField(max_length=1000)
+# class Owner(models.Model):
+#     id = models.AutoField(primary_key=True) 
+#     # owner_id = models.AutoField(primary_key=True)
+#     owner_name = models.CharField(max_length=1000, verbose_name = 'ชื่อ-สกุล')
+#     # owner_lastname = models.CharField(max_length=1000)
+#     image = models.ImageField(upload_to='media/', verbose_name = 'รูปโปรไฟล์')
+#     address = models.CharField(max_length=1000, verbose_name = 'ที่อยู่')
+#     phone = models.CharField(max_length=1000, verbose_name = 'เบอร์โทรศัพท์')
+#     email = models.CharField(max_length=1000)
+#     username = models.CharField(max_length=1000)
+#     password = models.CharField(max_length=1000)
 
-    def __str__(self):
-        return f'{self.owner_name} {self.phone}'
+#     def __str__(self):
+#         return f'{self.owner_name} {self.phone}'
 
-    class Meta:
-        verbose_name = 'เจ้าของรถ'
+#     class Meta:
+#         verbose_name = 'เจ้าของรถ'
 
 class Tractor_status(models.Model):
     id = models.AutoField(primary_key=True) 
@@ -87,7 +87,7 @@ class Work(models.Model):
     rice_type = models.ForeignKey(Rice_type, on_delete=models.CASCADE, null=True, default=1, verbose_name='ลักษณะข้าวที่จะให้เกี่ยว')
     rice = models.CharField(max_length=1000, null=True, verbose_name='พันธุ์ข้าว') 
     start_time = models.DateTimeField(blank=True, null=True)
-    end_time = models.DateTimeField(blank=True, null=True)
+    # end_time = models.DateTimeField(blank=True, null=True)
     workDetail = models.TextField(max_length=1000, null=True,  verbose_name='รายละเอียด')
     price = models.CharField(max_length=1000, null=True, verbose_name='จำนวนเงิน (บาท)')
     money_status = models.ForeignKey(Money_status, on_delete=models.CASCADE, default=1,null=True, verbose_name='สถานะการชำระเงิน') # ให้นิยามเพิ่มเติม
@@ -141,6 +141,7 @@ class Event(models.Model):
         url = reverse('api:event_edit', args=(self.id,))
         return f'<a href="{url}"> {self.title} </a>'
     
+
     def __str__(self):
         return f'{self.title}'
     class Meta:

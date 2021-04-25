@@ -29,7 +29,9 @@ Event
   {% csrf_token %}
   <table class="form form-table">
     {{ form }}
-    <tr><td colspan="2"><button type="submit" class="btn btn-info right"> Submit </button></td></tr>
+    <tr><td colspan="2"><button  class="btn btn-info left"> ยืนยัน </button></td></tr>
+    <tr><td colspan="2"><button  class="btn btn-info right"  href="/deleteEvent/{{event.id}}" onclick="return confirm('ยืนยันการยกเลิก ?')"> ยกเลิก </button></td></tr>
+    {% comment %} <td><a class="btn btn-sm btn-danger right"  href="/deleteEvent/{{deleteEvent.id}}" onclick="return confirm('ยืนยันการลบ ?')"><span class="fa fa-trash" ></span> ยกเลิก</a></td> {% endcomment %}
   </table>
   {% endif %}
 </form>

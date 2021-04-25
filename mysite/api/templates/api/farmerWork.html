@@ -2,6 +2,7 @@
 
 {% block content %}
 
+
 <div id="content-wrapper">
 
   <div class="container-fluid">
@@ -27,11 +28,12 @@
                       <tr>
                         <th>id</th>
                         <th>ชื่อ</th>
-                          <th>จำนวนไร่ที่ต้องการเก็บเกี่ยว</th>
+                          <th>จำนวนไร่ที่เก็บเกี่ยว</th>
                           <th>ลักษณะต้นข้าว</th>
                           <th>พันธุ์ข้าว</th>
                           <th>รายละเอียด</th>
                           <th>วันที่เก็บเกี่ยว</th>
+                          {% comment %} <th>เวลาที่ใช้ในการเก็บเกี่ยว</th> {% endcomment %}
                           <th>ราคา</th>
                           <th>สถานะการชำระเงิน</th>
                           <th>สถานะงาน</th>
@@ -42,7 +44,7 @@
                       </thead>
                       <tbody>
                      
-                      {% for work in farmerWork %}
+                      {% for work in farmerWork_p %}
                         
                           <tr>
                             <td>{{ work.id }}</td>
@@ -56,6 +58,8 @@
                               <td>{{ work.rice }}</td>
                               <td>{{ work.workDetail }}</td>
                               <td>{{ work.start_time }}</td>
+                              {% comment %} <td>{{ tractor.tractor_timeHarvers }}</td>  {% endcomment %}
+                              {% comment %} <td>{{ work.price }}</td> {% endcomment %}
                               <td>{{ work.price }}</td>
                               <td>{{ work.money_status }}</td>
                               <td>{{ work.work_status }}</td>
@@ -72,33 +76,35 @@
                       </tbody>
 
                     </table>
-                  
-                   {% comment %} {% if farmerWork.has_other_pages %} {% endcomment %}
-                    <ul class="pagination">
-                      {% if page_obj.has_previous %}
-                        <li><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;  Previous</a></li>
-                        <li><a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }} </a></li>
-                      {% else %}
-                        <li class="disabled page-link"><span>&laquo;Previous</span></li>
-                      {% endif %}
-                        <!--   หน้าปัจจุบัน -->
-                      <li class="page-item active">
-                        <span class="page-link">
-                            <span class="current" >
-                                {{ page_obj.number }} 
-                              </span>
-                         
-                        </span>
-                      </li>
-                          <!-- หน้าถัดไป -->
-                      {% if page_obj.has_next %}
-                        
-                        <li><a class="page-link"  href="?page={{ page_obj.next_page_number }}">Next &raquo; </a></li>
-                      {% else %}
-                        <li class="disabled page-link"><span>Next &raquo;</span></li>
-                      {% endif %}
-                    </ul>
-                  {% comment %} {% endif  %} {% endcomment %}
+
+
+        {% if farmerWork_p.has_other_pages %}
+          <ul class="pagination">
+
+            {% if farmerWork_p.has_previous %}
+              <li><a href="?page={{ farmerWork_p.previous_page_number }}" class="previous">&laquo; previous </a> </li>
+            {% else %}
+              <li class="disabled"><span>&laquo; </span></li>
+            {% endif %}
+
+            {% for i in farmerWork_p.paginator.page_range %}
+              {% if farmerWork_p.number == i %}
+                <li class="active"><span> {{ i }} <span class="sr-only">(current)</span></span> </li>
+              {% else %}
+                <li><a href="?page= {{ i }}" > {{ i }} </a></li>
+              {% endif %}
+            {% endfor %}
+
+            {% if farmerWork_p.has_next %}
+              <li><a href="?page={{ farmerWork_p.next_page_number }}" class="next">&raquo; next </a></li>
+            {% else %}
+              <li class="disabled"><span>&raquo; </span></li>
+            {% endif %}
+
+          </ul>
+        {% endif %}
+
+  
                     </div>
                     
                     </div> 
