@@ -41,7 +41,7 @@
                       </tr>
                       </thead>
                       <tbody>
-                      {% for work in works %}
+                      {% for work in works_p %}
                     
                           <tr>
                             <td>{{ work.id }}</td>
@@ -66,7 +66,7 @@
                       </tbody>
 
                     </table>
-           {% comment %} {% if works_p.has_other_pages %}
+            {% if works_p.has_other_pages %}
             <ul class="pagination">
               {% if works_p.has_previous %}
                 <li><a href="?page={{ works_p.previous_page_number }}">&laquo;</a></li>
@@ -86,7 +86,7 @@
                 <li class="disabled"><span>&raquo;</span></li>
               {% endif %}
             </ul>
-          {% endif %} {% endcomment %}
+          {% endif %} 
                 </div>
                 </div>
                 </div>

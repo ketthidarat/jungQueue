@@ -1,187 +1,147 @@
-{% if request.user.is_superuser %}
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
- 
-<head> 
+{% comment %} <!DOCTYPE HTML>
+<html>
+  <body>
+    <input id="userInput" type="number" value = "0"/> 
+    <p id="timerr"> 00 </p>
+    <button onclick="startTime()">Start time</button>
+    <button onclick="stop()">Stop time</button>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <script> 
+      var myVar;
+      var timer = document.getElementById("userInput");
+      var countDownSeconds;
+      function startTime(){ 
+        myVar = setInterval(start, 1000);
+        document.getElementById("timerr").innerHTML = timer.value;
+        countDownSeconds = timer.value;
+      } 
 
-    <title>Ket Tractor</title>
-    <link rel="short icon" href="{%static 'api/img/technical-support.png'%}">
-    <link rel="stylesheet" type="text/css" href="{% static 'api/css/styles.css' %}">
-    <!-- Custom fonts for this template-->
-    <link href="{% static 'api/vendor/fontawesome-free/css/all.min.css'%}" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+      function start(){
+        countDownSeconds--;
+        document.getElementById("timerr").innerHTML = countDownSeconds;
+        if (countDownSeconds == -1){
+          stop();
+          document.getElementById("timerr").innerHTML = "0";  
+        }
+      }
 
-    <!-- Custom styles for this template-->
-    <link href="{% static 'api/css/sb-admin-2.min.css'%}" rel="stylesheet">
+      function stop(){
+        clearInterval(myVar);
+      }
+    </script>
+  </body>
+</html> {% endcomment %}
+
+
+{% comment %} https://stackoverflow.com/questions/58405196/creating-a-timer-with-user-input-with-html-and-js {% endcomment %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Timer</title>
+<script type="text/javascript">
+<!--
+
+ var timeLeft = 0;
+    var begin
+
+function startTimer()  {
+//check for null input hours, minutes, seconds
+   if(document.getElementById("txtHours").value == ""){
+      document.getElementById("txtHours").value = "0";
+   }
+
+   if(document.getElementById("txtMinutes").value == ""){
+      document.getElementById("txtMinutes").value = "0";
+   }
+
+   if(document.getElementById("txtSeconds").value == ""){
+      document.getElementById("txtSeconds").value = "0";
+   }
+
+   //get input hours, minutes, seconds
+   var hours   = parseInt(document.getElementById("txtHours").value);
+   var minutes = parseInt(document.getElementById("txtMinutes").value);
+   var seconds = parseInt(document.getElementById("txtSeconds").value);
+
+   //calculate time left in seconds
+   timeLeft = (hours * 3600) + (minutes * 60) + seconds;
+
+  //start count down timer
+  begin=setInterval("countDown()",1000);
+}
+
+function countDown()  {
+var hoursLeft   = 0;
+   var minutesLeft = 0;
+   var secondsLeft = 0;
+   var remainder   = 0;
+
+ timeLeft = timeLeft-1;
+
+    if(timeLeft >= 0){
+   //break down time left into hours, minutes, seconds
+  hoursLeft = Math.floor(timeLeft/3600);
+  remainder = timeLeft%3600;
+
+  minutesLeft = Math.floor(remainder/60);
+  remainder   = remainder%60;
+
+  secondsLeft = remainder;
+             document.getElementById('cellHours').innerHTML = hoursLeft;
+ document.getElementById('cellMinutes').innerHTML = minutesLeft;
+ document.getElementById('cellSeconds').innerHTML = secondsLeft;    
+    } else {
+     clearInterval(begin);
+    }       
+}
+
+//-->
+</script>
 
 </head>
+<body>
+<form>
+<!-- Table to input total time -->
+<table>
+ <caption style="font-weight: bold">Total Time</caption>
+ <th>Hours</th>
+ <th>Minutes</th>
+ <th>Seconds</th>
+ <tr>
+     <td><input type="text" id="txtHours" value="0" size="5" /></td>
+    <td><input type="text" id="txtMinutes" value="0" size="5" /></td>
+    <td><input type="text" id="txtSeconds" value="0" size="5" /></td>
+ </tr>   
 
-<body id="page-top">
+</table>
+<!-- Table to output time left -->
+<table name="tblTimer" id="tblTimer" width="500px" style="margin: 70 0 0 0" border="1">
+ <caption style="font-weight: bold">Time Left</caption>
+ <th>Hours Left</th>
+ <th>Minutes Left</th>
+ <th>Seconds Left</th>
+ <tr>
+     <td id="cellHours" align="center">0</td>        
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+        <td id="cellMinutes" align="center">0</td>
+        <td id="cellSeconds" align="center">0</td>   
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/index">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                    <!-- <img src="/media/{{store.store_img}}" class="img-rounded" alt="img" width="30" height="20"> -->
-                </div>
-                <div class="sidebar-brand-text mx-3">Ket Tractor</div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="/ownerShowaddWork">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>รายละเอียดจองคิวรถเกี่ยวนวดข้าว</span></a>
-            </li>
-            <hr class="sidebar-divider">
-             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>ข้อมูลรถเกี่ยวนวดข้าว</span>
-                </a>
-             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <!-- <h6 class="collapse-header">Custom Components:</h6> -->
-                        <a class="collapse-item" href="/cal/calendar">ตารางงานรถเกี่ยวนวดข้าว</a>
-                        <a class="collapse-item" href="/ownerShowaddTractor">แก้ไขข้อมูลรถเกี่ยวนวดข้าว</a>
-                        <a class="collapse-item" href="/addTractor">เพิ่มข้อมูลรถเกี่ยวนวดข้าว</a>
-                        
-                        
-                    </div>
-                </div>
-          
-            <hr class="sidebar-divider">
-        </ul> 
-        <!-- End of Sidebar -->
-
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-                    <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
-                        <div class="topbar-divider d-none d-sm-block"></div>
-
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{user.username}}  </span>
-                                <img class="img-profile rounded-circle"
-                                    src="{% static 'api/img/undraw_profile.svg'%}">
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="/profile">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="/ownerShowaddWork">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                               
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/logout"
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
-                            </div>
-                        
-                        </li>
-
-                    </ul>
-
-                </nav>
-                <!-- End of Topbar -->
-
-                {% block content %}
-                {% endblock %}
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="{% static 'api/vendor/jquery/jquery.min.js'%}"></script>
-    <script src="{% static 'api/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="{% static 'api/vendor/jquery-easing/jquery.easing.min.js'%}"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="{% static 'api/js/sb-admin-2.min.js'%}"></script>
-
-    <!-- Page level plugins -->
-    <!-- <script src="{% static 'api/vendor/chart.js/Chart.min.js'%}"></script> -->
-
-    <!-- Page level custom scripts -->
-    <!-- <script src="{% static 'api/js/demo/chart-area-demo.js'%}"></script>
-    <script src="{% static 'api/js/demo/chart-pie-demo.js'%}"></script> -->
-
+    </tr>
+</table>
+<!-- Display control buttons -->
+<table style="margin: 50 0 0 0">
+    <tr>
+     <td>
+         <input type="button" value="Start Timer"
+             onclick="startTimer();" /> 
+        </td>
+        <td>
+         <input type="button" value="Stop Timer"
+             onclick="clearInterval(begin);" /> 
+        </td>
+    </tr>
+</table>
+</form>
 </body>
-
 </html>
-{% endif %}

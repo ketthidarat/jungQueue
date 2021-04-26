@@ -238,8 +238,16 @@ def ownerShowaddWork(req):
 def farmerWork(request):
     farmerWork = Work.objects.all() 
     page = request.GET.get('page',1)
-    paginator = Paginator(farmerWork, 7) # So limited to 25 profiles in a page
+    paginator = Paginator(farmerWork, 5) # So limited to 25 profiles in a page
     # page_obj= paginator.get_page(page) #data
+    print("____________",page,paginator,"___________________-")
+    try:
+        farmerWork_p = paginator.page(page)
+    except PageNotAnInteger:
+        farmerWork_p = paginator.page(1)
+    except EmptyPage:
+        farmerWork_p = paginator.page(paginator.num_pages)
+    print(farmerWork)
     return render(request, 'api/farmerWork.html', {
         'farmerWork': farmerWork,
         'paginator':paginator,
@@ -250,7 +258,7 @@ def farmerWork(request):
 def showWork(request):
     works = Work.objects.filter(farmer_name = request.user) 
     page = request.GET.get('page',1)
-    paginator = Paginator(works, 1) # So limited to 25 profiles in a page
+    paginator = Paginator(works, 5) # So limited to 25 profiles in a page
     # page_obj= paginator.get_page(page) #data
     print("____________",page,paginator,"___________________-")
     try:

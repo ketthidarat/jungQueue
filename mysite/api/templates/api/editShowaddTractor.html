@@ -1,7 +1,72 @@
 {% extends 'api/base.html' %}
 {% block content %}
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Timer</title>
+<script type="text/javascript">
 
+
+ var timeLeft = 0;
+    var begin
+
+function startTimer()  {
+//check for null input hours, minutes, seconds
+   if(document.getElementById("txtHours").value == ""){
+      document.getElementById("txtHours").value = "0";
+   }
+
+   if(document.getElementById("txtMinutes").value == ""){
+      document.getElementById("txtMinutes").value = "0";
+   }
+
+   if(document.getElementById("txtSeconds").value == ""){
+      document.getElementById("txtSeconds").value = "0";
+   }
+
+   //get input hours, minutes, seconds
+   var hours   = parseInt(document.getElementById("txtHours").value);
+   var minutes = parseInt(document.getElementById("txtMinutes").value);
+   var seconds = parseInt(document.getElementById("txtSeconds").value);
+
+   //calculate time left in seconds
+   timeLeft = (hours * 3600) + (minutes * 60) + seconds;
+
+  //start count down timer
+  begin=setInterval("countDown()",1000);
+}
+
+function countDown()  {
+var hoursLeft   = 0;
+   var minutesLeft = 0;
+   var secondsLeft = 0;
+   var remainder   = 0;
+
+ timeLeft = timeLeft-1;
+
+    if(timeLeft >= 0){
+   //break down time left into hours, minutes, seconds
+  hoursLeft = Math.floor(timeLeft/3600);
+  remainder = timeLeft%3600;
+
+  minutesLeft = Math.floor(remainder/60);
+  remainder   = remainder%60;
+
+  secondsLeft = remainder;
+             document.getElementById('cellHours').innerHTML = hoursLeft;
+ document.getElementById('cellMinutes').innerHTML = minutesLeft;
+ document.getElementById('cellSeconds').innerHTML = secondsLeft;    
+    } else {
+     clearInterval(begin);
+    }       
+}
+
+
+</script>
+
+</head>
 
 <div id="content-wrapper">
 
@@ -70,7 +135,7 @@
                       <div class="col-md-9">
                           <div class="form-label-group">
                             <label for="tractor_timeHarvers"><b>เวลาที่ใช้ในการเก็บเกี่ยว</b></label>
-                            <input type="text" class="form-control"  name="tractor_timeHarvers" value="{{ addTractor.tractor_timeHarvers }}" required>
+                            <input type="text" class="form-control"  name="tractor_timeHarvers" id="txtHours" value="{{ addTractor.tractor_timeHarvers }}" required>
                            
                               <!-- <input type="text" class="form-control" name="product_name" placeholder="กรุณากรอกชื่อสินค้า" id="inputFirst" required>  -->
                           </div>
@@ -84,7 +149,7 @@
                       <div class="col-md-9">
                           <div class="form-label-group">
                             <label for="tractor_timeRepair"><b>เวลาที่ใช้ในการซ่อม</b></label>
-                            <input type="text" class="form-control"  name="tractor_timeRepair" value="{{ addTractor.tractor_timeRepair }}" required>
+                            <input type="text" class="form-control" id="txtHours" name="tractor_timeRepair" value="{{ addTractor.tractor_timeRepair }}" required>
                             
                            
                           </div>
@@ -93,7 +158,7 @@
                   </div>
               </div>
 
-           <button class="btn btn-primary btn-block" onclick="return confirm('ยืนยันการแก้ไข ?')" type="submit">ยืนยัน &nbsp;&nbsp;&nbsp;<span></span></button>
+           <button class="btn btn-primary btn-block" onclick="countDown()" type="submit">ยืนยัน &nbsp;&nbsp;&nbsp;<span></span></button>
               <button class="btn btn-danger btn-block"  type="reset"  > ยกเลิก &nbsp;&nbsp;&nbsp;<span></span></button>
           </form>
           </div>

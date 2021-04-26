@@ -5,13 +5,6 @@
 <div id="content-wrapper">
 
   <div class="container-fluid">
-      <!-- Breadcrumbs-->
-      <!-- <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-              <a href="#">Dashboard</a>
-          </li>
-          <li class="breadcrumb-item active">CRUD</li>
-      </ol> -->
          {% if messages %}
         {% for message in messages %}
         <div class="alert alert-{{ message.tags }}">
@@ -28,22 +21,7 @@
               {% comment %} <a  class="btn btn-sm btn-success" href="/showaddTractor" style="padding: 8px; float: right; background-color: green; color: white;">ADD</a> {% endcomment %}
           </div>
 
-          {% comment %} <nav class="navbar navbar-light bg-light justify-content-between">
-            <a class="navbar-brand"></a>
-  
-              <form class="form-inline" action="/showshowWork/" style="font:right;" method="POST">
-              {% csrf_token %}
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="showWork_name" value="{{ search_showWork_name }}">
-              <button class="btn btn-outline-success my-2 my-sm-0"name="search" type="submit">Search</button>
-            </form> 
-          </nav> {% endcomment %}
-        
           <div class="card-body">
-              <!-- {% for message in messages %}
-                  <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
-                      {{ message }}
-                  </div> 
-              {% endfor %} -->
                <div class="table-responsive">
                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" align="center">
                       <thead>
