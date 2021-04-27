@@ -30,24 +30,29 @@ import folium
 class MapView(TemplateView):
 
     template_name = 'api/map.html'
-
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         figure = folium.Figure()
+        
         m = folium.Map(
             location=[15.1383833,104.8885447],
             zoom_start=13,
             tiles='OpenStreetMap', ## https://python-visualization.github.io/folium/modules.html#module-folium.map
         )
         m.add_to(figure)
-        ptt = folium.Marker(
-            location = [15.1143996,104.9018809],
-            popup = 'ปั๊มน้ำมันปตท. ม.อุบล',
-            icon = folium.Icon(icon='cloud') # fontawesome icon name
-        )
-        ptt.add_to(m)
-        figure.render()
-        context['map'] = figure
+        workList = Work.objects.all()
+        
+        for work in workList:
+            print(work)
+            ptt = folium.Marker(
+                location = [work.lat, work.lng],
+                popup = f'ชื่อ:{work.farmer_name} {work.area} ไร่',
+                icon = folium.Icon(icon='cloud') # fontawesome icon name
+            )
+            ptt.add_to(m)
+            figure.render()
+            context['map'] = figure
         return context
 
 class ProfileDetailView(DetailView):
@@ -128,14 +133,7 @@ def login(req):
         print('ยังไม่ได้กรอก login/password')
     return render(req, 'api/login.html')
 
- # if users.is_activate:
-            #     print(users)
-            #     auth_login(req, users)
-            #     messages.success(req, 'เข้าสู่ระบบสำเร็จ')
-            #     return redirect('/index')
-            # else:
-            #     messages.warning(req, 'เข้าสู่ระบบไม่สำเร็จ')
-            #     return redirect('/login')
+
 
 def addWork(req):
     
@@ -144,19 +142,23 @@ def addWork(req):
             url = 'https://notify-api.line.me/api/notify'
             token = 'yrpItRRDCVa9eiFSOXexHi3vXcxp9VBJpu9i2xTSaPP'
             headers = {'content-type':'application/x-www-form-urlencoded','Authorization':'Bearer '+token}
+            print("posttttttttttttttt" )
             print(req.POST)
             form = FarmerWorkForm(req.POST)
             if form.is_valid():
                 work = Work()
                 work.farmer_name = req.user
-                work.area = req.POST['area']
+                work.area = float(req.POST['area'])
+                work.lat = float(req.POST['lat'])
+                work.lng = float(req.POST['lng'])
                 work.rice_type = Rice_type.objects.get(pk=req.POST['rice_type'])
                 work.rice = req.POST['rice']
                 work.workDetail = req.POST['workDetail']
+                work.save()
                 msg = f'ชื่อ:{work.farmer_name} จำนวนไร่: {work.area} ลักษณะต้นข้าว: {work.rice_type} พันธุ์ข้าว: {work.rice} รายละเอียดอื่นๆ: {work.workDetail}'
                 r = requests.post(url, headers=headers, data = {'message':msg})
-                work.save()
                 messages.success(req, 'จองคิวสำเร็จ')
+                print(form.is_valid)
             return redirect('/showWork')
         else:
             form = FarmerWorkForm()
@@ -430,36 +432,12 @@ def deleteEvent(req, id=0):
 class ProfileFarmerDetail(DetailView):
     models = Farmer
 
-# def do_paginate(data_list, page_number):
-#     ret_data_list = data_list
-#     #  หน้า มี 5รายการ
-#     result_per_page = 20
-#     # build the paginator object.
-#     paginator = Paginator(data_list, result_per_page)
-#     try:
-#         # get data list for the specified page_number.
-#         ret_data_list = paginator.page(page_number)
-#     except EmptyPage:
-#         # get the lat page data if the page_number is bigger than last page number.
-#         ret_data_list = paginator.page(paginator.num_pages)
-#     except PageNotAnInteger:
-#         # if the page_number is not an integer then return the first page data.
-#         ret_data_list = paginator.page(1)
-#     return [ret_data_list, paginator]
-
 def viewwork(request):
    work = Work.objects.all()
    paginator = Paginator(work, 25) # So limited to 25 profiles in a page
    page = request.GET.get('page')
    work= paginator.get_page(page) #data
    return render(request, 'farmerWork.html', {'work': work})
-
-#  paginator = Paginator(contact_list, 25) # Show 25 contacts per page.
-
-#     page_number = request.GET.get('page')
-#     page_obj = paginator.get_page(page_number)
-
-
 
 class FarmerViewSet(viewsets.ModelViewSet):
     queryset = Farmer.objects.all()

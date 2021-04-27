@@ -1,147 +1,49 @@
-{% comment %} <!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html>
-  <body>
-    <input id="userInput" type="number" value = "0"/> 
-    <p id="timerr"> 00 </p>
-    <button onclick="startTime()">Start time</button>
-    <button onclick="stop()">Stop time</button>
-
-    <script> 
-      var myVar;
-      var timer = document.getElementById("userInput");
-      var countDownSeconds;
-      function startTime(){ 
-        myVar = setInterval(start, 1000);
-        document.getElementById("timerr").innerHTML = timer.value;
-        countDownSeconds = timer.value;
-      } 
-
-      function start(){
-        countDownSeconds--;
-        document.getElementById("timerr").innerHTML = countDownSeconds;
-        if (countDownSeconds == -1){
-          stop();
-          document.getElementById("timerr").innerHTML = "0";  
-        }
-      }
-
-      function stop(){
-        clearInterval(myVar);
-      }
-    </script>
-  </body>
-</html> {% endcomment %}
-
-
-{% comment %} https://stackoverflow.com/questions/58405196/creating-a-timer-with-user-input-with-html-and-js {% endcomment %}
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
- "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Timer</title>
-<script type="text/javascript">
-<!--
-
- var timeLeft = 0;
-    var begin
-
-function startTimer()  {
-//check for null input hours, minutes, seconds
-   if(document.getElementById("txtHours").value == ""){
-      document.getElementById("txtHours").value = "0";
-   }
-
-   if(document.getElementById("txtMinutes").value == ""){
-      document.getElementById("txtMinutes").value = "0";
-   }
-
-   if(document.getElementById("txtSeconds").value == ""){
-      document.getElementById("txtSeconds").value = "0";
-   }
-
-   //get input hours, minutes, seconds
-   var hours   = parseInt(document.getElementById("txtHours").value);
-   var minutes = parseInt(document.getElementById("txtMinutes").value);
-   var seconds = parseInt(document.getElementById("txtSeconds").value);
-
-   //calculate time left in seconds
-   timeLeft = (hours * 3600) + (minutes * 60) + seconds;
-
-  //start count down timer
-  begin=setInterval("countDown()",1000);
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+p {
+  text-align: center;
+  font-size: 60px;
+  margin-top: 0px;
 }
-
-function countDown()  {
-var hoursLeft   = 0;
-   var minutesLeft = 0;
-   var secondsLeft = 0;
-   var remainder   = 0;
-
- timeLeft = timeLeft-1;
-
-    if(timeLeft >= 0){
-   //break down time left into hours, minutes, seconds
-  hoursLeft = Math.floor(timeLeft/3600);
-  remainder = timeLeft%3600;
-
-  minutesLeft = Math.floor(remainder/60);
-  remainder   = remainder%60;
-
-  secondsLeft = remainder;
-             document.getElementById('cellHours').innerHTML = hoursLeft;
- document.getElementById('cellMinutes').innerHTML = minutesLeft;
- document.getElementById('cellSeconds').innerHTML = secondsLeft;    
-    } else {
-     clearInterval(begin);
-    }       
-}
-
-//-->
-</script>
-
+</style>
 </head>
 <body>
-<form>
-<!-- Table to input total time -->
-<table>
- <caption style="font-weight: bold">Total Time</caption>
- <th>Hours</th>
- <th>Minutes</th>
- <th>Seconds</th>
- <tr>
-     <td><input type="text" id="txtHours" value="0" size="5" /></td>
-    <td><input type="text" id="txtMinutes" value="0" size="5" /></td>
-    <td><input type="text" id="txtSeconds" value="0" size="5" /></td>
- </tr>   
 
-</table>
-<!-- Table to output time left -->
-<table name="tblTimer" id="tblTimer" width="500px" style="margin: 70 0 0 0" border="1">
- <caption style="font-weight: bold">Time Left</caption>
- <th>Hours Left</th>
- <th>Minutes Left</th>
- <th>Seconds Left</th>
- <tr>
-     <td id="cellHours" align="center">0</td>        
+<p id="demo"></p>
 
-        <td id="cellMinutes" align="center">0</td>
-        <td id="cellSeconds" align="center">0</td>   
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("Jan 5, 2022 15:37:25").getTime();
 
-    </tr>
-</table>
-<!-- Display control buttons -->
-<table style="margin: 50 0 0 0">
-    <tr>
-     <td>
-         <input type="button" value="Start Timer"
-             onclick="startTimer();" /> 
-        </td>
-        <td>
-         <input type="button" value="Stop Timer"
-             onclick="clearInterval(begin);" /> 
-        </td>
-    </tr>
-</table>
-</form>
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+    
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+  // Output the result in an element with id="demo"
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+    
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</script>
+
 </body>
 </html>
