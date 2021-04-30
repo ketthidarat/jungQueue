@@ -94,17 +94,16 @@ var x = setInterval(function() {
                       </thead>
                       <tbody>
                         {% csrf_token %} 
-                      {% for addTractorList in ownerShowaddTractor %}
-                    
+                      {% for ownerShowaddTractor in ownerShowaddTractor %}
+                        {% for i,t in tractor.items %}
                           <tr>
-                            <td>{{ addTractorList.tractor_name }}</td>
-                              <td>{{ addTractorList.tractor_detail }} </td>
-                              <td id="demo1"></td>
-                              <td id="demo2"></td>
-                              {% comment %} <td id="demo{{tractor.id}}"> {% endcomment %}
-                              {% comment %} <td>{{ addTractorList.tractor_timeHarvers }}</td>
-                              <td>{{ addTractorList.tractor_timeRepair }}</td> {% endcomment %}
-                              <td>{{ addTractorList.tractor_status }}</td>
+                          <td> {{i}} </td>
+                          <td> {{t.tractor_name}}
+                            <td>{{ ownerShowaddTractor.tractor_name }}</td>
+                              <td>{{ ownerShowaddTractor.tractor_detail }} </td>
+                              <td>{{ ownerShowaddTractor.tractor_timeHarvers }}</td>
+                              <td>{{ ownerShowaddTractor.tractor_timeRepair }}</td> 
+                              <td>{{ ownerShowaddTractor.tractor_status }}</td>
                               {% comment %} <td><img src="/media/{{showWork.showWork_img}}" style="height: 75px;"></td>
                               <td>{{ showWork.showWork_amount }}</td> {% endcomment %}
                               <!-- <td>{{ i.created_at  |date:"d-m-Y H:i:s" }}</td> -->
@@ -120,7 +119,7 @@ var x = setInterval(function() {
                               <td><a class="btn btn-sm btn-danger" href="/deleteShowaddTractor/{{ownerShowaddTractor.id}}" onclick="return confirm('ยืนยันการลบ ?')"><span class="fa fa-trash"></span> ยกเลิก</a></td>
                           {% endif %}
                           </tr>
-                          
+                      {% endfor %}
                       {% endfor %}
                       </tbody>
                   

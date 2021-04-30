@@ -240,7 +240,7 @@ def ownerShowaddWork(req):
 def farmerWork(request):
     farmerWork = Work.objects.all() 
     page = request.GET.get('page',1)
-    paginator = Paginator(farmerWork, 5) # So limited to 25 profiles in a page
+    paginator = Paginator(farmerWork, 8) # So limited to 25 profiles in a page
     # page_obj= paginator.get_page(page) #data
     print("____________",page,paginator,"___________________-")
     try:
@@ -260,7 +260,7 @@ def farmerWork(request):
 def showWork(request):
     works = Work.objects.filter(farmer_name = request.user) 
     page = request.GET.get('page',1)
-    paginator = Paginator(works, 5) # So limited to 25 profiles in a page
+    paginator = Paginator(works, 8) # So limited to 25 profiles in a page
     # page_obj= paginator.get_page(page) #data
     print("____________",page,paginator,"___________________-")
     try:
@@ -319,10 +319,12 @@ def showaddTractor(req):
     })
 
 def ownerShowaddTractor(req):
-    ownerShowaddTractor = AddTractor.objects.all() 
+    t = AddTractor.objects.all() 
+    tractors = dict( (k,v) for k,v in zip(range(1, len(t)+1), t) )
     # messages.success(req, 'เพิ่มสำเร็จ')
     return render(req, 'api/ownerShowaddTractor.html', {
-        'ownerShowaddTractor': ownerShowaddTractor,
+        # 'ownerShowaddTractor': ownerShowaddTractor,
+        'tractors': tractors,
     })
 
 def editShowaddTractor(request, id=0):
