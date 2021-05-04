@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'api',
     'rest_framework',
     'django_extensions',
+    'django_dbml',
     # 'api.apps.CalConfig',
     # 'schedule',
     # 'djangobower',

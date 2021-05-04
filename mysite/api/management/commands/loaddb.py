@@ -29,7 +29,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # pass
         from openpyxl import load_workbook
-        filename = "xlsx/แผนการดำเนินโครงงานที่ปรึกษา senior project 62 - เกษ.xlsx"
+        filename = "xlsx/แผนการดำเนินโครงงานที่ปรึกษา senior project 62 - เกษ.xlsx" 
         wb = load_workbook(filename, data_only=True)
         #sheets = [ 'Rice_type', 'Work_status', 'Money_status', 'Work' ]
 
@@ -46,61 +46,61 @@ class Command(BaseCommand):
         for d in self.load(wb, 'Money_status', ['id', 'money_status']):
             Money_status(**d).save()
 
-        print('กำลัง load ... Farmer')
-        for d in self.load(wb, 'Farmer', ['id', 'farmer_name','phone', 'address', 'email', 'username', 'password', 'image']):
-            print(d)
-            Farmer(**d).save()
+        # print('กำลัง load ... Farmer')
+        # for d in self.load(wb, 'Farmer', ['id', 'farmer_name','phone', 'address', 'email', 'username', 'password', 'image']):
+        #     print(d)
+        #     Farmer(**d).save()
 
-        print('กำลัง load ... Owner')
-        for d in self.load(wb, 'Owner', ['id', 'owner_name','phone', 'address', 'email', 'username', 'password', 'image']):
-            print(d)
-            Owner(**d).save()
+        # print('กำลัง load ... Owner')
+        # for d in self.load(wb, 'Owner', ['id', 'owner_name','phone', 'address', 'email', 'username', 'password', 'image']):
+        #     print(d)
+        #     Owner(**d).save()
 
         print('กำลัง load ... Tractor_status')
         for d in self.load(wb, 'Tractor_status', ['id', 'tractor_status']):
             print(d)
             Tractor_status(**d).save()
         
-        print('กำลัง load ... Tractor')
-        for d in self.load(wb, 'Tractor', ['id', 'tractor', 'tractor_status']):
-            # print(d)
-            tractor_status = Tractor_status.objects.get(pk=d['tractor_status'])
-            d.pop('tractor_status', None)
-            q = Tractor(**d)
-            q.tractor_status = tractor_status
-            q.save()
+        # print('กำลัง load ... Tractor')
+        # for d in self.load(wb, 'AddTractor', ['id', 'tractor', 'tractor_status']):
+        #     # print(d)
+        #     tractor_status = Tractor_status.objects.get(pk=d['tractor_status'])
+        #     d.pop('tractor_status', None)
+        #     q = AddTractor(**d)
+        #     q.tractor_status = tractor_status
+        #     q.save()
 
 
-        print('กำลัง load ... Work')
-        for d in self.load(wb, 'Work', ['id', 'farmer_name', 'lat', 'lng', 'date_start', 'date_end', 'area', 'rice_type', 'rice', 'RepairTime', 'Harverstime', 'money', 'money_status', 'work_status', 'tractor', 'tractor_status']):
+        # print('กำลัง load ... Work')
+        # for d in self.load(wb, 'Work', ['id', 'farmer_name', 'lat', 'lng', 'start_time', 'area', 'rice_type', 'rice', 'RepairTime', 'Harverstime', 'price', 'money_status', 'work_status']):
            
-            farmer_name = Farmer.objects.get(pk=d['farmer_name'])
-            d.pop('farmer_name', None)
+        #     farmer_name = Farmer.objects.get(pk=d['farmer_name'])
+        #     d.pop('farmer_name', None)
         
-            rice_type = Rice_type.objects.get(pk=d['rice_type'])
-            d.pop('rice_type', None)
+        #     rice_type = Rice_type.objects.get(pk=d['rice_type'])
+        #     d.pop('rice_type', None)
 
-            tractor = Tractor.objects.get(pk=d['tractor'])
-            d.pop('tractor', None)
+        #     tractor = Tractor.objects.get(pk=d['tractor'])
+        #     d.pop('tractor', None)
 
-            tractor_status = Tractor_status.objects.get(pk=d['tractor_status'])
-            d.pop('tractor_status', None)
+        #     tractor_status = Tractor_status.objects.get(pk=d['tractor_status'])
+        #     d.pop('tractor_status', None)
 
-            money_status = Money_status.objects.get(pk=d['money_status'])
-            d.pop('money_status', None)
+        #     money_status = Money_status.objects.get(pk=d['money_status'])
+        #     d.pop('money_status', None)
             
-            work_status = Work_status.objects.get(pk=d['work_status'])
-            d.pop('work_status', None)
+        #     work_status = Work_status.objects.get(pk=d['work_status'])
+        #     d.pop('work_status', None)
             
-            q = Work(**d)
-            q.farmer_name = farmer_name
-            q.rice_type = rice_type
-            q.tractor = tractor
-            q.tractor_status = tractor_status
-            q.money_status = money_status
-            q.work_status = work_status
+        #     q = Work(**d)
+        #     q.farmer_name = farmer_name
+        #     q.rice_type = rice_type
+        #     q.tractor = tractor
+        #     q.tractor_status = tractor_status
+        #     q.money_status = money_status
+        #     q.work_status = work_status
 
-            q.save()
+        #     q.save()
 
             # tractor = Tractor.objects.get(pk=d['tractor'])
             # d.pop('tractor', None)

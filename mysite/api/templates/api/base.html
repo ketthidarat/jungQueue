@@ -1,48 +1,45 @@
 <!DOCTYPE html>
 {% load static %}
-
 <html lang="en">
-
-<head> 
-
+ 
+<head>
+ 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
+ 
     <title>Ket Tractor</title>
-    <link rel="short icon" href="{%static 'api/img/technical-support.png'%}">
-    <link rel="stylesheet" type="text/css" href="{% static 'api/css/styles.css' %}">
+
     <!-- Custom fonts for this template-->
-    <link href="{% static 'api/vendor/fontawesome-free/css/all.min.css'%}" rel="stylesheet" type="text/css">
+    <link href="{% static 'api/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-
+    <link rel="stylesheet" type="text/css" href="{% static 'api/css/styles.css' %}">
     <!-- Custom styles for this template-->
-    <link href="{% static 'api/css/sb-admin-2.min.css'%}" rel="stylesheet">
+    <link href="{% static 'api/css/sb-admin-2.min.css' %}" rel="stylesheet">
     
-
+ 
 </head>
-
+ 
 <body id="page-top">
-
+ 
     <!-- Page Wrapper -->
     <div id="wrapper">
-
+ 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
+ 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/index">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    {% comment %} <i class="fas fa-laugh-wink"></i> {% endcomment %}
-                    <!-- <img src="/media/{{store.store_img}}" class="img-rounded" alt="img" width="30" height="20"> -->
+                    <i class="fas fa-laugh-wink"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">Ket Tractor</div>
             </a>
-
+ 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
             <div class="sidebar-heading">
@@ -99,7 +96,7 @@
                    </div>
                 </div>
              {% endif %}
-
+ 
             
              <li class="nav-item active">
              <hr class="sidebar-divider">
@@ -107,29 +104,30 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>ข้อมูลเจ้าของรถ</span></a>
             </li>
-
+ 
             <!-- Divider -->
             <hr class="sidebar-divider">
         </ul>
         <!-- End of Sidebar -->
-
+ 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-
+ 
             <!-- Main Content -->
             <div id="content">
-
+ 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
+ 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
-
+ 
                     <ul class="navbar-nav ml-auto">
-  <div class="topbar-divider d-none d-sm-block"></div>
+                        <div class="topbar-divider d-none d-sm-block"></div>
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        
                         <li class="nav-item dropdown no-arrow d-sm-none">
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -152,7 +150,7 @@
                                 </form>
                             </div>
                         </li>
-
+ 
                      
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
@@ -176,12 +174,12 @@
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
-                                {% comment %} {% if request.user.is_superuser %}
+                                {% if request.user.is_superuser %}
                                 <a class="dropdown-item" href="/ownerShowaddWork">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
                                 </a>
-                                {% endif %} {% endcomment %}
+                                {% endif %}
                                 
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/logout"
@@ -190,51 +188,35 @@
                                 </a>
                             </div>
                         </li>
-
+ 
                     </ul>
-
+ 
                      {% else %}
              
                   <li class="nav-item"><a class="nav-link" href="/login">เข้าสู่ระบบ</a></li>
                   <li class="nav-item"><a class="nav-link" href="/register">สมัครสมาชิก</a></li>
                 </ul>
-			   	</li>
+                </li>
                    {% endif %}
                 </nav>
-
+ 
                 {% block content %}
                 {% endblock %}
         </div>
         <!-- End of Content Wrapper -->
-
+ 
     </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    
-
+ 
     <!-- Bootstrap core JavaScript-->
-    <script src="{% static 'api/vendor/jquery/jquery.min.js'%}"></script>
-    <script src="{% static 'api/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
-
+    <script src="{% static 'api/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'api/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+ 
     <!-- Core plugin JavaScript-->
-    <script src="{% static 'api/vendor/jquery-easing/jquery.easing.min.js'%}"></script>
-
+    <script src="{% static 'api/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+ 
     <!-- Custom scripts for all pages-->
-    <script src="{% static 'api/js/sb-admin-2.min.js'%}"></script>
-
-    <!-- Page level plugins -->
-    <script src="{% static 'api/vendor/chart.js/Chart.min.js'%}"></script> 
-
-    {% comment %} Page level custom scripts  {% endcomment %}
-    <script src="{% static 'api/js/demo/chart-area-demo.js'%}"></script>
-    <script src="{% static 'api/js/demo/chart-pie-demo.js'%}"></script> 
-
-    
-
-
-
+    <script src="{% static 'api/js/sb-admin-2.min.js' %}"></script>
+ 
 </body>
-
+ 
 </html>
-

@@ -37,8 +37,8 @@ var x = setInterval(function() {
   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
     
   // Output the result in an element with id="demo"
-  document.getElementById("demo1").innerHTML = seconds + "s ";
-  document.getElementById("demo2").innerHTML = seconds + "s ";
+  document.getElementById("demo1").innerHTML = hours + "h ";
+  document.getElementById("demo2").innerHTML = hours + "h ";
     
   // If the count down is over, write some text 
   if (distance < 0) {
@@ -75,7 +75,7 @@ var x = setInterval(function() {
                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" align="center">
                       <thead>
                       <tr>
-                      
+                      <th>Id</th>
                           <th>ยี่ห้อ</th>
                           <th>ขนาดของรถ</th>
                           <th>เวลาที่ใช้ในการเก็บเกี่ยว</th>
@@ -94,66 +94,31 @@ var x = setInterval(function() {
                       </thead>
                       <tbody>
                         {% csrf_token %} 
-                      {% for ownerShowaddTractor in ownerShowaddTractor %}
-                        {% for i,t in tractor.items %}
+                      {% comment %} {% for work in t %} {% endcomment %}
+                        {% for i,t in tractors.items %}
                           <tr>
                           <td> {{i}} </td>
                           <td> {{t.tractor_name}}
-                            <td>{{ ownerShowaddTractor.tractor_name }}</td>
-                              <td>{{ ownerShowaddTractor.tractor_detail }} </td>
-                              <td>{{ ownerShowaddTractor.tractor_timeHarvers }}</td>
-                              <td>{{ ownerShowaddTractor.tractor_timeRepair }}</td> 
-                              <td>{{ ownerShowaddTractor.tractor_status }}</td>
-                              {% comment %} <td><img src="/media/{{showWork.showWork_img}}" style="height: 75px;"></td>
-                              <td>{{ showWork.showWork_amount }}</td> {% endcomment %}
-                              <!-- <td>{{ i.created_at  |date:"d-m-Y H:i:s" }}</td> -->
-                               {% comment %} <td>                                   
-                                  <a class="btn btn-sm btn-warning" href="/addShowTractor/{{addTractor.id}}"> <span class="fa fa-edit"></span> Add</a>
-                                  
-                              </td> {% endcomment %}
+                            {% comment %} <td>{{ work.tractor_name }}</td> {% endcomment %}
+                              <td>{{ t.tractor_detail }} </td>
+                              <td>{{ t.tractor_timeHarvers }} ชม.</td>
+                              <td>{{ t.tractor_timeRepair }} ชม.</td> 
+                              <td>{{ t.tractor_status }}</td> 
+                      
                               {% if request.user.is_superuser %}
                               <td>                                   
-                                  <a class="btn btn-sm btn-warning" href="/editShowaddTractor/{{ownerShowaddTractor.id}}"> <span class="fa fa-edit"></span> แก้ไข</a>
+                                  <a class="btn btn-sm btn-warning" href="/editShowaddTractor/{{t.id}}"> <span class="fa fa-edit"></span> แก้ไข</a>
                                   
                               </td>
-                              <td><a class="btn btn-sm btn-danger" href="/deleteShowaddTractor/{{ownerShowaddTractor.id}}" onclick="return confirm('ยืนยันการลบ ?')"><span class="fa fa-trash"></span> ยกเลิก</a></td>
+                              <td><a class="btn btn-sm btn-danger" href="/deleteShowaddTractor/{{t.id}}" onclick="return confirm('ยืนยันการลบ ?')"><span class="fa fa-trash"></span> ยกเลิก</a></td>
                           {% endif %}
                           </tr>
-                      {% endfor %}
+                      {% comment %} {% endfor %} {% endcomment %}
                       {% endfor %}
                       </tbody>
                   
                     </table>
-                    {% comment %} {% if showWork.has_other_pages %}
-                    <ul class="pagination">
-                      {% if showWork.has_previous %}
-                        <li><a class="page-link" href="?page={{ showWork.previous_page_number }}">&laquo;  Previous</a></li>
-                        <li><a class="page-link" href="?page={{ showWork.previous_page_number }}">{{ showWork.previous_page_number }} </a></li>
-                      {% else %}
-                        <li class="disabled page-link"><span>&laquo;Previous</span></li>
-                      {% endif %}
-                        <!--   หน้าปัจจุบัน -->
-                      <li class="page-item active">
-                        <span class="page-link">
-                            <span class="current" >
-                                {{ showWork.number }} 
-                              </span>
-                         
-                        </span>
-                      </li>
-                          <!-- หน้าถัดไป -->
-                      {% if showWork.has_next %}
-                        
-                        <li><a class="page-link"  href="?page={{ showWork.next_page_number }}">Next &raquo; </a></li>
-                      {% else %}
-                        <li class="disabled page-link"><span>Next &raquo;</span></li>
-                      {% endif %}
-                    </ul>
-                  {% endif %}
-                    </div>
-                    
-                    </div> {% endcomment %}
-                    
+                   
 
                 </div>
                 </div>
