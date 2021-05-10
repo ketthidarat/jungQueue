@@ -51,8 +51,8 @@ class MapView(TemplateView):
                 icon = folium.Icon(icon='cloud') # fontawesome icon name
             )
             ptt.add_to(m)
-            figure.render()
-            context['map'] = figure
+        figure.render()
+        context['map'] = figure
         return context
 
 class ProfileDetailView(DetailView):
